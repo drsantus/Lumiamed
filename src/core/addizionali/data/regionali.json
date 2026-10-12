@@ -1,0 +1,438 @@
+{
+ "ABR": {
+  "regione": "ABR",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 2800000,
+    "aliquota": 0.0167
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.0287
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0333
+   }
+  ]
+ },
+ "BAS": {
+  "regione": "BAS",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": null,
+    "aliquota": 0.0123
+   }
+  ]
+ },
+ "TAA_BZ": {
+  "regione": "TAA_BZ",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 2800000,
+    "aliquota": 0.0123
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.0123
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0173
+   }
+  ],
+  "detrazioni": [
+   {
+    "da": 0,
+    "a": 9000000,
+    "importo": 43050
+   }
+  ],
+  "note": "Detrazione aggiuntiva decrescente oltre 50.000 € e detrazioni per figli non applicate."
+ },
+ "CAL": {
+  "regione": "CAL",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": null,
+    "aliquota": 0.0173
+   }
+  ]
+ },
+ "CAM": {
+  "regione": "CAM",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 1500000,
+    "aliquota": 0.0173
+   },
+   {
+    "fino": 2800000,
+    "aliquota": 0.0296
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.032
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0333
+   }
+  ],
+  "note": "Detrazioni per figli a carico non applicate."
+ },
+ "EMR": {
+  "regione": "EMR",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 1500000,
+    "aliquota": 0.0133
+   },
+   {
+    "fino": 2800000,
+    "aliquota": 0.0193
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.0278
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0333
+   }
+  ]
+ },
+ "FVG": {
+  "regione": "FVG",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": null,
+    "aliquota": 0.0123
+   }
+  ],
+  "aliquotaAgevolata": {
+   "finoReddito": 1500000,
+   "aliquota": 0.007
+  }
+ },
+ "LAZ": {
+  "regione": "LAZ",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 1500000,
+    "aliquota": 0.0173
+   },
+   {
+    "fino": 2800000,
+    "aliquota": 0.0333
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.0333
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0333
+   }
+  ],
+  "aliquotaAgevolata": {
+   "finoReddito": 2800000,
+   "aliquota": 0.0173
+  },
+  "detrazioni": [
+   {
+    "da": 2800001,
+    "a": 3000000,
+    "importo": 6000
+   }
+  ]
+ },
+ "LIG": {
+  "regione": "LIG",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 2800000,
+    "aliquota": 0.0123
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.0318
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0323
+   }
+  ]
+ },
+ "LOM": {
+  "regione": "LOM",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 1500000,
+    "aliquota": 0.0123
+   },
+   {
+    "fino": 2800000,
+    "aliquota": 0.0158
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.0172
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0173
+   }
+  ]
+ },
+ "MAR": {
+  "regione": "MAR",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 1500000,
+    "aliquota": 0.0123
+   },
+   {
+    "fino": 2800000,
+    "aliquota": 0.0153
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.017
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0173
+   }
+  ],
+  "note": "Aliquota ridotta per chi ha figli disabili a carico non applicata."
+ },
+ "MOL": {
+  "regione": "MOL",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 1500000,
+    "aliquota": 0.0203
+   },
+   {
+    "fino": 2800000,
+    "aliquota": 0.0223
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.0363
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0363
+   }
+  ]
+ },
+ "PIE": {
+  "regione": "PIE",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 1500000,
+    "aliquota": 0.0162
+   },
+   {
+    "fino": 2800000,
+    "aliquota": 0.0268
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.0331
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0333
+   }
+  ],
+  "note": "Detrazioni per figli a carico non applicate."
+ },
+ "PUG": {
+  "regione": "PUG",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 1500000,
+    "aliquota": 0.0133
+   },
+   {
+    "fino": 2800000,
+    "aliquota": 0.0213
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.0323
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0333
+   }
+  ],
+  "note": "Detrazioni per figli a carico non applicate."
+ },
+ "SAR": {
+  "regione": "SAR",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": null,
+    "aliquota": 0.0123
+   }
+  ],
+  "note": "Detrazione per figli minorenni non applicata."
+ },
+ "SIC": {
+  "regione": "SIC",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": null,
+    "aliquota": 0.0123
+   }
+  ]
+ },
+ "TOS": {
+  "regione": "TOS",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 1500000,
+    "aliquota": 0.0142
+   },
+   {
+    "fino": 2800000,
+    "aliquota": 0.0143
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.0332
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0333
+   }
+  ]
+ },
+ "TAA_TN": {
+  "regione": "TAA_TN",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 1500000,
+    "aliquota": 0.0123
+   },
+   {
+    "fino": 2800000,
+    "aliquota": 0.0123
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.0123
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0173
+   }
+  ],
+  "esenzione": {
+   "soglia": 3000000,
+   "tipo": "esclusione"
+  },
+  "note": "Deduzione di 30.000 € per redditi fino a 30.000 € (trattata come esenzione); detrazione per figli non applicata."
+ },
+ "UMB": {
+  "regione": "UMB",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": 1500000,
+    "aliquota": 0.0173
+   },
+   {
+    "fino": 2800000,
+    "aliquota": 0.0302
+   },
+   {
+    "fino": 5000000,
+    "aliquota": 0.0312
+   },
+   {
+    "fino": null,
+    "aliquota": 0.0333
+   }
+  ],
+  "aliquotaAgevolata": {
+   "finoReddito": 2800000,
+   "aliquota": 0.0123
+  },
+  "detrazioni": [
+   {
+    "da": 2800001,
+    "a": 5000000,
+    "importo": 15000
+   }
+  ]
+ },
+ "VDA": {
+  "regione": "VDA",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": null,
+    "aliquota": 0.0123
+   }
+  ],
+  "esenzione": {
+   "soglia": 1500000,
+   "tipo": "esclusione"
+  }
+ },
+ "VEN": {
+  "regione": "VEN",
+  "anno": 2026,
+  "fonte": "MEF Dipartimento Finanze, addizionale regionale IRPEF 2026 (addregirpef.php)",
+  "scaglioni": [
+   {
+    "fino": null,
+    "aliquota": 0.0123
+   }
+  ],
+  "note": "Aliquota agevolata 0,9% per contribuenti disabili o con familiari disabili a carico non applicata."
+ }
+}

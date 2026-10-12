@@ -1,0 +1,771 @@
+{
+  "generato": "2026-10-12T08:32:35.883Z",
+  "righe": [
+    {
+      "id": "F1",
+      "area": "Forfettario",
+      "descrizione": "Giovane medico al 5° anno con requisiti startup, 40.000 € incassati, 2.500 € di ENPAM versati",
+      "input": "Anno 2026; inizio attività 2022; requisiti 5%: sì; ricavi incassati 40.000,00 €; ENPAM versato nell'anno 2.500,00 €",
+      "voce": "Reddito lordo (ricavi × 78%)",
+      "valore": 31200,
+      "formato": "euro"
+    },
+    {
+      "id": "F1",
+      "area": "Forfettario",
+      "descrizione": "Giovane medico al 5° anno con requisiti startup, 40.000 € incassati, 2.500 € di ENPAM versati",
+      "input": "Anno 2026; inizio attività 2022; requisiti 5%: sì; ricavi incassati 40.000,00 €; ENPAM versato nell'anno 2.500,00 €",
+      "voce": "Imponibile (dopo contributi)",
+      "valore": 28700,
+      "formato": "euro"
+    },
+    {
+      "id": "F1",
+      "area": "Forfettario",
+      "descrizione": "Giovane medico al 5° anno con requisiti startup, 40.000 € incassati, 2.500 € di ENPAM versati",
+      "input": "Anno 2026; inizio attività 2022; requisiti 5%: sì; ricavi incassati 40.000,00 €; ENPAM versato nell'anno 2.500,00 €",
+      "voce": "Aliquota imposta sostitutiva",
+      "valore": 0.05,
+      "formato": "percentuale"
+    },
+    {
+      "id": "F1",
+      "area": "Forfettario",
+      "descrizione": "Giovane medico al 5° anno con requisiti startup, 40.000 € incassati, 2.500 € di ENPAM versati",
+      "input": "Anno 2026; inizio attività 2022; requisiti 5%: sì; ricavi incassati 40.000,00 €; ENPAM versato nell'anno 2.500,00 €",
+      "voce": "Imposta sostitutiva",
+      "valore": 1435,
+      "formato": "euro"
+    },
+    {
+      "id": "F2",
+      "area": "Forfettario",
+      "descrizione": "Medico al 6° anno (aliquota 15%), 60.000 € incassati, 4.000 € di ENPAM versati",
+      "input": "Anno 2026; inizio attività 2021; requisiti 5%: sì; ricavi incassati 60.000,00 €; ENPAM versato nell'anno 4.000,00 €",
+      "voce": "Reddito lordo (ricavi × 78%)",
+      "valore": 46800,
+      "formato": "euro"
+    },
+    {
+      "id": "F2",
+      "area": "Forfettario",
+      "descrizione": "Medico al 6° anno (aliquota 15%), 60.000 € incassati, 4.000 € di ENPAM versati",
+      "input": "Anno 2026; inizio attività 2021; requisiti 5%: sì; ricavi incassati 60.000,00 €; ENPAM versato nell'anno 4.000,00 €",
+      "voce": "Imponibile (dopo contributi)",
+      "valore": 42800,
+      "formato": "euro"
+    },
+    {
+      "id": "F2",
+      "area": "Forfettario",
+      "descrizione": "Medico al 6° anno (aliquota 15%), 60.000 € incassati, 4.000 € di ENPAM versati",
+      "input": "Anno 2026; inizio attività 2021; requisiti 5%: sì; ricavi incassati 60.000,00 €; ENPAM versato nell'anno 4.000,00 €",
+      "voce": "Aliquota imposta sostitutiva",
+      "valore": 0.15,
+      "formato": "percentuale"
+    },
+    {
+      "id": "F2",
+      "area": "Forfettario",
+      "descrizione": "Medico al 6° anno (aliquota 15%), 60.000 € incassati, 4.000 € di ENPAM versati",
+      "input": "Anno 2026; inizio attività 2021; requisiti 5%: sì; ricavi incassati 60.000,00 €; ENPAM versato nell'anno 4.000,00 €",
+      "voce": "Imposta sostitutiva",
+      "valore": 6420,
+      "formato": "euro"
+    },
+    {
+      "id": "F3",
+      "area": "Forfettario",
+      "descrizione": "Primo anno senza requisiti startup (15%), 25.000 € incassati, nessun contributo versato",
+      "input": "Anno 2026; inizio attività 2026; requisiti 5%: no; ricavi incassati 25.000,00 €; ENPAM versato nell'anno 0,00 €",
+      "voce": "Reddito lordo (ricavi × 78%)",
+      "valore": 19500,
+      "formato": "euro"
+    },
+    {
+      "id": "F3",
+      "area": "Forfettario",
+      "descrizione": "Primo anno senza requisiti startup (15%), 25.000 € incassati, nessun contributo versato",
+      "input": "Anno 2026; inizio attività 2026; requisiti 5%: no; ricavi incassati 25.000,00 €; ENPAM versato nell'anno 0,00 €",
+      "voce": "Imponibile (dopo contributi)",
+      "valore": 19500,
+      "formato": "euro"
+    },
+    {
+      "id": "F3",
+      "area": "Forfettario",
+      "descrizione": "Primo anno senza requisiti startup (15%), 25.000 € incassati, nessun contributo versato",
+      "input": "Anno 2026; inizio attività 2026; requisiti 5%: no; ricavi incassati 25.000,00 €; ENPAM versato nell'anno 0,00 €",
+      "voce": "Aliquota imposta sostitutiva",
+      "valore": 0.15,
+      "formato": "percentuale"
+    },
+    {
+      "id": "F3",
+      "area": "Forfettario",
+      "descrizione": "Primo anno senza requisiti startup (15%), 25.000 € incassati, nessun contributo versato",
+      "input": "Anno 2026; inizio attività 2026; requisiti 5%: no; ricavi incassati 25.000,00 €; ENPAM versato nell'anno 0,00 €",
+      "voce": "Imposta sostitutiva",
+      "valore": 2925,
+      "formato": "euro"
+    },
+    {
+      "id": "F4",
+      "area": "Forfettario",
+      "descrizione": "Contributi superiori al reddito: 5.000 € incassati, 5.000 € di ENPAM versati",
+      "input": "Anno 2026; inizio attività 2025; requisiti 5%: sì; ricavi incassati 5.000,00 €; ENPAM versato nell'anno 5.000,00 €",
+      "voce": "Reddito lordo (ricavi × 78%)",
+      "valore": 3900,
+      "formato": "euro"
+    },
+    {
+      "id": "F4",
+      "area": "Forfettario",
+      "descrizione": "Contributi superiori al reddito: 5.000 € incassati, 5.000 € di ENPAM versati",
+      "input": "Anno 2026; inizio attività 2025; requisiti 5%: sì; ricavi incassati 5.000,00 €; ENPAM versato nell'anno 5.000,00 €",
+      "voce": "Imponibile (dopo contributi)",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "F4",
+      "area": "Forfettario",
+      "descrizione": "Contributi superiori al reddito: 5.000 € incassati, 5.000 € di ENPAM versati",
+      "input": "Anno 2026; inizio attività 2025; requisiti 5%: sì; ricavi incassati 5.000,00 €; ENPAM versato nell'anno 5.000,00 €",
+      "voce": "Aliquota imposta sostitutiva",
+      "valore": 0.05,
+      "formato": "percentuale"
+    },
+    {
+      "id": "F4",
+      "area": "Forfettario",
+      "descrizione": "Contributi superiori al reddito: 5.000 € incassati, 5.000 € di ENPAM versati",
+      "input": "Anno 2026; inizio attività 2025; requisiti 5%: sì; ricavi incassati 5.000,00 €; ENPAM versato nell'anno 5.000,00 €",
+      "voce": "Imposta sostitutiva",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "O1",
+      "area": "Ordinario",
+      "descrizione": "Specialista con 70.000 € di compensi; affitto 6.000, telefono 1.000 (80%), ristoranti 2.000 (75% ma max 2% dei compensi); ENPAM versato 8.000",
+      "input": "Compensi 70.000,00 €; spese: affitto_studio 6.000,00 €, telefono_internet 1.000,00 €, ristoranti_alberghi 2.000,00 €; ENPAM versato 8.000,00 €; ritenute subite 0,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "Spese deducibili",
+      "valore": 8200,
+      "formato": "euro"
+    },
+    {
+      "id": "O1",
+      "area": "Ordinario",
+      "descrizione": "Specialista con 70.000 € di compensi; affitto 6.000, telefono 1.000 (80%), ristoranti 2.000 (75% ma max 2% dei compensi); ENPAM versato 8.000",
+      "input": "Compensi 70.000,00 €; spese: affitto_studio 6.000,00 €, telefono_internet 1.000,00 €, ristoranti_alberghi 2.000,00 €; ENPAM versato 8.000,00 €; ritenute subite 0,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "Reddito professionale",
+      "valore": 61800,
+      "formato": "euro"
+    },
+    {
+      "id": "O1",
+      "area": "Ordinario",
+      "descrizione": "Specialista con 70.000 € di compensi; affitto 6.000, telefono 1.000 (80%), ristoranti 2.000 (75% ma max 2% dei compensi); ENPAM versato 8.000",
+      "input": "Compensi 70.000,00 €; spese: affitto_studio 6.000,00 €, telefono_internet 1.000,00 €, ristoranti_alberghi 2.000,00 €; ENPAM versato 8.000,00 €; ritenute subite 0,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "Reddito imponibile IRPEF",
+      "valore": 53800,
+      "formato": "euro"
+    },
+    {
+      "id": "O1",
+      "area": "Ordinario",
+      "descrizione": "Specialista con 70.000 € di compensi; affitto 6.000, telefono 1.000 (80%), ristoranti 2.000 (75% ma max 2% dei compensi); ENPAM versato 8.000",
+      "input": "Compensi 70.000,00 €; spese: affitto_studio 6.000,00 €, telefono_internet 1.000,00 €, ristoranti_alberghi 2.000,00 €; ENPAM versato 8.000,00 €; ritenute subite 0,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "IRPEF lorda",
+      "valore": 15334,
+      "formato": "euro"
+    },
+    {
+      "id": "O1",
+      "area": "Ordinario",
+      "descrizione": "Specialista con 70.000 € di compensi; affitto 6.000, telefono 1.000 (80%), ristoranti 2.000 (75% ma max 2% dei compensi); ENPAM versato 8.000",
+      "input": "Compensi 70.000,00 €; spese: affitto_studio 6.000,00 €, telefono_internet 1.000,00 €, ristoranti_alberghi 2.000,00 €; ENPAM versato 8.000,00 €; ritenute subite 0,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "Detrazione lavoro autonomo (art. 13 c. 5 TUIR)",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "O1",
+      "area": "Ordinario",
+      "descrizione": "Specialista con 70.000 € di compensi; affitto 6.000, telefono 1.000 (80%), ristoranti 2.000 (75% ma max 2% dei compensi); ENPAM versato 8.000",
+      "input": "Compensi 70.000,00 €; spese: affitto_studio 6.000,00 €, telefono_internet 1.000,00 €, ristoranti_alberghi 2.000,00 €; ENPAM versato 8.000,00 €; ritenute subite 0,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "IRPEF netta",
+      "valore": 15334,
+      "formato": "euro"
+    },
+    {
+      "id": "O1",
+      "area": "Ordinario",
+      "descrizione": "Specialista con 70.000 € di compensi; affitto 6.000, telefono 1.000 (80%), ristoranti 2.000 (75% ma max 2% dei compensi); ENPAM versato 8.000",
+      "input": "Compensi 70.000,00 €; spese: affitto_studio 6.000,00 €, telefono_internet 1.000,00 €, ristoranti_alberghi 2.000,00 €; ENPAM versato 8.000,00 €; ritenute subite 0,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "Addizionale regionale (tabella di prova)",
+      "valore": 1385.54,
+      "formato": "euro"
+    },
+    {
+      "id": "O1",
+      "area": "Ordinario",
+      "descrizione": "Specialista con 70.000 € di compensi; affitto 6.000, telefono 1.000 (80%), ristoranti 2.000 (75% ma max 2% dei compensi); ENPAM versato 8.000",
+      "input": "Compensi 70.000,00 €; spese: affitto_studio 6.000,00 €, telefono_internet 1.000,00 €, ristoranti_alberghi 2.000,00 €; ENPAM versato 8.000,00 €; ritenute subite 0,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "Addizionale comunale (tabella di prova)",
+      "valore": 430.4,
+      "formato": "euro"
+    },
+    {
+      "id": "O2",
+      "area": "Ordinario",
+      "descrizione": "Medico con 30.000 € di compensi, 4.000 € di materiale sanitario, 6.000 € di ENPAM versato, 2.000 € di ritenute subite",
+      "input": "Compensi 30.000,00 €; spese: materiale_sanitario 4.000,00 €; ENPAM versato 6.000,00 €; ritenute subite 2.000,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "Spese deducibili",
+      "valore": 4000,
+      "formato": "euro"
+    },
+    {
+      "id": "O2",
+      "area": "Ordinario",
+      "descrizione": "Medico con 30.000 € di compensi, 4.000 € di materiale sanitario, 6.000 € di ENPAM versato, 2.000 € di ritenute subite",
+      "input": "Compensi 30.000,00 €; spese: materiale_sanitario 4.000,00 €; ENPAM versato 6.000,00 €; ritenute subite 2.000,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "Reddito professionale",
+      "valore": 26000,
+      "formato": "euro"
+    },
+    {
+      "id": "O2",
+      "area": "Ordinario",
+      "descrizione": "Medico con 30.000 € di compensi, 4.000 € di materiale sanitario, 6.000 € di ENPAM versato, 2.000 € di ritenute subite",
+      "input": "Compensi 30.000,00 €; spese: materiale_sanitario 4.000,00 €; ENPAM versato 6.000,00 €; ritenute subite 2.000,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "Reddito imponibile IRPEF",
+      "valore": 20000,
+      "formato": "euro"
+    },
+    {
+      "id": "O2",
+      "area": "Ordinario",
+      "descrizione": "Medico con 30.000 € di compensi, 4.000 € di materiale sanitario, 6.000 € di ENPAM versato, 2.000 € di ritenute subite",
+      "input": "Compensi 30.000,00 €; spese: materiale_sanitario 4.000,00 €; ENPAM versato 6.000,00 €; ritenute subite 2.000,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "IRPEF lorda",
+      "valore": 4600,
+      "formato": "euro"
+    },
+    {
+      "id": "O2",
+      "area": "Ordinario",
+      "descrizione": "Medico con 30.000 € di compensi, 4.000 € di materiale sanitario, 6.000 € di ENPAM versato, 2.000 € di ritenute subite",
+      "input": "Compensi 30.000,00 €; spese: materiale_sanitario 4.000,00 €; ENPAM versato 6.000,00 €; ritenute subite 2.000,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "Detrazione lavoro autonomo (art. 13 c. 5 TUIR)",
+      "valore": 568,
+      "formato": "euro"
+    },
+    {
+      "id": "O2",
+      "area": "Ordinario",
+      "descrizione": "Medico con 30.000 € di compensi, 4.000 € di materiale sanitario, 6.000 € di ENPAM versato, 2.000 € di ritenute subite",
+      "input": "Compensi 30.000,00 €; spese: materiale_sanitario 4.000,00 €; ENPAM versato 6.000,00 €; ritenute subite 2.000,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "IRPEF netta",
+      "valore": 4032,
+      "formato": "euro"
+    },
+    {
+      "id": "O2",
+      "area": "Ordinario",
+      "descrizione": "Medico con 30.000 € di compensi, 4.000 € di materiale sanitario, 6.000 € di ENPAM versato, 2.000 € di ritenute subite",
+      "input": "Compensi 30.000,00 €; spese: materiale_sanitario 4.000,00 €; ENPAM versato 6.000,00 €; ritenute subite 2.000,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "Addizionale regionale (tabella di prova)",
+      "valore": 396,
+      "formato": "euro"
+    },
+    {
+      "id": "O2",
+      "area": "Ordinario",
+      "descrizione": "Medico con 30.000 € di compensi, 4.000 € di materiale sanitario, 6.000 € di ENPAM versato, 2.000 € di ritenute subite",
+      "input": "Compensi 30.000,00 €; spese: materiale_sanitario 4.000,00 €; ENPAM versato 6.000,00 €; ritenute subite 2.000,00 €. Addizionali calcolate con tabelle DI PROVA: regionale 1,73%/2,73%/2,93%/3,33% (scaglioni 15k/28k/50k), comunale 0,8% con esenzione fino a 10.000 €.",
+      "voce": "Addizionale comunale (tabella di prova)",
+      "valore": 160,
+      "formato": "euro"
+    },
+    {
+      "id": "A1",
+      "area": "ENPAM Quota A",
+      "descrizione": "Compie 30 anni il 15/3/2026: 3 mesi a 291,61 €/anno e 9 mesi a 566 €/anno, più maternità 95,54",
+      "input": "Anno 2026; nato il 1996-03-15",
+      "voce": "Quota A totale (con maternità)",
+      "valore": 592.94,
+      "formato": "euro"
+    },
+    {
+      "id": "A2",
+      "area": "ENPAM Quota A",
+      "descrizione": "Over 40 tutto l'anno: 1.961,56 + maternità 95,54",
+      "input": "Anno 2026; nato il 1980-06-01",
+      "voce": "Quota A totale (con maternità)",
+      "valore": 2057.1,
+      "formato": "euro"
+    },
+    {
+      "id": "B1",
+      "area": "ENPAM Quota B",
+      "descrizione": "Under 40, reddito forfettario (LM34) 31.200 €: 19,5% sulla parte oltre 5.446,77 €",
+      "input": "Redditi 2026; nato il 1991-05-10; reddito libero-professionale 31.200,00 €",
+      "voce": "Soglia esente (coperta da Quota A)",
+      "valore": 5446.77,
+      "formato": "euro"
+    },
+    {
+      "id": "B1",
+      "area": "ENPAM Quota B",
+      "descrizione": "Under 40, reddito forfettario (LM34) 31.200 €: 19,5% sulla parte oltre 5.446,77 €",
+      "input": "Redditi 2026; nato il 1991-05-10; reddito libero-professionale 31.200,00 €",
+      "voce": "Quota B dovuta",
+      "valore": 5021.88,
+      "formato": "euro"
+    },
+    {
+      "id": "B2",
+      "area": "ENPAM Quota B",
+      "descrizione": "Over 40, reddito 160.000 €: 19,5% fino a 150.000 (oltre la soglia di 10.059,28) + 1% sull'eccedenza",
+      "input": "Redditi 2026; nato il 1975-01-01; reddito libero-professionale 160.000,00 €",
+      "voce": "Soglia esente (coperta da Quota A)",
+      "valore": 10059.28,
+      "formato": "euro"
+    },
+    {
+      "id": "B2",
+      "area": "ENPAM Quota B",
+      "descrizione": "Over 40, reddito 160.000 €: 19,5% fino a 150.000 (oltre la soglia di 10.059,28) + 1% sull'eccedenza",
+      "input": "Redditi 2026; nato il 1975-01-01; reddito libero-professionale 160.000,00 €",
+      "voce": "Quota B dovuta",
+      "valore": 27388.44,
+      "formato": "euro"
+    },
+    {
+      "id": "B3",
+      "area": "ENPAM Quota B",
+      "descrizione": "Under 40 con reddito sotto la soglia: nessuna Quota B",
+      "input": "Redditi 2026; nato il 1995-01-01; reddito libero-professionale 5.000,00 €",
+      "voce": "Soglia esente (coperta da Quota A)",
+      "valore": 5446.77,
+      "formato": "euro"
+    },
+    {
+      "id": "B3",
+      "area": "ENPAM Quota B",
+      "descrizione": "Under 40 con reddito sotto la soglia: nessuna Quota B",
+      "input": "Redditi 2026; nato il 1995-01-01; reddito libero-professionale 5.000,00 €",
+      "voce": "Quota B dovuta",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "AC1",
+      "area": "Acconti",
+      "descrizione": "Imposta anno precedente 50 €: nessun acconto",
+      "input": "Imposta anno precedente (rigo differenza) 50,00 €",
+      "voce": "Modalità",
+      "valore": 0,
+      "formato": "testo",
+      "testo": "nessuno"
+    },
+    {
+      "id": "AC1",
+      "area": "Acconti",
+      "descrizione": "Imposta anno precedente 50 €: nessun acconto",
+      "input": "Imposta anno precedente (rigo differenza) 50,00 €",
+      "voce": "1° acconto (giugno/luglio)",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "AC1",
+      "area": "Acconti",
+      "descrizione": "Imposta anno precedente 50 €: nessun acconto",
+      "input": "Imposta anno precedente (rigo differenza) 50,00 €",
+      "voce": "2° acconto (novembre)",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "AC2",
+      "area": "Acconti",
+      "descrizione": "Imposta anno precedente 200 €: acconto unico a novembre",
+      "input": "Imposta anno precedente (rigo differenza) 200,00 €",
+      "voce": "Modalità",
+      "valore": 0,
+      "formato": "testo",
+      "testo": "unica soluzione"
+    },
+    {
+      "id": "AC2",
+      "area": "Acconti",
+      "descrizione": "Imposta anno precedente 200 €: acconto unico a novembre",
+      "input": "Imposta anno precedente (rigo differenza) 200,00 €",
+      "voce": "1° acconto (giugno/luglio)",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "AC2",
+      "area": "Acconti",
+      "descrizione": "Imposta anno precedente 200 €: acconto unico a novembre",
+      "input": "Imposta anno precedente (rigo differenza) 200,00 €",
+      "voce": "2° acconto (novembre)",
+      "valore": 200,
+      "formato": "euro"
+    },
+    {
+      "id": "AC3",
+      "area": "Acconti",
+      "descrizione": "Imposta anno precedente 1.435 €: due rate da 50% (soggetti ISA/forfettari)",
+      "input": "Imposta anno precedente (rigo differenza) 1.435,00 €",
+      "voce": "Modalità",
+      "valore": 0,
+      "formato": "testo",
+      "testo": "due rate"
+    },
+    {
+      "id": "AC3",
+      "area": "Acconti",
+      "descrizione": "Imposta anno precedente 1.435 €: due rate da 50% (soggetti ISA/forfettari)",
+      "input": "Imposta anno precedente (rigo differenza) 1.435,00 €",
+      "voce": "1° acconto (giugno/luglio)",
+      "valore": 717.5,
+      "formato": "euro"
+    },
+    {
+      "id": "AC3",
+      "area": "Acconti",
+      "descrizione": "Imposta anno precedente 1.435 €: due rate da 50% (soggetti ISA/forfettari)",
+      "input": "Imposta anno precedente (rigo differenza) 1.435,00 €",
+      "voce": "2° acconto (novembre)",
+      "valore": 717.5,
+      "formato": "euro"
+    }
+  ],
+  "parametri": [
+    {
+      "gruppo": "Forfettario",
+      "voce": "Limite ricavi",
+      "valore": "85.000,00 €",
+      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%"
+    },
+    {
+      "gruppo": "Forfettario",
+      "voce": "Uscita immediata oltre",
+      "valore": "100.000,00 €",
+      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%"
+    },
+    {
+      "gruppo": "Forfettario",
+      "voce": "Coefficiente di redditività (ATECO 86.2x)",
+      "valore": "78%",
+      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%"
+    },
+    {
+      "gruppo": "Forfettario",
+      "voce": "Aliquota startup (primi 5 anni)",
+      "valore": "5%",
+      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%"
+    },
+    {
+      "gruppo": "Forfettario",
+      "voce": "Aliquota ordinaria",
+      "valore": "15%",
+      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%"
+    },
+    {
+      "gruppo": "IRPEF 2026",
+      "voce": "Scaglione 1: 0 – 28.000,00 €",
+      "valore": "23%",
+      "fonte": "L. 199/2025 (Legge di Bilancio 2026) art. 1 c. 3"
+    },
+    {
+      "gruppo": "IRPEF 2026",
+      "voce": "Scaglione 2: 28.000,00 € – 50.000,00 €",
+      "valore": "33%",
+      "fonte": "L. 199/2025 (Legge di Bilancio 2026) art. 1 c. 3"
+    },
+    {
+      "gruppo": "IRPEF 2026",
+      "voce": "Scaglione 3: 50.000,00 € – oltre",
+      "valore": "43%",
+      "fonte": "L. 199/2025 (Legge di Bilancio 2026) art. 1 c. 3"
+    },
+    {
+      "gruppo": "Detrazione lavoro autonomo",
+      "voce": "Fino a 5.500,00 €",
+      "valore": "1.265,00 €",
+      "fonte": "Art. 13 c. 5 TUIR"
+    },
+    {
+      "gruppo": "Detrazione lavoro autonomo",
+      "voce": "Da 5.500,00 € a 28.000,00 €",
+      "valore": "500,00 € + 765,00 € × (28.000 − reddito) / 22.500",
+      "fonte": "Art. 13 c. 5 TUIR"
+    },
+    {
+      "gruppo": "Detrazione lavoro autonomo",
+      "voce": "Da 28.000,00 € a 50.000,00 €",
+      "valore": "500,00 € × (50.000 − reddito) / 22.000",
+      "fonte": "Art. 13 c. 5 TUIR"
+    },
+    {
+      "gruppo": "Acconti",
+      "voce": "Nessun acconto sotto",
+      "valore": "51,65 €",
+      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%"
+    },
+    {
+      "gruppo": "Acconti",
+      "voce": "Unica soluzione (novembre) sotto",
+      "valore": "257,52 €",
+      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%"
+    },
+    {
+      "gruppo": "Acconti",
+      "voce": "Percentuale acconto",
+      "valore": "100%",
+      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%"
+    },
+    {
+      "gruppo": "Acconti",
+      "voce": "Prima rata soggetti ISA/forfettari",
+      "valore": "50%",
+      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%"
+    },
+    {
+      "gruppo": "Acconti",
+      "voce": "Acconto addizionale comunale",
+      "valore": "30%",
+      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%"
+    },
+    {
+      "gruppo": "ENPAM",
+      "voce": "Quota A fino a 30 anni",
+      "valore": "291,61 €",
+      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it",
+      "nota": "Importi Quota A 2026 discordanti tra le fonti (es. money.it riporta 304,73 / 591,47 / 1.109,92 / 2.049,83 e maternità 84,26). Verificare sul bollettino ENPAM."
+    },
+    {
+      "gruppo": "ENPAM",
+      "voce": "Quota A 30-35 anni",
+      "valore": "566,00 €",
+      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+    },
+    {
+      "gruppo": "ENPAM",
+      "voce": "Quota A 35-40 anni",
+      "valore": "1.062,12 €",
+      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+    },
+    {
+      "gruppo": "ENPAM",
+      "voce": "Quota A da 40 anni",
+      "valore": "1.961,56 €",
+      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+    },
+    {
+      "gruppo": "ENPAM",
+      "voce": "Contributo maternità",
+      "valore": "95,54 €",
+      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+    },
+    {
+      "gruppo": "ENPAM",
+      "voce": "Quota B aliquota intera",
+      "valore": "19,5%",
+      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+    },
+    {
+      "gruppo": "ENPAM",
+      "voce": "Quota B massimale",
+      "valore": "150.000,00 €",
+      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+    },
+    {
+      "gruppo": "ENPAM",
+      "voce": "Quota B oltre massimale",
+      "valore": "1%",
+      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+    },
+    {
+      "gruppo": "ENPAM",
+      "voce": "Soglia esente under 40",
+      "valore": "5.446,77 €",
+      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+    },
+    {
+      "gruppo": "ENPAM",
+      "voce": "Soglia esente over 40",
+      "valore": "10.059,28 €",
+      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+    },
+    {
+      "gruppo": "IVA e bollo",
+      "voce": "Bollo: soglia",
+      "valore": "77,47 €",
+      "fonte": "DPR 642/72, tariffa art. 13",
+      "nota": "D.Lgs. 192/2024: dal 2025 i rimborsi di spese addebitate al cliente non concorrono al reddito di lavoro autonomo. Verificare se vale anche per il bollo e per i forfettari."
+    },
+    {
+      "gruppo": "IVA e bollo",
+      "voce": "Bollo: importo",
+      "valore": "2,00 €",
+      "fonte": "DPR 642/72, tariffa art. 13"
+    },
+    {
+      "gruppo": "IVA e bollo",
+      "voce": "Bollo riaddebitato concorre al reddito",
+      "valore": "no",
+      "fonte": "DPR 642/72, tariffa art. 13"
+    },
+    {
+      "gruppo": "IVA e bollo",
+      "voce": "IVA aliquota prestazioni non sanitarie",
+      "valore": "22%",
+      "fonte": "DPR 642/72, tariffa art. 13"
+    },
+    {
+      "gruppo": "IVA e bollo",
+      "voce": "Interessi liquidazione trimestrale",
+      "valore": "1%",
+      "fonte": "DPR 642/72, tariffa art. 13"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità affitto_studio",
+      "valore": "100%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità utenze",
+      "valore": "100%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità materiale_sanitario",
+      "valore": "100%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità attrezzature",
+      "valore": "100%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità assicurazione_rc",
+      "valore": "100%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità formazione_ecm",
+      "valore": "100%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità software",
+      "valore": "100%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità telefono_internet",
+      "valore": "80%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità auto",
+      "valore": "20%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità ristoranti_alberghi",
+      "valore": "75%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità commercialista",
+      "valore": "100%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità quota_ordine",
+      "valore": "100%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità personale",
+      "valore": "100%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità contributi_enpam",
+      "valore": "0%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità imposte_f24",
+      "valore": "0%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità personale_non_deducibile",
+      "valore": "0%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Spese (ordinario)",
+      "voce": "Deducibilità altro",
+      "valore": "100%",
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+    },
+    {
+      "gruppo": "Scadenze 2026",
+      "voce": "Saldo e 1° acconto ISA/forfettari",
+      "valore": "2026-07-20",
+      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026"
+    },
+    {
+      "gruppo": "Scadenze 2026",
+      "voce": "2° acconto",
+      "valore": "2026-11-30",
+      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026"
+    },
+    {
+      "gruppo": "Scadenze 2026",
+      "voce": "Dichiarazione dei redditi",
+      "valore": "2026-10-31",
+      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026"
+    },
+    {
+      "gruppo": "Scadenze 2026",
+      "voce": "Invio Sistema TS",
+      "valore": "2026-01-31",
+      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026"
+    },
+    {
+      "gruppo": "Scadenze 2026",
+      "voce": "Modello D ENPAM",
+      "valore": "2026-07-31",
+      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026"
+    }
+  ]
+}
