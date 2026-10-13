@@ -8,12 +8,12 @@ Tutti i dati restano sul telefono.
 
 | Cartella | Cosa contiene | Chi ci lavora |
 |---|---|---|
-| `src/core/` | **Motore di calcolo**: forfettario, ordinario (IRPEF, addizionali, IVA), ENPAM, acconti, scadenziario, lettura del testo delle fatture, limiti dei piani | Claude Code — **Rork non deve modificarlo** |
+| `src/core/` | **Motore di calcolo**: forfettario, ordinario (IRPEF, addizionali, IVA), ENPAM, acconti, scadenziario, lettura del testo delle fatture, stato dell'abbonamento, storico, analisi, validazione, backup | Claude Code — **Rork non deve modificarlo** |
 | `src/core/__tests__/` | Test automatici e casi fiscali (`scenari.ts`) | Claude Code |
 | `src/core/params/` | Parametri normativi per anno (aliquote, soglie, scadenze) | Claude Code + verifica del commercialista |
 | `src/core/addizionali/data/` | Tabelle precaricate delle addizionali (dati ufficiali MEF) | Generate da `npm run import-addizionali` |
 | `src/db/` | Archivio locale SQLite | Claude Code |
-| `src/app/`, `src/components/` | Interfaccia (schermate) | **Rork** |
+| `src/app/` | Solo un segnaposto: l'app per iPhone è in SwiftUI (vedi `RORK.md` e `docs/PORTING.md`) | — |
 | `docs/` | Excel per il commercialista, privacy, GDPR, lettura foto | — |
 
 ## Comandi
@@ -21,7 +21,9 @@ Tutti i dati restano sul telefono.
 ```bash
 npm install                # una volta sola
 npm test                   # esegue tutti i test del motore
-npm run check              # typecheck + test (lo stesso controllo di GitHub)
+npm run check              # typecheck + test
+npm run test:motore        # typecheck + test del solo motore, senza Expo (lo stesso controllo di GitHub)
+npm run vettori            # rigenera golden/vettori.json per il porting in Swift
 npm run casi-test          # esporta casi e parametri in docs/casi-test.json
 python scripts/genera_excel_commercialista.py   # crea l'Excel per il commercialista
 npm run import-addizionali # rigenera le tabelle dai CSV del MEF in "raw data/"
@@ -39,8 +41,8 @@ npx expo start             # avvia l'app in sviluppo
 ## Stato dei dati fiscali (ottobre 2026)
 
 - Tutti i parametri 2026 sono **da verificare** con il commercialista: `docs/LumiaMed_verifica_commercialista.xlsx`.
-- Quota A ENPAM 2026: le fonti pubbliche non concordano sugli importi (vedi nota in `params/2026.ts`).
-- Addizionali comunali: 7.012 comuni su 7.897 dagli elenchi MEF 2023-2026 (per ogni comune l'ultima delibera disponibile). Per gli 885 comuni senza delibere dal 2023 (es. Portoscuso) aggiungere gli elenchi 2020-2022 in `raw data/` e rilanciare `npm run import-addizionali`.
+- Quota A ENPAM 2026: verificata su enpam.it (agg. 19/3/2026). I punti ancora da verificare sono in `docs/domande-commercialista.md`.
+- Addizionali comunali: tutti i 7.897 comuni degli elenchi MEF 2023-2026; per 7.012 c'è l'ultima delibera disponibile. Gli 885 comuni senza delibere dal 2023 (es. Portoscuso) sono in tabella con `senzaDelibera`: si trovano nella ricerca, ma l'addizionale non viene stimata. Per stimarla aggiungere gli elenchi 2020-2022 in `raw data/` e rilanciare `npm run import-addizionali`.
 - Addizionali regionali 2026: tutte le 21 regioni/province autonome, trascritte dalle pagine MEF (`addregirpef.php`) in `src/core/addizionali/data/regionali.json`. Le agevolazioni per figli e disabilità non sono applicate (l'app lo segnala). Da verificare ogni anno: il MEF non offre un file scaricabile.
 
 ## Lavorare con Rork

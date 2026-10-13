@@ -3,7 +3,7 @@ import { liquidazioniIva, proRata } from '../iva';
 import { euro } from '../money';
 import { bolloDovuto, creditiAperti, nettoIncassato, ricaviAnno } from '../movimenti';
 import { getParametri } from '../params';
-import { puoAggiungere, puoUsare } from '../piani';
+import { PRODOTTI, puoUsare, statoAbbonamento } from '../piani';
 import { csvFatture, csvSpese } from '../report';
 import { calcolaRiepilogo } from '../riepilogo';
 import type { Fattura, Profilo, Spesa } from '../types';
@@ -116,16 +116,16 @@ describe('Riepilogo (dashboard)', () => {
   });
 
   it('Quota B maturata: soglia in proporzione ai giorni trascorsi', () => {
-    // 15.600 − 5.446,77 × 181/365 = 15.600 − 2.701,00 = 12.899,00 × 19,5% = 2.515,31
-    expect(r.quotaBMaturata.soglia).toBe(euro(2_701));
-    expect(r.quotaBMaturata.totale).toBe(euro(2_515.31));
+    // Soglia 2026 stimata: 15.600 − 5.691,90 × 181/365 = 15.600 − 2.822,56 = 12.777,44 × 19,5% (scripts/atteso_pacchetto_b.py)
+    expect(r.quotaBMaturata.soglia).toBe(282_256);
+    expect(r.quotaBMaturata.totale).toBe(249_160);
   });
 
   it('da accantonare = imposte nette + Quota A residua + Quota B maturata + IVA', () => {
     const a = r.accantonamento;
-    // Quota A 2026 (34 anni fino a maggio, 35 da giugno) = 950,94; versati 592,94 il 30/4 (senza riferimento: attribuiti alla Quota A)
-    expect(r.quotaA.totale).toBe(euro(950.94));
-    expect(a.quotaAResidua).toBe(euro(358));
+    // Quota A 2026 (34 anni fino a maggio, 35 da giugno) = 978,16; versati 592,94 il 30/4 (senza riferimento: attribuiti alla Quota A)
+    expect(r.quotaA.totale).toBe(97_816);
+    expect(a.quotaAResidua).toBe(38_522);
     expect(a.metodo).toBe('proiezione');
     expect(a.imposte).toBe(a.imposteMaturate - a.ritenute - a.accontiVersati);
     expect(r.daAccantonare).toBe(a.imposte + a.quotaAResidua + a.quotaBMaturata + a.iva);
@@ -165,15 +165,77 @@ describe('Riepilogo (dashboard)', () => {
     expect(ord.iva?.soloEsenti).toBe(true);
     expect(ord.scadenze.some((s) => s.categoria === 'iva')).toBe(false);
   });
+
+  // Attesi: scripts/atteso_pacchetto_b.py
+  it('Quota B ad aliquota ridotta nel profilo: vale per la maturata e per quella dell\'anno scorso', () => {
+    const rid = calcolaRiepilogo({
+      oggi: '2026-06-30',
+      profilo: { ...profiloForf, aliquotaQuotaB: 0.0975, annoPrecedente: { anno: 2025, impostaDifferenza: euro(1_000), accontiVersati: euro(800), redditoProfessionale: euro(20_000) } },
+      fatture, spese,
+    });
+    expect(rid.quotaBMaturata.totale).toBe(124_580);
+    expect(rid.impegniAnnoPrecedente?.quotaB).toBe(141_894);
+  });
+
+  it('forfettario: avviso sui redditi da lavoro dipendente dell\'anno scorso', () => {
+    const conDipendente = calcolaRiepilogo({ oggi: '2026-06-30', profilo: { ...profiloForf, redditiLavoroDipendenteAnnoPrecedente: euro(40_000) }, fatture, spese });
+    expect(conDipendente.avvisi.map((x) => x.codice)).toContain('FORF_REDDITI_DIPENDENTE');
+  });
+
+  it('ordinario con stipendio: imposte marginali, stipendio maturato da inizio anno', () => {
+    const ord = calcolaRiepilogo({
+      oggi: '2026-06-30',
+      profilo: { ...profiloForf, regime: 'ordinario', regione: 'SAR', redditoLavoroDipendente: euro(60_000) },
+      fatture: [fattura({ trattamentoIva: 'esente_art10', imponibile: euro(30_000), dataIncasso: '2026-03-01' })],
+      spese,
+    });
+    expect((ord.daInizioAnno.dettaglio as { altriRedditi: number }).altriRedditi).toBe(2_975_342);
+    expect((ord.proiezione.dettaglio as { altriRedditi: number }).altriRedditi).toBe(euro(60_000));
+    expect(ord.avvisi.map((x) => x.codice)).toContain('ORD_ALTRI_REDDITI');
+  });
+
+  it('fatture caricate come storico: niente avviso del Sistema TS', () => {
+    const storico = calcolaRiepilogo({
+      oggi: '2026-06-30', profilo: profiloForf, spese: [],
+      fatture: [fattura({ imponibile: euro(5_000), dataFattura: '2025-12-31', dataIncasso: '2025-12-31', storico: true })],
+    });
+    expect(storico.avvisi.map((x) => x.codice)).not.toContain('STS_DA_INVIARE');
+  });
 });
 
-describe('Piani', () => {
-  it('limiti e funzioni', () => {
-    expect(puoAggiungere('free', 'fattura', 29).consentito).toBe(true);
-    expect(puoAggiungere('free', 'fattura', 30).consentito).toBe(false);
-    expect(puoAggiungere('pro', 'fattura', 10_000).consentito).toBe(true);
-    expect(puoUsare('free', 'report_pdf')).toBe(false);
-    expect(puoUsare('pro', 'lettura_foto')).toBe(true);
+describe('Abbonamento', () => {
+  const oggi = '2026-06-30';
+
+  it('periodo dello store in corso: attivo, o prova se lo store lo indica', () => {
+    expect(statoAbbonamento({ oggi, store: { prodotto: 'pro_annuale', scadenza: '2027-01-15' } }))
+      .toEqual({ stato: 'attivo', prodotto: 'pro_annuale', finoAl: '2027-01-15' });
+    expect(statoAbbonamento({ oggi, store: { prodotto: 'pro_mensile', scadenza: '2026-07-10', periodoDiProva: true } }).stato).toBe('prova');
+  });
+
+  it('l\'ultimo giorno è incluso', () => {
+    expect(statoAbbonamento({ oggi, store: { prodotto: 'founding_annuale', scadenza: oggi } }).stato).toBe('attivo');
+    expect(statoAbbonamento({ oggi, store: { prodotto: 'founding_annuale', scadenza: '2026-06-29' } }).stato).toBe('scaduto');
+  });
+
+  it('prova gestita dall\'app, senza acquisti nello store', () => {
+    expect(statoAbbonamento({ oggi, store: {}, fineProvaApp: '2026-07-01' })).toEqual({ stato: 'prova', finoAl: '2026-07-01' });
+    expect(statoAbbonamento({ oggi, store: {}, fineProvaApp: '2026-06-29' }).stato).toBe('scaduto');
+    expect(statoAbbonamento({ oggi, store: {} }).stato).toBe('scaduto');
+  });
+
+  it('abbonamento scaduto: resta il prodotto, nessuna data', () => {
+    expect(statoAbbonamento({ oggi, store: { prodotto: 'pro_mensile', scadenza: '2026-05-31' } })).toEqual({ stato: 'scaduto', prodotto: 'pro_mensile' });
+  });
+
+  it('scaduto = sola lettura ed export; nessun limite sul numero di movimenti', () => {
+    expect(puoUsare('scaduto', 'consultazione')).toBe(true);
+    expect(puoUsare('scaduto', 'export')).toBe(true);
+    for (const f of ['inserimento', 'import_storico', 'lettura_foto', 'notifiche_scadenze'] as const) {
+      expect(puoUsare('scaduto', f)).toBe(false);
+      expect(puoUsare('prova', f)).toBe(true);
+      expect(puoUsare('attivo', f)).toBe(true);
+    }
+    expect(PRODOTTI).toEqual(['pro_mensile', 'pro_annuale', 'founding_annuale']);
   });
 });
 
@@ -186,6 +248,11 @@ describe('Report CSV', () => {
     expect(csv).toContain('"Visita; controllo"');
     expect(csv).not.toContain('Mario Rossi');
     expect(csvFatture(f, 2026, p, { includiNomePaziente: true })).toContain('Mario Rossi');
+  });
+
+  it('BOM UTF-8 all\'inizio, per le lettere accentate in Excel', () => {
+    expect(csvFatture([], 2026, p).startsWith('﻿Numero;')).toBe(true);
+    expect(csvSpese([], 2026).startsWith('﻿Data;')).toBe(true);
   });
 
   it('spese', () => {
@@ -357,5 +424,15 @@ describe('Attribuzione dei versamenti senza riferimento', () => {
     expect(r.versamenti.map((v) => [v.riferimento.tributo, v.riferimento.tipo, v.importo])).toEqual([
       ['iva', undefined, euro(2_666.4)], ['imposta', 'acconto', euro(333.6)],
     ]);
+  });
+});
+
+describe('Riepilogo — scadenze dei prossimi 12 mesi', () => {
+  it('a metà dicembre: nessuna scadenza passata, già presenti Sistema TS e Quota A dell\'anno dopo', () => {
+    const r = calcolaRiepilogo({ oggi: '2026-12-15', profilo: profiloForf, fatture: [], spese: [] });
+    expect(r.scadenze.every((s) => s.data >= '2026-12-15' && s.data < '2027-12-15')).toBe(true);
+    expect(r.scadenze.find((s) => s.id === 'sts')).toMatchObject({ anno: 2027, data: '2027-02-01' });
+    expect(r.scadenze.find((s) => s.id === 'quotaA-1')).toMatchObject({ anno: 2027, data: '2027-04-30' });
+    expect(r.scadenzeImminenti.map((s) => s.id)).toEqual([]); // nulla tra il 15/12 e il 14/1 con Quota B in unica rata
   });
 });

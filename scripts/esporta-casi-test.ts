@@ -75,9 +75,13 @@ for (const s of SCENARI_DASHBOARD) {
 }
 
 const p = getParametri(2026).parametri;
-const parametri: { gruppo: string; voce: string; valore: string; fonte: string; nota?: string }[] = [];
-const g = (gruppo: string, fonte: { fonte: string; nota?: string }, voci: [string, string][]) =>
-  voci.forEach(([voce, valore], i) => parametri.push({ gruppo, voce, valore, fonte: fonte.fonte, nota: i === 0 ? fonte.nota : undefined }));
+const p25 = getParametri(2025).parametri;
+const p27 = getParametri(2027).parametri;
+const parametri: { gruppo: string; voce: string; valore: string; fonte: string; nota?: string; verificato: boolean }[] = [];
+const g = (gruppo: string, fonte: { fonte: string; nota?: string; verificato: boolean }, voci: [string, string][]) =>
+  voci.forEach(([voce, valore], i) => parametri.push({
+    gruppo, voce, valore, fonte: fonte.fonte, nota: i === 0 ? fonte.nota : undefined, verificato: fonte.verificato,
+  }));
 
 g('Forfettario', p.forfettario, [
   ['Limite ricavi', eurTxt(p.forfettario.limiteRicavi)],
@@ -85,6 +89,12 @@ g('Forfettario', p.forfettario, [
   ['Coefficiente di redditività (ATECO 86.2x)', pctTxt(p.forfettario.coefficienteDefault)],
   ['Aliquota startup (primi 5 anni)', pctTxt(p.forfettario.aliquotaStartup)],
   ['Aliquota ordinaria', pctTxt(p.forfettario.aliquotaOrdinaria)],
+]);
+g('Forfettario: redditi da lavoro dipendente', p.forfettario.sogliaRedditiDipendente, [
+  ['Soglia 2026 (redditi 2025)', eurTxt(p.forfettario.sogliaRedditiDipendente.importo)],
+]);
+g('Forfettario: redditi da lavoro dipendente', p27.forfettario.sogliaRedditiDipendente, [
+  ['Soglia 2027 provvisoria (redditi 2026)', eurTxt(p27.forfettario.sogliaRedditiDipendente.importo)],
 ]);
 g('IRPEF 2026', p.irpef, p.irpef.scaglioni.map((s, i, arr) => [
   `Scaglione ${i + 1}: ${i === 0 ? '0' : eurTxt(arr[i - 1].fino as number)} – ${s.fino === null ? 'oltre' : eurTxt(s.fino)}`, pctTxt(s.aliquota),
@@ -102,17 +112,30 @@ g('Acconti', p.acconti, [
   ['Prima rata soggetti ISA/forfettari', pctTxt(p.acconti.primaRataIsa)],
   ['Acconto addizionale comunale', pctTxt(p.acconti.accontoAddizionaleComunale)],
 ]);
-g('ENPAM', p.enpam, [
+g('ENPAM Quota A 2026', p.enpam.quotaA, [
   ...p.enpam.quotaA.fasce.map((f, i, arr): [string, string] => [
     `Quota A ${i === 0 ? 'fino a 30 anni' : f.finoEta === null ? `da ${(arr[i - 1].finoEta as number) + 1} anni` : `${(arr[i - 1].finoEta as number) + 1}-${f.finoEta + 1} anni`}`,
     eurTxt(f.importoAnnuo),
   ]),
-  ['Contributo maternità', eurTxt(p.enpam.quotaA.contributoMaternita)],
+  ['Contributo maternità (si somma alla fascia)', eurTxt(p.enpam.quotaA.contributoMaternita)],
+  ['Quota A studenti (non usata nei calcoli)', eurTxt(p.enpam.quotaA.studenti)],
+]);
+g('ENPAM Quota B', p.enpam, [
   ['Quota B aliquota intera', pctTxt(p.enpam.quotaB.aliquotaIntera)],
+  ['Quota B aliquota ridotta (a scelta del medico)', pctTxt(0.0975)],
   ['Quota B massimale', eurTxt(p.enpam.quotaB.massimale)],
   ['Quota B oltre massimale', pctTxt(p.enpam.quotaB.aliquotaOltreMassimale)],
-  ['Soglia esente under 40', eurTxt(p.enpam.quotaB.sogliaUnder40)],
-  ['Soglia esente over 40', eurTxt(p.enpam.quotaB.sogliaOver40)],
+]);
+g('ENPAM soglie Quota B redditi 2025', p25.enpam.quotaB.sogliaEsenzione, [
+  ['Soglia esente under 40', eurTxt(p25.enpam.quotaB.sogliaEsenzione.under40)],
+  ['Soglia esente over 40', eurTxt(p25.enpam.quotaB.sogliaEsenzione.over40)],
+]);
+g('ENPAM soglie Quota B redditi 2026', p.enpam.quotaB.sogliaEsenzione, [
+  ['Soglia esente under 40', eurTxt(p.enpam.quotaB.sogliaEsenzione.under40)],
+  ['Soglia esente over 40', eurTxt(p.enpam.quotaB.sogliaEsenzione.over40)],
+]);
+g('Detrazione lavoro dipendente', p.detrazioneLavoroDipendente, [
+  ['Nulla oltre (solo per l\'avviso sugli altri redditi)', eurTxt(p.detrazioneLavoroDipendente.nullaOltre)],
 ]);
 g('IVA e bollo', p.bollo, [
   ['Bollo: soglia', eurTxt(p.bollo.soglia)],

@@ -27,6 +27,20 @@ export interface Profilo {
   rateQuotaA: 1 | 4 | 8;
   /** Rate scelte per la Quota B ENPAM. */
   rateQuotaB: 1 | 2 | 5 | 9;
+  /**
+   * Aliquota della Quota B: 0.195 (intera, predefinita) o 0.0975 (ridotta, su scelta del medico).
+   * L'aliquota del 2% non va offerta: vale solo per l'intramoenia.
+   */
+  aliquotaQuotaB?: 0.195 | 0.0975;
+  /** Forfettario: redditi di lavoro dipendente o assimilati dell'anno precedente (requisito di accesso). */
+  redditiLavoroDipendenteAnnoPrecedente?: Cents;
+  /** Forfettario: il rapporto di lavoro dipendente è cessato entro il 31/12 dell'anno precedente. */
+  rapportoCessatoEntro31_12?: boolean;
+  /**
+   * Ordinario: reddito di lavoro dipendente atteso nell'anno (es. ospedaliero in extramoenia).
+   * Le imposte dell'attività si calcolano in modo marginale: imposte sul totale meno imposte sul solo stipendio.
+   */
+  redditoLavoroDipendente?: Cents;
   /** Emette fatture elettroniche (verso strutture/aziende)? Serve per il bollo virtuale trimestrale. */
   emetteFattureElettroniche: boolean;
   /**
@@ -97,6 +111,8 @@ export interface Fattura {
   inviataSTS?: boolean;
   /** Origine del dato: inserimento manuale o lettura da foto. */
   origine: 'manuale' | 'foto';
+  /** Caricata con lo storico (totali o import CSV): si può dettagliare dopo. */
+  storico?: boolean;
 }
 
 export type CategoriaSpesa =
@@ -157,6 +173,8 @@ export interface Spesa {
    * L'interfaccia deve chiederlo. Se manca, il motore lo attribuisce in base alla data e lo segnala.
    */
   riferimento?: RiferimentoVersamento;
+  /** Caricata con lo storico (totali o import CSV): si può dettagliare dopo. */
+  storico?: boolean;
 }
 
 export interface Avviso {

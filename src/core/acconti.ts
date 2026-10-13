@@ -19,7 +19,8 @@ export interface PianoAcconti {
  */
 export function pianoAcconti(base: Cents, p: ParametriAnno): PianoAcconti {
   const { sogliaNessunAcconto, sogliaUnicaSoluzione, percentuale, primaRataIsa } = p.acconti;
-  if (base < sogliaNessunAcconto) {
+  // Acconto non dovuto se la differenza non supera 51,65 € (51,65 compreso).
+  if (base <= sogliaNessunAcconto) {
     return { base, totale: 0, primaRata: 0, secondaRata: 0, modalita: 'nessuno' };
   }
   const totale = pct(base, percentuale);

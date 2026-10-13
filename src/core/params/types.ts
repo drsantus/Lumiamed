@@ -27,6 +27,8 @@ export interface ParametriAnno {
     aliquotaStartup: number; // 0.05
     anniStartup: number; // 5
     aliquotaOrdinaria: number; // 0.15
+    /** Redditi di lavoro dipendente dell'anno precedente oltre i quali il forfettario non è ammesso. */
+    sogliaRedditiDipendente: Fonte & { importo: Cents };
   };
 
   irpef: Fonte & {
@@ -54,19 +56,27 @@ export interface ParametriAnno {
   };
 
   enpam: Fonte & {
-    quotaA: {
-      /** Importi annui per fascia d'età (anni compiuti). */
+    quotaA: Fonte & {
+      /** Importi annui per fascia d'età (anni compiuti), maternità esclusa. */
       fasce: { finoEta: number | null; importoAnnuo: Cents }[];
+      /** Contributo di maternità: separato, si somma all'importo della fascia. */
       contributoMaternita: Cents;
+      /** Quota A degli studenti iscritti. Solo parametro: non usata nei calcoli. */
+      studenti: Cents;
     };
     quotaB: {
       aliquotaIntera: number; // 0.195
       aliquotaOltreMassimale: number; // 0.01
       massimale: Cents; // 150.000
-      /** Reddito già coperto dalla Quota A (esente da Quota B). */
-      sogliaUnder40: Cents;
-      sogliaOver40: Cents;
+      /** Reddito già coperto dalla Quota A (esente da Quota B), per età nell'anno del reddito. */
+      sogliaEsenzione: Fonte & { under40: Cents; over40: Cents };
     };
+  };
+
+  /** Usato solo per l'avviso sugli altri redditi nell'ordinario: il motore non calcola la detrazione per lavoro dipendente. */
+  detrazioneLavoroDipendente: Fonte & {
+    /** Reddito complessivo oltre il quale la detrazione è zero. */
+    nullaOltre: Cents;
   };
 
   iva: Fonte & {
@@ -98,3 +108,11 @@ export interface ParametriAnno {
     modelloD: IsoDate;
   };
 }
+
+type ParzialeProfondo<T> = { [K in keyof T]?: T[K] extends unknown[] ? T[K] : T[K] extends object ? ParzialeProfondo<T[K]> : T[K] };
+
+/**
+ * Anno con solo alcuni parametri (es. 2025: le soglie della Quota B sui redditi 2025).
+ * I campi mancanti vengono presi dall'anno completo più vicino, con `approssimati: true`.
+ */
+export type ParametriParziali = { anno: number } & ParzialeProfondo<Omit<ParametriAnno, 'anno'>>;

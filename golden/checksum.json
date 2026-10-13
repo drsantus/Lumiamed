@@ -1,0 +1,10 @@
+{
+  "versioneMotore": "1.0.0",
+  "generatoIl": "2026-10-13T13:17:29.454Z",
+  "algoritmo": "SHA-256",
+  "descrizione": "Impronta dei file di dati del motore: il porting deve includerli identici, byte per byte.",
+  "file": {
+    "src/core/addizionali/data/comunali.json": "6ee2138bf0b9fc9aa8c3517572c95b90f4c02e4ff693410a72ef85bba666b48d",
+    "src/core/addizionali/data/regionali.json": "0f204ed640c2c512c1efd440b7d50efad52a0e0de96f1936af5f0baf43f86816"
+  }
+}

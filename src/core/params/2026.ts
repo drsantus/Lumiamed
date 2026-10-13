@@ -17,6 +17,12 @@ export const PARAMETRI_2026: ParametriAnno = {
     aliquotaStartup: 0.05,
     anniStartup: 5,
     aliquotaOrdinaria: 0.15,
+    sogliaRedditiDipendente: {
+      fonte: 'L. 190/2014 art. 1 c. 57 lett. d-ter',
+      verificato: false,
+      nota: 'Da confermare dal commercialista.',
+      importo: euro(35_000),
+    },
   },
 
   irpef: {
@@ -52,27 +58,41 @@ export const PARAMETRI_2026: ParametriAnno = {
   },
 
   enpam: {
-    fonte:
-      'Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it',
+    fonte: 'Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it',
     verificato: false,
-    nota:
-      'Importi Quota A 2026 discordanti tra le fonti (es. money.it riporta 304,73 / 591,47 / 1.109,92 / 2.049,83 e maternità 84,26). Verificare sul bollettino ENPAM.',
+    nota: 'Aliquote e massimale della Quota B da verificare.',
     quotaA: {
+      fonte: 'enpam.it',
+      verificato: true,
+      nota: 'enpam.it agg. 19/3/2026',
       fasce: [
-        { finoEta: 29, importoAnnuo: euro(291.61) }, // fino a 30 anni
-        { finoEta: 34, importoAnnuo: euro(566.0) }, // da 30 a 35
-        { finoEta: 39, importoAnnuo: euro(1_062.12) }, // da 35 a 40
-        { finoEta: null, importoAnnuo: euro(1_961.56) }, // oltre 40
+        { finoEta: 29, importoAnnuo: 30_473 }, // fino a 30 anni
+        { finoEta: 34, importoAnnuo: 59_147 }, // da 30 a 35
+        { finoEta: 39, importoAnnuo: 110_992 }, // da 35 a 40
+        { finoEta: null, importoAnnuo: 204_983 }, // oltre 40
       ],
-      contributoMaternita: euro(95.54),
+      contributoMaternita: 8_426,
+      studenti: 15_237,
     },
     quotaB: {
       aliquotaIntera: 0.195,
       aliquotaOltreMassimale: 0.01,
       massimale: euro(150_000),
-      sogliaUnder40: euro(5_446.77),
-      sogliaOver40: euro(10_059.28),
+      sogliaEsenzione: {
+        fonte: 'Stima LumiaMed',
+        verificato: false,
+        nota: 'Stima: Quota A 2026 ÷ 19,5%. ENPAM la pubblica con il Modello D 2027',
+        under40: 569_190,
+        over40: 1_051_195,
+      },
     },
+  },
+
+  detrazioneLavoroDipendente: {
+    fonte: 'Art. 13 c. 1 TUIR',
+    verificato: false,
+    nota: 'Usata solo per l\'avviso sugli altri redditi nell\'ordinario: la detrazione per lavoro dipendente non è calcolata.',
+    nullaOltre: euro(50_000),
   },
 
   iva: {

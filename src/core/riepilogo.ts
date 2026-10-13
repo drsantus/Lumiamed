@@ -2,7 +2,7 @@ import { confrontaAcconti, pianoAcconti, proiezioneAnnua, accontoAddizionaleComu
 import type { TabelleAddizionali } from './addizionali';
 import { addDays, isoYear } from './dates';
 import { quotaA, quotaB, type DettaglioQuotaA, type DettaglioQuotaB } from './enpam';
-import { aliquotaForfettario, calcolaForfettario, type RisultatoForfettario } from './forfettario';
+import { aliquotaForfettario, avvisiRequisitiForfettario, calcolaForfettario, type RisultatoForfettario } from './forfettario';
 import { liquidazioniIva, type RisultatoIva } from './iva';
 import { clampMin0, pct, sum, type Cents } from './money';
 import {
@@ -10,8 +10,8 @@ import {
   type Credito,
 } from './movimenti';
 import { calcolaOrdinario, type RisultatoOrdinario } from './ordinario';
-import { getParametri, type ParametriAnno } from './params';
-import { frazioneQuotaBNellAnno, generaScadenziario, scadenzeImminenti, type Scadenza } from './scadenziario';
+import { getParametri, parametriDaVerificare, type ParametriAnno } from './params';
+import { frazioneQuotaBNellAnno, scadenzeImminenti, scadenzeProssimi12Mesi, type Scadenza } from './scadenziario';
 import type { Avviso, DatiAnnoPrecedente, Fattura, IsoDate, Profilo, Spesa } from './types';
 import { attribuisciVersamenti, totaleVersato } from './versamenti';
 
@@ -119,6 +119,7 @@ export interface Riepilogo {
   acconti?: ConfrontoAcconti;
   crediti: Credito[];
   totaleCrediti: Cents;
+  /** Scadenze dei prossimi 12 mesi (da oggi), con importi stimati. */
   scadenze: Scadenza[];
   scadenzeImminenti: Scadenza[];
   avvisi: Avviso[];
@@ -126,14 +127,14 @@ export interface Riepilogo {
 
 function stima(
   regime: Profilo['regime'], anno: number, ricavi: Cents, speseList: Spesa[], contributi: Cents, ritenute: Cents,
-  profilo: Profilo, p: ParametriAnno, percDetrazioneIva: number, tabelle?: TabelleAddizionali,
+  profilo: Profilo, p: ParametriAnno, percDetrazioneIva: number, altriRedditi: Cents, tabelle?: TabelleAddizionali,
 ): StimaImposte {
   if (regime === 'forfettario') {
     const r = calcolaForfettario({ anno, ricavi, contributiVersati: contributi, profilo }, p);
     return { regime, ricavi, redditoProfessionale: r.redditoLordo, imposte: r.impostaSostitutiva, differenza: r.impostaSostitutiva, dettaglio: r };
   }
   const r = calcolaOrdinario(
-    { anno, compensi: ricavi, spese: speseList, contributiVersati: contributi, ritenuteSubite: ritenute, profilo, percentualeDetrazioneIva: percDetrazioneIva, tabelleAddizionali: tabelle },
+    { anno, compensi: ricavi, spese: speseList, contributiVersati: contributi, ritenuteSubite: ritenute, profilo, percentualeDetrazioneIva: percDetrazioneIva, tabelleAddizionali: tabelle, altriRedditi },
     p,
   );
   return { regime, ricavi, redditoProfessionale: r.redditoProfessionale, imposte: r.totaleImposte, differenza: r.differenza, dettaglio: r };
@@ -193,8 +194,9 @@ export function calcolaRiepilogo(input: InputRiepilogo): Riepilogo {
 
   // Importi noti dell'anno: Quota A, debiti dell'anno scorso
   const qa = quotaA(anno, profilo.dataNascita, p);
+  // Quota B sui redditi dell'anno scorso: parametri dell'anno del reddito.
   const quotaBAnnoPrec = prec?.redditoProfessionale !== undefined
-    ? quotaB(anno - 1, prec.redditoProfessionale, profilo.dataNascita, p).totale
+    ? quotaB(anno - 1, prec.redditoProfessionale, profilo.dataNascita, getParametri(anno - 1).parametri, 1, profilo.aliquotaQuotaB).totale
     : undefined;
   const saldoImposteDovuto = prec ? clampMin0(prec.impostaDifferenza - (prec.accontiVersati ?? 0)) : 0;
   const saldoAddizionaliDovuto = prec && ordinario ? saldoAddizionaliAnnoPrecedente(prec, p) : 0;
@@ -219,19 +221,25 @@ export function calcolaRiepilogo(input: InputRiepilogo): Riepilogo {
   const saldoAddizionaliPagato = totaleVersato(att.versamenti, ['addizionale_regionale', 'addizionale_comunale'], anno - 1, 'saldo');
   const ivaVersata = totaleVersato(att.versamenti, ['iva'], anno);
 
-  const daInizioAnno = stima(profilo.regime, anno, ricavi, speseProf, contributiVersati, ritenute, profilo, p, percDetrazioneIva, input.tabelleAddizionali);
+  // Altri redditi (solo ordinario): il valore del profilo è annuo; da inizio anno se ne conta la quota maturata.
+  const pr = proiezioneAnnua(ricavi, oggi);
+  const f = pr.frazioneAnno;
+  const altriRedditiAnnui = ordinario ? profilo.redditoLavoroDipendente ?? 0 : 0;
+
+  const daInizioAnno = stima(
+    profilo.regime, anno, ricavi, speseProf, contributiVersati, ritenute, profilo, p, percDetrazioneIva,
+    Math.round(altriRedditiAnnui * f), input.tabelleAddizionali,
+  );
 
   // Proiezione a fine anno. Contributi deducibili dell'anno: già versati + Quota A residua
   // + Quota B dell'anno scorso che scade entro dicembre (secondo il piano di rate).
-  const pr = proiezioneAnnua(ricavi, oggi);
-  const f = pr.frazioneAnno;
   const speseProiettate = speseProf.map((s) => ({ ...s, importo: scala(s.importo, f), iva: s.iva === undefined ? undefined : scala(s.iva, f) }));
   const quotaAResidua = clampMin0(qa.totale - quotaAVersata);
   const quotaBPrecNellAnno = quotaBAnnoPrec !== undefined ? Math.round(quotaBAnnoPrec * frazioneQuotaBNellAnno(profilo.rateQuotaB)) : 0;
   const contributiProiettati = contributiVersati + quotaAResidua + clampMin0(quotaBPrecNellAnno - quotaBPrecVersata);
   const proiezioneBase = stima(
     profilo.regime, anno, pr.valoreAnnuo, speseProiettate, contributiProiettati, scala(ritenute, f),
-    profilo, p, percDetrazioneIva, input.tabelleAddizionali,
+    profilo, p, percDetrazioneIva, altriRedditiAnnui, input.tabelleAddizionali,
   );
   const proiezione = { ...proiezioneBase, affidabile: pr.affidabile };
 
@@ -248,7 +256,7 @@ export function calcolaRiepilogo(input: InputRiepilogo): Riepilogo {
   }
 
   // Contributi ENPAM di competenza
-  const quotaBMaturata = quotaB(anno, daInizioAnno.redditoProfessionale, profilo.dataNascita, p, f);
+  const quotaBMaturata = quotaB(anno, daInizioAnno.redditoProfessionale, profilo.dataNascita, p, f, profilo.aliquotaQuotaB);
   const quotaAMaturata = Math.round(qa.totale * f);
 
   // IVA incassata e non ancora versata
@@ -284,10 +292,10 @@ export function calcolaRiepilogo(input: InputRiepilogo): Riepilogo {
     avvisi.push(...acconti.avvisi);
   }
 
-  // Scadenziario con importi stimati
+  // Scadenziario dei prossimi 12 mesi con importi stimati
   const piano = prec ? pianoAcconti(prec.impostaDifferenza, p) : undefined;
-  const scadenze = generaScadenziario({
-    anno,
+  const scadenze = scadenzeProssimi12Mesi({
+    oggi,
     profilo,
     haOperazioniIva: !!iva && !iva.soloEsenti,
     importi: {
@@ -302,7 +310,7 @@ export function calcolaRiepilogo(input: InputRiepilogo): Riepilogo {
         : undefined,
       ivaTrimestri: iva ? { 1: iva.trimestri[0].daVersare, 2: iva.trimestri[1].daVersare, 3: iva.trimestri[2].daVersare } : undefined,
     },
-  }, p);
+  });
 
   const crediti = creditiAperti(fatture, oggi, p);
   const vecchi = crediti.filter((c) => c.giorni > 60);
@@ -310,12 +318,14 @@ export function calcolaRiepilogo(input: InputRiepilogo): Riepilogo {
     avvisi.push({ codice: 'CREDITI_SCADUTI', livello: 'attenzione', messaggio: `${vecchi.length} fatture non incassate da più di 60 giorni.` });
   }
 
-  const daInviareSTS = fatture.filter((ft) => ft.destinatario === 'paziente' && ft.stato === 'incassata' && !ft.inviataSTS && ft.dataIncasso && isoYear(ft.dataIncasso) === anno - 1);
+  // Le fatture caricate come storico sono totali, non singole spese da trasmettere.
+  const daInviareSTS = fatture.filter((ft) => ft.destinatario === 'paziente' && ft.stato === 'incassata' && !ft.inviataSTS && !ft.storico && ft.dataIncasso && isoYear(ft.dataIncasso) === anno - 1);
   if (daInviareSTS.length > 0) {
     avvisi.push({ codice: 'STS_DA_INVIARE', livello: 'critico', messaggio: `${daInviareSTS.length} fatture del ${anno - 1} non risultano inviate al Sistema TS.` });
   }
 
   avvisi.push(...(daInizioAnno.dettaglio as { avvisi: Avviso[] }).avvisi);
+  avvisi.push(...avvisiRequisitiForfettario(profilo, p));
   if (profilo.regime === 'forfettario') {
     const sopra = (proiezione.dettaglio as RisultatoForfettario).avvisi.find((a) => a.codice.startsWith('FORF_USCITA'));
     if (sopra && !avvisi.some((a) => a.codice === sopra.codice)) {
@@ -326,13 +336,11 @@ export function calcolaRiepilogo(input: InputRiepilogo): Riepilogo {
     avvisi.push({ codice: 'PARAMETRI_APPROSSIMATI', livello: 'attenzione', messaggio: `Parametri fiscali ${anno} non ancora aggiornati: le stime usano quelli dell'anno più vicino.` });
   }
 
-  const gruppi = ['forfettario', 'irpef', 'detrazioneLavoroAutonomo', 'acconti', 'enpam', 'iva', 'bollo', 'spese', 'scadenze'] as const;
-  const parametriDaVerificare = gruppi.filter((g) => !p[g].verificato);
 
   return {
     anno, oggi,
     parametriApprossimati: approssimati,
-    parametriDaVerificare,
+    parametriDaVerificare: parametriDaVerificare(p),
     incassatoLordo, ricavi, speseProfessionali, contributiVersati,
     daInizioAnno, proiezione,
     quotaA: qa, quotaBMaturata,

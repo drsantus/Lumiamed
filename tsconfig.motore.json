@@ -1,0 +1,19 @@
+{
+  "//": "Typecheck del solo motore (src/core) e dei suoi test, senza Expo: serve solo typescript. Usato da npm run test:motore e dalla CI.",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": []
+  },
+  "include": ["src/core/**/*.ts"]
+}

@@ -40,6 +40,8 @@ export interface DettaglioQuotaB {
   totale: Cents;
   redditoProfessionale: Cents;
   soglia: Cents;
+  /** Aliquota applicata fino al massimale (0.195 intera o 0.0975 ridotta). */
+  aliquota: number;
   baseAliquotaIntera: Cents;
   quotaAliquotaIntera: Cents;
   baseOltreMassimale: Cents;
@@ -50,10 +52,16 @@ export interface DettaglioQuotaB {
  * Quota B dovuta sul reddito libero-professionale dell'anno (pagata nell'anno successivo).
  * - Forfettario: reddito = ricavi × coefficiente (rigo LM34, prima dei contributi).
  * - Ordinario: reddito = compensi − spese deducibili (quadro RE, senza togliere i contributi).
- * La parte già coperta dalla Quota A (soglia) è esente. Solo libero professionista puro (aliquota intera).
+ * La parte già coperta dalla Quota A (soglia) è esente. Solo libero professionista puro.
+ *
+ * `p` sono i parametri dell'ANNO DEL REDDITO (es. getParametri(2025) per la Quota B pagata nel 2026);
+ * l'età è quella al 31/12 dell'anno del reddito.
  *
  * `frazioneAnno` (0-1) serve per la Quota B MATURATA da inizio anno: soglia e massimale
  * si riducono in proporzione, come la Quota A maturata. Con 1 (default) è la Quota B dell'anno intero.
+ *
+ * `aliquota`: 0.195 (default, aliquota intera) o 0.0975 (aliquota ridotta scelta dal medico).
+ * Sostituisce solo l'aliquota intera: la quota oltre il massimale resta all'1%.
  */
 export function quotaB(
   annoReddito: number,
@@ -61,29 +69,31 @@ export function quotaB(
   dataNascita: IsoDate,
   p: ParametriAnno,
   frazioneAnno = 1,
+  aliquota: number = p.enpam.quotaB.aliquotaIntera,
 ): DettaglioQuotaB {
   const f = Math.min(1, Math.max(0, frazioneAnno));
   const eta = etaAl(dataNascita, ymd(annoReddito, 12, 31));
-  const sogliaAnnua = eta < 40 ? p.enpam.quotaB.sogliaUnder40 : p.enpam.quotaB.sogliaOver40;
+  const { sogliaEsenzione, aliquotaOltreMassimale } = p.enpam.quotaB;
+  const sogliaAnnua = eta < 40 ? sogliaEsenzione.under40 : sogliaEsenzione.over40;
   const soglia = Math.round(sogliaAnnua * f);
   const massimale = Math.round(p.enpam.quotaB.massimale * f);
-  const { aliquotaIntera, aliquotaOltreMassimale } = p.enpam.quotaB;
   const reddito = clampMin0(redditoProfessionale);
 
   if (reddito <= soglia) {
     return {
-      totale: 0, redditoProfessionale: reddito, soglia,
+      totale: 0, redditoProfessionale: reddito, soglia, aliquota,
       baseAliquotaIntera: 0, quotaAliquotaIntera: 0, baseOltreMassimale: 0, quotaOltreMassimale: 0,
     };
   }
   const baseAliquotaIntera = clampMin0(Math.min(reddito, massimale) - soglia);
   const baseOltreMassimale = clampMin0(reddito - massimale);
-  const quotaAliquotaIntera = pct(baseAliquotaIntera, aliquotaIntera);
+  const quotaAliquotaIntera = pct(baseAliquotaIntera, aliquota);
   const quotaOltreMassimale = pct(baseOltreMassimale, aliquotaOltreMassimale);
   return {
     totale: quotaAliquotaIntera + quotaOltreMassimale,
     redditoProfessionale: reddito,
     soglia,
+    aliquota,
     baseAliquotaIntera,
     quotaAliquotaIntera,
     baseOltreMassimale,

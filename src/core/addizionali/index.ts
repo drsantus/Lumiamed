@@ -41,6 +41,11 @@ export interface AddizionaleComunale {
   esenzione?: Esenzione;
   /** Esenzioni per categorie (pensionati, redditi bassi di lavoro autonomo, ...): non applicate in automatico. */
   noteEsenzioni?: string[];
+  /**
+   * Il comune non ha delibere negli elenchi MEF letti: è in tabella solo per la ricerca,
+   * l'addizionale non viene stimata.
+   */
+  senzaDelibera?: boolean;
 }
 
 export interface TabelleAddizionali {
@@ -115,6 +120,16 @@ export function addizionaleComunale(
       }],
     };
   }
+  if (dati.senzaDelibera) {
+    return {
+      importo: 0,
+      avvisi: [{
+        codice: 'ADD_COM_SENZA_DELIBERA',
+        livello: 'attenzione',
+        messaggio: `Per ${dati.comune} non ci sono delibere recenti negli elenchi del MEF: addizionale comunale non inclusa nella stima. Chiedi l'aliquota al commercialista.`,
+      }],
+    };
+  }
   const calcola = (base: Cents): Cents =>
     dati.scaglioni ? impostaProgressiva(base, dati.scaglioni).totale : pct(base, dati.aliquotaUnica ?? 0);
   const avvisi: Avviso[] = [];
@@ -146,4 +161,6 @@ export const cercaComune = (testo: string, tabelle: TabelleAddizionali = TABELLE
 export const tabelleCaricate = (tabelle: TabelleAddizionali = TABELLE_PRECARICATE) => ({
   regioni: Object.keys(tabelle.regionali).length,
   comuni: Object.keys(tabelle.comunali).length,
+  /** Comuni in tabella senza delibere (solo per la ricerca). */
+  comuniSenzaDelibera: Object.values(tabelle.comunali).filter((c) => c.senzaDelibera).length,
 });

@@ -1,4 +1,4 @@
-import { clampMin0, pct, type Cents } from './money';
+import { clampMin0, formatEuro, pct, type Cents } from './money';
 import type { ParametriAnno } from './params';
 import type { Avviso, Profilo } from './types';
 
@@ -35,6 +35,37 @@ export function aliquotaForfettario(
   return profilo.requisitiStartup5 && annoAttivita >= 1 && annoAttivita <= p.forfettario.anniStartup
     ? p.forfettario.aliquotaStartup
     : p.forfettario.aliquotaOrdinaria;
+}
+
+/**
+ * Avvisi (non blocchi) sui requisiti per restare nel forfettario, dai dati dell'anno precedente:
+ * - redditi di lavoro dipendente oltre la soglia, salvo rapporto cessato entro il 31/12;
+ * - ricavi dell'anno precedente oltre il limite (85.000 €).
+ * `p` sono i parametri dell'anno in corso (la soglia 2026 riguarda i redditi 2025).
+ */
+export function avvisiRequisitiForfettario(
+  profilo: Pick<Profilo, 'regime' | 'redditiLavoroDipendenteAnnoPrecedente' | 'rapportoCessatoEntro31_12' | 'annoPrecedente'>,
+  p: ParametriAnno,
+): Avviso[] {
+  if (profilo.regime !== 'forfettario') return [];
+  const avvisi: Avviso[] = [];
+  const soglia = p.forfettario.sogliaRedditiDipendente.importo;
+  if ((profilo.redditiLavoroDipendenteAnnoPrecedente ?? 0) > soglia && !profilo.rapportoCessatoEntro31_12) {
+    avvisi.push({
+      codice: 'FORF_REDDITI_DIPENDENTE',
+      livello: 'attenzione',
+      messaggio: `L'anno scorso hai avuto redditi da lavoro dipendente oltre ${formatEuro(soglia)}: potresti non avere i requisiti per il forfettario. Verifica con il commercialista.`,
+    });
+  }
+  const prec = profilo.annoPrecedente;
+  if (prec?.ricavi !== undefined && prec.ricavi > p.forfettario.limiteRicavi) {
+    avvisi.push({
+      codice: 'FORF_RICAVI_ANNO_PRECEDENTE',
+      livello: 'critico',
+      messaggio: `Nel ${prec.anno} hai superato ${formatEuro(p.forfettario.limiteRicavi)} di ricavi: quest'anno non puoi restare nel forfettario. Contatta il commercialista.`,
+    });
+  }
+  return avvisi;
 }
 
 export function calcolaForfettario(input: InputForfettario, p: ParametriAnno): RisultatoForfettario {

@@ -136,21 +136,21 @@ export interface ScenarioQuotaB {
 export const SCENARI_QUOTA_B: ScenarioQuotaB[] = [
   {
     id: 'B1',
-    descrizione: 'Under 40, reddito forfettario (LM34) 31.200 €: 19,5% sulla parte oltre 5.446,77 €',
+    descrizione: 'Under 40, reddito forfettario (LM34) 31.200 €: 19,5% sulla parte oltre 5.691,90 € (soglia 2026 stimata)',
     input: { annoReddito: 2026, dataNascita: '1991-05-10', redditoProfessionale: euro(31_200) },
-    atteso: { soglia: euro(5_446.77), totale: euro(5_021.88) },
+    atteso: { soglia: 569_190, totale: 497_408 },
   },
   {
     id: 'B2',
-    descrizione: 'Over 40, reddito 160.000 €: 19,5% fino a 150.000 (oltre la soglia di 10.059,28) + 1% sull\'eccedenza',
+    descrizione: 'Over 40, reddito 160.000 €: 19,5% fino a 150.000 (oltre la soglia 2026 stimata di 10.511,95) + 1% sull\'eccedenza',
     input: { annoReddito: 2026, dataNascita: '1975-01-01', redditoProfessionale: euro(160_000) },
-    atteso: { soglia: euro(10_059.28), totale: euro(27_388.44) },
+    atteso: { soglia: 1_051_195, totale: 2_730_017 },
   },
   {
     id: 'B3',
     descrizione: 'Under 40 con reddito sotto la soglia: nessuna Quota B',
     input: { annoReddito: 2026, dataNascita: '1995-01-01', redditoProfessionale: euro(5_000) },
-    atteso: { soglia: euro(5_446.77), totale: 0 },
+    atteso: { soglia: 569_190, totale: 0 },
   },
 ];
 
@@ -164,15 +164,15 @@ export interface ScenarioQuotaA {
 export const SCENARI_QUOTA_A: ScenarioQuotaA[] = [
   {
     id: 'A1',
-    descrizione: 'Compie 30 anni il 15/3/2026: 3 mesi a 291,61 €/anno e 9 mesi a 566 €/anno, più maternità 95,54',
+    descrizione: 'Compie 30 anni il 15/3/2026: 3 mesi a 304,73 €/anno e 9 mesi a 591,47 €/anno, più maternità 84,26',
     input: { anno: 2026, dataNascita: '1996-03-15' },
-    atteso: { totale: euro(592.94) },
+    atteso: { totale: 60_405 },
   },
   {
     id: 'A2',
-    descrizione: 'Over 40 tutto l\'anno: 1.961,56 + maternità 95,54',
+    descrizione: 'Over 40 tutto l\'anno: 2.049,83 + maternità 84,26',
     input: { anno: 2026, dataNascita: '1980-06-01' },
-    atteso: { totale: euro(2_057.1) },
+    atteso: { totale: 213_409 },
   },
 ];
 
@@ -199,6 +199,7 @@ export const SCENARI_ACCONTI: ScenarioAcconti[] = [
  * - impegni dell'anno scorso = saldo imposte + saldo addizionali + Quota B non ancora pagati;
  * - guadagno netto = ricavi − spese (al netto dell'IVA detraibile) − imposte maturate − Quota A e Quota B maturate.
  * Gli attesi sono calcolati a parte (scripts/atteso_dashboard.py), non copiati dal motore.
+ * Quota A 2026 da enpam.it (agg. 19/3/2026); Quota B: soglie dell'anno del reddito (2025 confermate, 2026 stimate).
  */
 export interface IncassoScenario {
   data: string;
@@ -244,41 +245,41 @@ export const SCENARI_DASHBOARD: ScenarioDashboard[] = [
   {
     id: 'D1',
     descrizione: 'Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare',
-    inputTesto: 'Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.',
+    inputTesto: 'Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.134,09 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.',
     input: {
       oggi: '2026-06-30',
       profilo: { ...PROFILO_BASE, regime: 'forfettario', dataNascita: '1975-03-01', annoInizioAttivita: 2018, requisitiStartup5: false, annoPrecedente: PREC_2025 },
       incassi: mesi(6, 15, euro(7_500)),
-      spese: [{ id: 'qa', data: '2026-04-30', importo: euro(2_057.1), categoria: 'contributi_enpam', riferimento: { tributo: 'enpam_quota_a', anno: 2026 } }],
+      spese: [{ id: 'qa', data: '2026-04-30', importo: 213_409, categoria: 'contributi_enpam', riferimento: { tributo: 'enpam_quota_a', anno: 2026 } }],
     },
     atteso: {
-      metodo: 'proiezione', imposteMaturate: euro(4_352.79), imposte: euro(4_352.79), quotaAResidua: 0,
-      quotaBMaturata: euro(5_871.78), iva: 0, daAccantonare: euro(10_224.57),
-      impegniAnnoPrecedente: euro(12_206.44), guadagnoNetto: euro(33_755.33),
+      metodo: 'proiezione', imposteMaturate: 434_707, imposte: 434_707, quotaAResidua: 0,
+      quotaBMaturata: 582_801, iva: 0, daAccantonare: 1_017_508,
+      impegniAnnoPrecedente: 1_220_644, guadagnoNetto: 3_376_665,
     },
   },
   {
     id: 'D2',
     descrizione: 'Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%',
-    inputTesto: 'Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell\'anno precedente.',
+    inputTesto: 'Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.134,09 €). Nessun dato dell\'anno precedente.',
     input: {
       oggi: '2026-09-30',
       profilo: { ...PROFILO_BASE, regime: 'ordinario', dataNascita: '1975-03-01', annoInizioAttivita: 2015, requisitiStartup5: false, regione: 'SAR' },
       incassi: mesi(9, 10, euro(6_000), { trattamentoIva: 'esente_art10', destinatario: 'struttura', ritenuta: euro(1_200) }),
       spese: [
         ...Array.from({ length: 9 }, (_, i): Spesa => ({ id: `aff${i}`, data: `2026-${String(i + 1).padStart(2, '0')}-01`, importo: euro(800), categoria: 'affitto_studio' })),
-        { id: 'qa', data: '2026-04-30', importo: euro(2_057.1), categoria: 'contributi_enpam', riferimento: { tributo: 'enpam_quota_a', anno: 2026 } },
+        { id: 'qa', data: '2026-04-30', importo: 213_409, categoria: 'contributi_enpam', riferimento: { tributo: 'enpam_quota_a', anno: 2026 } },
       ],
     },
     atteso: {
-      metodo: 'proiezione', imposteMaturate: euro(14_185.14), imposte: euro(3_385.14), quotaAResidua: 0,
-      quotaBMaturata: euro(7_658.86), iva: 0, daAccantonare: euro(11_044), guadagnoNetto: euro(23_417.4),
+      metodo: 'proiezione', imposteMaturate: 1_415_966, imposte: 335_966, quotaAResidua: 0,
+      quotaBMaturata: 759_284, iva: 0, daAccantonare: 1_095_250, guadagnoNetto: 2_345_132,
     },
   },
   {
     id: 'D3',
     descrizione: 'Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)',
-    inputTesto: 'Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.',
+    inputTesto: 'Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.194,18 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.',
     input: {
       oggi: '2026-12-15',
       profilo: {
@@ -287,16 +288,16 @@ export const SCENARI_DASHBOARD: ScenarioDashboard[] = [
       },
       incassi: mesi(12, 5, euro(5_000)),
       spese: [
-        { id: 'v1', data: '2026-04-30', importo: euro(1_157.66), categoria: 'contributi_enpam' },
+        { id: 'v1', data: '2026-04-30', importo: 119_418, categoria: 'contributi_enpam' },
         { id: 'v2', data: '2026-07-20', importo: euro(3_000), categoria: 'imposte_f24' },
         { id: 'v3', data: '2026-11-02', importo: euro(6_542.88), categoria: 'contributi_enpam' },
         { id: 'v4', data: '2026-11-30', importo: euro(1_000), categoria: 'imposte_f24' },
       ],
     },
     atteso: {
-      metodo: 'proiezione', imposteMaturate: euro(1_971.85), imposte: 0, quotaAResidua: 0,
-      quotaBMaturata: euro(8_110.44), iva: 0, daAccantonare: euro(8_110.44),
-      impegniAnnoPrecedente: 0, guadagnoNetto: euro(48_810.8),
+      metodo: 'proiezione', imposteMaturate: 197_011, imposte: 0, quotaAResidua: 0,
+      quotaBMaturata: 806_473, iva: 0, daAccantonare: 806_473,
+      impegniAnnoPrecedente: 0, guadagnoNetto: 4_882_333,
     },
   },
   {
@@ -313,8 +314,8 @@ export const SCENARI_DASHBOARD: ScenarioDashboard[] = [
       spese: [],
     },
     atteso: {
-      metodo: 'proiezione', imposteMaturate: euro(8_949.86), imposte: euro(8_949.86), quotaAResidua: euro(2_057.1),
-      quotaBMaturata: euro(4_877.28), iva: euro(2_666.4), daAccantonare: euro(18_550.64), guadagnoNetto: euro(15_152.76),
+      metodo: 'proiezione', imposteMaturate: 893_298, imposte: 893_298, quotaAResidua: 213_409,
+      quotaBMaturata: 483_351, iva: 266_640, daAccantonare: 1_856_698, guadagnoNetto: 1_517_524,
     },
   },
   {
@@ -331,9 +332,9 @@ export const SCENARI_DASHBOARD: ScenarioDashboard[] = [
       spese: [],
     },
     atteso: {
-      metodo: 'anno_precedente', imposteMaturate: euro(1_462.5), imposte: euro(1_462.5), quotaAResidua: euro(2_057.1),
-      quotaBMaturata: euro(1_703.22), iva: 0, daAccantonare: euro(5_222.82),
-      impegniAnnoPrecedente: euro(12_206.44), guadagnoNetto: euro(9_546.85),
+      metodo: 'anno_precedente', imposteMaturate: 146_250, imposte: 146_250, quotaAResidua: 213_409,
+      quotaBMaturata: 169_089, iva: 0, daAccantonare: 528_748,
+      impegniAnnoPrecedente: 1_220_644, guadagnoNetto: 954_842,
     },
   },
 ];

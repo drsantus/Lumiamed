@@ -48,7 +48,8 @@
     "check": "npm run typecheck:core && npm run test",
     "casi-test": "tsx scripts/esporta-casi-test.ts",
     "import-addizionali": "tsx scripts/import-addizionali.ts",
-    "vettori": "tsx scripts/esporta-vettori.ts"
+    "vettori": "tsx scripts/esporta-vettori.ts",
+    "test:motore": "tsc -p tsconfig.motore.json && vitest run"
   },
   "private": true
 }

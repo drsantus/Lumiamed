@@ -7,7 +7,11 @@ import type { Fattura, Spesa } from './types';
 /**
  * Dati per l'export destinato al commercialista (CSV oggi, PDF nell'app).
  * Formato italiano: separatore ";" e decimali con la virgola (si apre bene in Excel).
+ * Il testo inizia con il BOM UTF-8, così Excel riconosce le lettere accentate.
  */
+
+/** Byte order mark UTF-8 all'inizio dei CSV. */
+export const BOM_UTF8 = '﻿';
 
 const eur = (c: Cents | undefined): string => ((c ?? 0) / 100).toFixed(2).replace('.', ',');
 const cella = (v: string): string => (/[;"\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
@@ -33,7 +37,7 @@ export function csvFatture(fatture: Fattura[], anno: number, p: ParametriAnno, o
       if (opt.includiNomePaziente) r.splice(3, 0, f.nomePaziente ?? '');
       return riga(r);
     });
-  return [riga(header), ...righe].join('\n');
+  return BOM_UTF8 + [riga(header), ...righe].join('\n');
 }
 
 export function csvSpese(spese: Spesa[], anno: number): string {
@@ -42,5 +46,5 @@ export function csvSpese(spese: Spesa[], anno: number): string {
     .filter((s) => isoYear(s.data) === anno)
     .sort((a, b) => a.data.localeCompare(b.data))
     .map((s) => riga([s.data, s.categoria, s.descrizione ?? '', eur(s.importo), eur(s.iva)]));
-  return [riga(header), ...righe].join('\n');
+  return BOM_UTF8 + [riga(header), ...righe].join('\n');
 }

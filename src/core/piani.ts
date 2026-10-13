@@ -1,67 +1,68 @@
+import type { IsoDate } from './types';
+
 /**
- * Limiti dei piani Free / Pro. I VALORI SONO ANCORA DA DECIDERE:
- * modificare solo questo oggetto. `null` = illimitato.
+ * Abbonamento: un solo livello di funzioni, nessun limite sul numero di fatture o spese.
+ * - prova / attivo: tutto disponibile;
+ * - scaduto: sola lettura ed export (i dati restano dell'utente).
+ *
+ * Il motore non decide chi gestisce la prova gratuita (l'app o l'App Store) né la sua durata:
+ * riceve le date e lo stato dello store e restituisce lo stato. Nessuna lettura dell'orologio.
  */
-export type Piano = 'free' | 'pro';
+export type StatoAbbonamento = 'prova' | 'attivo' | 'scaduto';
+
+export type Prodotto = 'pro_mensile' | 'pro_annuale' | 'founding_annuale';
+
+export const PRODOTTI: readonly Prodotto[] = ['pro_mensile', 'pro_annuale', 'founding_annuale'];
+
+/** Stato dell'abbonamento come lo riporta lo store (es. StoreKit / RevenueCat). */
+export interface StatoStore {
+  /** Prodotto dell'abbonamento in corso o più recente. Assente se l'utente non ha mai acquistato. */
+  prodotto?: Prodotto;
+  /** Ultimo giorno coperto (incluso) dal periodo pagato o di prova dello store. */
+  scadenza?: IsoDate;
+  /** true se lo store indica che il periodo in corso è una prova gratuita. */
+  periodoDiProva?: boolean;
+}
+
+export interface InputAbbonamento {
+  oggi: IsoDate;
+  store: StatoStore;
+  /** Prova gestita dall'app: ultimo giorno di prova (incluso). Assente se la prova la gestisce solo lo store. */
+  fineProvaApp?: IsoDate;
+}
+
+export interface Abbonamento {
+  stato: StatoAbbonamento;
+  prodotto?: Prodotto;
+  /** Ultimo giorno (incluso) dello stato attuale; assente se scaduto. */
+  finoAl?: IsoDate;
+}
+
+/**
+ * Stato dell'abbonamento alla data `oggi`:
+ * 1. periodo dello store non scaduto → 'prova' se lo store lo indica come prova, altrimenti 'attivo';
+ * 2. altrimenti, prova dell'app non scaduta → 'prova';
+ * 3. altrimenti 'scaduto'.
+ */
+export function statoAbbonamento(input: InputAbbonamento): Abbonamento {
+  const { oggi, store, fineProvaApp } = input;
+  if (store.scadenza && oggi <= store.scadenza) {
+    return { stato: store.periodoDiProva ? 'prova' : 'attivo', prodotto: store.prodotto, finoAl: store.scadenza };
+  }
+  if (fineProvaApp && oggi <= fineProvaApp) return { stato: 'prova', finoAl: fineProvaApp };
+  return { stato: 'scaduto', prodotto: store.prodotto };
+}
 
 export type Funzione =
-  | 'stime_fiscali'
-  | 'scadenziario'
-  | 'notifiche_scadenze'
-  | 'report_pdf'
-  | 'export_csv'
+  | 'consultazione' // vedere dati, stime, scadenziario, analisi
+  | 'inserimento' // aggiungere, modificare, eliminare movimenti e profilo
+  | 'import_storico'
   | 'lettura_foto'
-  | 'confronto_acconti';
+  | 'notifiche_scadenze'
+  | 'export'; // CSV, report, backup
 
-export interface LimitiPiano {
-  maxFattureMese: number | null;
-  maxSpeseMese: number | null;
-  funzioni: Record<Funzione, boolean>;
-}
+const SOLA_LETTURA: readonly Funzione[] = ['consultazione', 'export'];
 
-export const LIMITI: Record<Piano, LimitiPiano> = {
-  free: {
-    maxFattureMese: 30, // DA DECIDERE
-    maxSpeseMese: 30, // DA DECIDERE
-    funzioni: {
-      stime_fiscali: true,
-      scadenziario: true,
-      notifiche_scadenze: false,
-      report_pdf: false,
-      export_csv: false,
-      lettura_foto: false,
-      confronto_acconti: false,
-    },
-  },
-  pro: {
-    maxFattureMese: null,
-    maxSpeseMese: null,
-    funzioni: {
-      stime_fiscali: true,
-      scadenziario: true,
-      notifiche_scadenze: true,
-      report_pdf: true,
-      export_csv: true,
-      lettura_foto: true,
-      confronto_acconti: true,
-    },
-  },
-};
-
-export const puoUsare = (piano: Piano, funzione: Funzione, limiti = LIMITI): boolean => limiti[piano].funzioni[funzione];
-
-export interface EsitoLimite {
-  consentito: boolean;
-  usati: number;
-  massimo: number | null;
-}
-
-export function puoAggiungere(
-  piano: Piano,
-  tipo: 'fattura' | 'spesa',
-  usatiNelMese: number,
-  limiti = LIMITI,
-): EsitoLimite {
-  const massimo = tipo === 'fattura' ? limiti[piano].maxFattureMese : limiti[piano].maxSpeseMese;
-  return { consentito: massimo === null || usatiNelMese < massimo, usati: usatiNelMese, massimo };
-}
+/** Con l'abbonamento scaduto restano solo consultazione ed export. */
+export const puoUsare = (stato: StatoAbbonamento, funzione: Funzione): boolean =>
+  stato !== 'scaduto' || SOLA_LETTURA.includes(funzione);

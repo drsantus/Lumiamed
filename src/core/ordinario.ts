@@ -1,5 +1,5 @@
 import { addizionaleComunale, addizionaleRegionale, type TabelleAddizionali } from './addizionali';
-import { clampMin0, pct, sum, type Cents } from './money';
+import { clampMin0, formatEuro, pct, sum, type Cents } from './money';
 import type { ParametriAnno } from './params';
 import { impostaProgressiva, type QuotaScaglione } from './scaglioni';
 import type { Avviso, Profilo, Spesa } from './types';
@@ -90,13 +90,26 @@ export interface InputOrdinario {
   /** Percentuale di detrazione IVA (pro-rata), 0-1. */
   percentualeDetrazioneIva?: number;
   tabelleAddizionali?: TabelleAddizionali;
+  /**
+   * Altri redditi dell'anno (lavoro dipendente, es. ospedaliero in extramoenia).
+   * Le imposte dell'attività sono calcolate in modo marginale: sul totale meno quelle sul solo stipendio.
+   */
+  altriRedditi?: Cents;
 }
 
+/**
+ * Con `altriRedditi` > 0 i campi si leggono così:
+ * - redditoComplessivo, imponibile, dettaglioScaglioni e detrazioneLavoroAutonomo riguardano il TOTALE (attività + altri redditi);
+ * - impostaLorda, impostaNetta, addizionali e totaleImposte sono la parte MARGINALE attribuita all'attività
+ *   (imposte sul totale meno imposte sui soli altri redditi, minimo 0).
+ * Senza altri redditi i due modi coincidono.
+ */
 export interface RisultatoOrdinario {
   compensi: Cents;
   speseDeducibili: Cents;
   /** Reddito di lavoro autonomo (quadro RE): base anche per la Quota B. */
   redditoProfessionale: Cents;
+  altriRedditi: Cents;
   redditoComplessivo: Cents;
   oneriDeducibili: Cents;
   imponibile: Cents;
@@ -113,6 +126,36 @@ export interface RisultatoOrdinario {
   avvisi: Avviso[];
 }
 
+interface ImposteSu {
+  lorda: Cents;
+  dettaglio: QuotaScaglione[];
+  detrazione: Cents;
+  netta: Cents;
+  regionale: Cents;
+  comunale: Cents;
+  avvisi: Avviso[];
+}
+
+/** IRPEF, detrazione per lavoro autonomo (se spetta) e addizionali su un imponibile. */
+function imposteSu(
+  imponibile: Cents, redditoComplessivo: Cents, detrazioneAutonomo: boolean, input: InputOrdinario, p: ParametriAnno,
+): ImposteSu {
+  const { totale: lorda, dettaglio } = impostaProgressiva(imponibile, p.irpef.scaglioni);
+  const detrazione = detrazioneAutonomo ? Math.min(detrazioneLavoroAutonomo(redditoComplessivo, p), lorda) : 0;
+  const netta = lorda - detrazione;
+  // Le addizionali non sono dovute se l'IRPEF netta è zero.
+  const regionale = netta > 0
+    ? addizionaleRegionale(imponibile, input.profilo.regione, input.tabelleAddizionali)
+    : { importo: 0, avvisi: [] };
+  const comunale = netta > 0
+    ? addizionaleComunale(imponibile, input.profilo.comuneCodiceCatastale, input.tabelleAddizionali, input.anno)
+    : { importo: 0, avvisi: [] };
+  return {
+    lorda, dettaglio, detrazione, netta, regionale: regionale.importo, comunale: comunale.importo,
+    avvisi: [...regionale.avvisi, ...comunale.avvisi],
+  };
+}
+
 export function calcolaOrdinario(input: InputOrdinario, p: ParametriAnno): RisultatoOrdinario {
   const spese = speseDeducibili(
     input.spese.filter((s) => s.categoria !== 'contributi_enpam'),
@@ -121,23 +164,21 @@ export function calcolaOrdinario(input: InputOrdinario, p: ParametriAnno): Risul
     input.percentualeDetrazioneIva ?? 0,
   );
   const redditoProfessionale = input.compensi - spese.deducibili;
-  const redditoComplessivo = clampMin0(redditoProfessionale);
+  const altriRedditi = clampMin0(input.altriRedditi ?? 0);
+  const redditoComplessivo = clampMin0(redditoProfessionale) + altriRedditi;
   const oneriDeducibili = Math.min(input.contributiVersati, redditoComplessivo);
   const imponibile = clampMin0(redditoComplessivo - oneriDeducibili);
 
-  const { totale: impostaLorda, dettaglio } = impostaProgressiva(imponibile, p.irpef.scaglioni);
-  const detrazione = Math.min(detrazioneLavoroAutonomo(redditoComplessivo, p), impostaLorda);
-  const impostaNetta = impostaLorda - detrazione;
+  const totale = imposteSu(imponibile, redditoComplessivo, true, input, p);
+  // Calcolo marginale: si tolgono le imposte che si pagherebbero sui soli altri redditi.
+  const soloAltri = altriRedditi > 0 ? imposteSu(altriRedditi, altriRedditi, false, input, p) : undefined;
+  const marginale = (tot: Cents, altri: Cents | undefined): Cents => clampMin0(tot - (altri ?? 0));
+  const impostaLorda = marginale(totale.lorda, soloAltri?.lorda);
+  const impostaNetta = marginale(totale.netta, soloAltri?.netta);
+  const regionale = marginale(totale.regionale, soloAltri?.regionale);
+  const comunale = marginale(totale.comunale, soloAltri?.comunale);
 
-  // Le addizionali non sono dovute se l'IRPEF netta è zero.
-  const regionale = impostaNetta > 0
-    ? addizionaleRegionale(imponibile, input.profilo.regione, input.tabelleAddizionali)
-    : { importo: 0, avvisi: [] };
-  const comunale = impostaNetta > 0
-    ? addizionaleComunale(imponibile, input.profilo.comuneCodiceCatastale, input.tabelleAddizionali, input.anno)
-    : { importo: 0, avvisi: [] };
-
-  const avvisi: Avviso[] = [...spese.avvisi, ...regionale.avvisi, ...comunale.avvisi];
+  const avvisi: Avviso[] = [...spese.avvisi, ...totale.avvisi];
   if (redditoProfessionale < 0) {
     avvisi.push({
       codice: 'ORD_PERDITA',
@@ -145,23 +186,38 @@ export function calcolaOrdinario(input: InputOrdinario, p: ParametriAnno): Risul
       messaggio: 'Le spese superano i compensi: risulta una perdita professionale.',
     });
   }
+  if (altriRedditi > 0) {
+    avvisi.push({
+      codice: 'ORD_ALTRI_REDDITI',
+      livello: 'info',
+      messaggio: 'Hai altri redditi (es. stipendio): le imposte dell\'attività sono la differenza tra le imposte sul totale e quelle sul solo stipendio.',
+    });
+    if (altriRedditi < p.detrazioneLavoroDipendente.nullaOltre) {
+      avvisi.push({
+        codice: 'ORD_ALTRI_REDDITI_DETRAZIONE',
+        livello: 'attenzione',
+        messaggio: `Con altri redditi sotto ${formatEuro(p.detrazioneLavoroDipendente.nullaOltre)} la stima non considera la detrazione per lavoro dipendente: è approssimata. Verifica con il commercialista.`,
+      });
+    }
+  }
 
   return {
     compensi: input.compensi,
     speseDeducibili: spese.deducibili,
     redditoProfessionale,
+    altriRedditi,
     redditoComplessivo,
     oneriDeducibili,
     imponibile,
     impostaLorda,
-    dettaglioScaglioni: dettaglio,
-    detrazioneLavoroAutonomo: detrazione,
+    dettaglioScaglioni: totale.dettaglio,
+    detrazioneLavoroAutonomo: totale.detrazione,
     impostaNetta,
     ritenute: input.ritenuteSubite,
     differenza: impostaNetta - input.ritenuteSubite,
-    addizionaleRegionale: regionale.importo,
-    addizionaleComunale: comunale.importo,
-    totaleImposte: impostaNetta + regionale.importo + comunale.importo,
+    addizionaleRegionale: regionale,
+    addizionaleComunale: comunale,
+    totaleImposte: impostaNetta + regionale + comunale,
     avvisi,
   };
 }

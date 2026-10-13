@@ -8,15 +8,20 @@ App Expo per la gestione finanziaria dei medici liberi professionisti italiani. 
 - `src/core/params/AAAA.ts`: parametri normativi per anno, con fonte e flag `verificato`.
 - `src/core/__tests__/scenari.ts`: casi fiscali condivisi con il commercialista (Excel in `docs/`).
 - `src/db/`: archivio locale expo-sqlite. I dati non lasciano il dispositivo.
-- `src/app/`: schermate (Expo Router), costruite con Rork. Le schermate non fanno calcoli fiscali: usano `@/core`.
+- `src/app/`: solo un segnaposto. L'app per iPhone è in SwiftUI e usa il motore tradotto in Swift (`RORK.md`, `docs/PORTING.md`).
+- `golden/`: vettori, parametri e checksum per verificare il porting in Swift. Si rigenerano con `npm run vettori`.
+- Il motore non legge la data di oggi, non usa numeri casuali e non importa Expo né API di Node: tutto arriva come parametro.
 
 ## Convenzioni
 - Importi in centesimi interi (`Cents`). Date ISO `YYYY-MM-DD`, calcoli in UTC.
 - Principio di cassa: ricavi per data di incasso, spese per data di pagamento.
 - Prima di dichiarare finito: `npm run check` (typecheck del motore + test).
 - Se cambia una regola fiscale: aggiorna `params/`, poi `scenari.ts`, poi rigenera l'Excel (`npm run casi-test` + `python scripts/genera_excel_commercialista.py`).
-- Vettori golden per il porting in Swift (`golden/vettori.json`, vedi `docs/PORTING.md`): dopo ogni modifica a `scenari.ts`
-  o ai casi di test rigenerali con `npm run vettori` (altrimenti `vettori.test.ts` fallisce).
+- Vettori golden per il porting in Swift (`golden/`, vedi `docs/PORTING.md`): dopo ogni modifica al motore, a `scenari.ts`,
+  ai casi di test, ai parametri o alle tabelle delle addizionali rigenerali con `npm run vettori` (altrimenti `vettori.test.ts` fallisce).
+  Ogni test nuovo va trascritto in `vettori-casi.ts` / `vettori-casi-bc.ts` con attesi letterali.
+  A ogni modifica del motore aggiorna `VERSIONE_MOTORE` (`src/core/versione.ts`).
+- Test del solo motore, senza Expo (come la CI): `npm run test:motore`.
 
 ---
 

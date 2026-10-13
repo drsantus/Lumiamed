@@ -161,7 +161,10 @@ for (const [codice, base] of piuRecente.dati) {
     if (trovato.anno !== piuRecente.anno) daAnniPrecedenti++;
     output[codice] = trovato;
   } else {
+    // Anche senza delibera il comune resta in tabella: deve comparire nella ricerca (cercaComune).
+    // L'addizionale non viene stimata e il motore lo segnala.
     senzaDati.push(`${codice} ${base.comune} (${base.provincia})`);
+    output[codice] = { codiceCatastale: codice, comune: base.comune, provincia: base.provincia, anno: piuRecente.anno, senzaDelibera: true };
   }
 }
 
@@ -170,8 +173,9 @@ writeFileSync(OUT, JSON.stringify(ordinato));
 
 console.log(`Anni letti: ${anni.map((a) => a.anno).join(', ')}`);
 console.log(`Comuni nell'elenco ${piuRecente.anno}: ${piuRecente.dati.size}`);
-console.log(`Comuni con aliquota: ${Object.keys(output).length} (di cui ${daAnniPrecedenti} da delibere di anni precedenti)`);
-console.log(`Comuni senza delibera in nessun anno letto: ${senzaDati.length}`);
+console.log(`Comuni in tabella: ${Object.keys(output).length}`);
+console.log(`Comuni con aliquota: ${Object.keys(output).length - senzaDati.length} (di cui ${daAnniPrecedenti} da delibere di anni precedenti)`);
+console.log(`Comuni senza delibera in nessun anno letto (in tabella con senzaDelibera): ${senzaDati.length}`);
 if (problemi.length) console.log(`Righe non interpretate (${problemi.length}):\n  ${problemi.slice(0, 30).join('\n  ')}`);
 writeFileSync(path.join(RAW, 'import-report.txt'), [
   `Anni: ${anni.map((a) => a.anno).join(', ')}`,

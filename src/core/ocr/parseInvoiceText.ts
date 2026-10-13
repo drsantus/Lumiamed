@@ -28,10 +28,14 @@ export interface FatturaLetta {
   avvisi: string[];
 }
 
-/** "1.234,56" | "1234,56" | "150" | "1,234.56" -> centesimi. */
+/**
+ * "1.234,56" | "1234,56" | "150" | "1,234.56" -> centesimi.
+ * Rigida: accetta solo cifre, punti e virgole (più "€", "EUR" e spazi). Niente segni (+/−),
+ * niente notazione scientifica, al massimo 2 decimali; altrimenti undefined.
+ */
 export function parseImporto(raw: string): Cents | undefined {
   let s = raw.replace(/[€\s]/g, '').replace(/EUR/i, '');
-  if (!/\d/.test(s)) return undefined;
+  if (!/^[\d.,]+$/.test(s) || !/\d/.test(s)) return undefined;
   const lastComma = s.lastIndexOf(',');
   const lastDot = s.lastIndexOf('.');
   if (lastComma > lastDot) {
@@ -43,8 +47,8 @@ export function parseImporto(raw: string): Cents | undefined {
     const dec = s.length - lastDot - 1;
     if (dec === 3) s = s.replace(/\./g, '');
   }
-  const n = Number(s);
-  return Number.isFinite(n) ? euro(n) : undefined;
+  if (!/^\d+(\.\d{1,2})?$/.test(s)) return undefined;
+  return euro(Number(s));
 }
 
 const RE_IMPORTO = /(?:€\s*)?(\d{1,3}(?:[.\s]\d{3})*(?:,\d{2})|\d+(?:[.,]\d{2})?)(?:\s*€)?/g;

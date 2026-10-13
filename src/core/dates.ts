@@ -46,10 +46,11 @@ export function easterSunday(year: number): IsoDate {
   return ymd(year, month, day);
 }
 
-/** Festività nazionali italiane. */
+/** Festività nazionali italiane. Il 4 ottobre (San Francesco) è festivo dal 2026. */
 export function festivita(year: number): Set<IsoDate> {
   const fixed = [
     [1, 1], [1, 6], [4, 25], [5, 1], [6, 2], [8, 15], [11, 1], [12, 8], [12, 25], [12, 26],
+    ...(year >= 2026 ? [[10, 4]] : []),
   ].map(([m, d]) => ymd(year, m, d));
   return new Set([...fixed, addDays(easterSunday(year), 1)]);
 }

@@ -1,5 +1,5 @@
 {
-  "generato": "2026-10-13T10:15:18.320Z",
+  "generato": "2026-10-13T12:48:12.794Z",
   "righe": [
     {
       "id": "F1",
@@ -292,55 +292,55 @@
     {
       "id": "A1",
       "area": "ENPAM Quota A",
-      "descrizione": "Compie 30 anni il 15/3/2026: 3 mesi a 291,61 €/anno e 9 mesi a 566 €/anno, più maternità 95,54",
+      "descrizione": "Compie 30 anni il 15/3/2026: 3 mesi a 304,73 €/anno e 9 mesi a 591,47 €/anno, più maternità 84,26",
       "input": "Anno 2026; nato il 1996-03-15",
       "voce": "Quota A totale (con maternità)",
-      "valore": 592.94,
+      "valore": 604.05,
       "formato": "euro"
     },
     {
       "id": "A2",
       "area": "ENPAM Quota A",
-      "descrizione": "Over 40 tutto l'anno: 1.961,56 + maternità 95,54",
+      "descrizione": "Over 40 tutto l'anno: 2.049,83 + maternità 84,26",
       "input": "Anno 2026; nato il 1980-06-01",
       "voce": "Quota A totale (con maternità)",
-      "valore": 2057.1,
+      "valore": 2134.09,
       "formato": "euro"
     },
     {
       "id": "B1",
       "area": "ENPAM Quota B",
-      "descrizione": "Under 40, reddito forfettario (LM34) 31.200 €: 19,5% sulla parte oltre 5.446,77 €",
+      "descrizione": "Under 40, reddito forfettario (LM34) 31.200 €: 19,5% sulla parte oltre 5.691,90 € (soglia 2026 stimata)",
       "input": "Redditi 2026; nato il 1991-05-10; reddito libero-professionale 31.200,00 €",
       "voce": "Soglia esente (coperta da Quota A)",
-      "valore": 5446.77,
+      "valore": 5691.9,
       "formato": "euro"
     },
     {
       "id": "B1",
       "area": "ENPAM Quota B",
-      "descrizione": "Under 40, reddito forfettario (LM34) 31.200 €: 19,5% sulla parte oltre 5.446,77 €",
+      "descrizione": "Under 40, reddito forfettario (LM34) 31.200 €: 19,5% sulla parte oltre 5.691,90 € (soglia 2026 stimata)",
       "input": "Redditi 2026; nato il 1991-05-10; reddito libero-professionale 31.200,00 €",
       "voce": "Quota B dovuta",
-      "valore": 5021.88,
+      "valore": 4974.08,
       "formato": "euro"
     },
     {
       "id": "B2",
       "area": "ENPAM Quota B",
-      "descrizione": "Over 40, reddito 160.000 €: 19,5% fino a 150.000 (oltre la soglia di 10.059,28) + 1% sull'eccedenza",
+      "descrizione": "Over 40, reddito 160.000 €: 19,5% fino a 150.000 (oltre la soglia 2026 stimata di 10.511,95) + 1% sull'eccedenza",
       "input": "Redditi 2026; nato il 1975-01-01; reddito libero-professionale 160.000,00 €",
       "voce": "Soglia esente (coperta da Quota A)",
-      "valore": 10059.28,
+      "valore": 10511.95,
       "formato": "euro"
     },
     {
       "id": "B2",
       "area": "ENPAM Quota B",
-      "descrizione": "Over 40, reddito 160.000 €: 19,5% fino a 150.000 (oltre la soglia di 10.059,28) + 1% sull'eccedenza",
+      "descrizione": "Over 40, reddito 160.000 €: 19,5% fino a 150.000 (oltre la soglia 2026 stimata di 10.511,95) + 1% sull'eccedenza",
       "input": "Redditi 2026; nato il 1975-01-01; reddito libero-professionale 160.000,00 €",
       "voce": "Quota B dovuta",
-      "valore": 27388.44,
+      "valore": 27300.17,
       "formato": "euro"
     },
     {
@@ -349,7 +349,7 @@
       "descrizione": "Under 40 con reddito sotto la soglia: nessuna Quota B",
       "input": "Redditi 2026; nato il 1995-01-01; reddito libero-professionale 5.000,00 €",
       "voce": "Soglia esente (coperta da Quota A)",
-      "valore": 5446.77,
+      "valore": 5691.9,
       "formato": "euro"
     },
     {
@@ -449,7 +449,7 @@
       "id": "D1",
       "area": "Dashboard",
       "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
-      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.134,09 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
       "voce": "Metodo di stima",
       "valore": 0,
       "formato": "testo",
@@ -459,25 +459,25 @@
       "id": "D1",
       "area": "Dashboard",
       "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
-      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.134,09 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
       "voce": "Imposte maturate da inizio anno",
-      "valore": 4352.79,
+      "valore": 4347.07,
       "formato": "euro"
     },
     {
       "id": "D1",
       "area": "Dashboard",
       "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
-      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.134,09 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
       "voce": "Imposte da accantonare (dopo ritenute e acconti versati)",
-      "valore": 4352.79,
+      "valore": 4347.07,
       "formato": "euro"
     },
     {
       "id": "D1",
       "area": "Dashboard",
       "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
-      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.134,09 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
       "voce": "Quota A ancora da versare",
       "valore": 0,
       "formato": "euro"
@@ -486,16 +486,16 @@
       "id": "D1",
       "area": "Dashboard",
       "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
-      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.134,09 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
       "voce": "Quota B maturata (si paga l'anno prossimo)",
-      "valore": 5871.78,
+      "valore": 5828.01,
       "formato": "euro"
     },
     {
       "id": "D1",
       "area": "Dashboard",
       "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
-      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.134,09 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
       "voce": "IVA da versare",
       "valore": 0,
       "formato": "euro"
@@ -504,16 +504,16 @@
       "id": "D1",
       "area": "Dashboard",
       "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
-      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.134,09 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
       "voce": "TOTALE da accantonare",
-      "valore": 10224.57,
+      "valore": 10175.08,
       "formato": "euro"
     },
     {
       "id": "D1",
       "area": "Dashboard",
       "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
-      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.134,09 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
       "voce": "Impegni dell'anno precedente ancora da pagare",
       "valore": 12206.44,
       "formato": "euro"
@@ -522,16 +522,16 @@
       "id": "D1",
       "area": "Dashboard",
       "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
-      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.134,09 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
       "voce": "Guadagno netto da inizio anno",
-      "valore": 33755.33,
+      "valore": 33766.65,
       "formato": "euro"
     },
     {
       "id": "D2",
       "area": "Dashboard",
       "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
-      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.134,09 €). Nessun dato dell'anno precedente.",
       "voce": "Metodo di stima",
       "valore": 0,
       "formato": "testo",
@@ -541,25 +541,25 @@
       "id": "D2",
       "area": "Dashboard",
       "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
-      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.134,09 €). Nessun dato dell'anno precedente.",
       "voce": "Imposte maturate da inizio anno",
-      "valore": 14185.14,
+      "valore": 14159.66,
       "formato": "euro"
     },
     {
       "id": "D2",
       "area": "Dashboard",
       "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
-      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.134,09 €). Nessun dato dell'anno precedente.",
       "voce": "Imposte da accantonare (dopo ritenute e acconti versati)",
-      "valore": 3385.14,
+      "valore": 3359.66,
       "formato": "euro"
     },
     {
       "id": "D2",
       "area": "Dashboard",
       "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
-      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.134,09 €). Nessun dato dell'anno precedente.",
       "voce": "Quota A ancora da versare",
       "valore": 0,
       "formato": "euro"
@@ -568,16 +568,16 @@
       "id": "D2",
       "area": "Dashboard",
       "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
-      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.134,09 €). Nessun dato dell'anno precedente.",
       "voce": "Quota B maturata (si paga l'anno prossimo)",
-      "valore": 7658.86,
+      "valore": 7592.84,
       "formato": "euro"
     },
     {
       "id": "D2",
       "area": "Dashboard",
       "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
-      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.134,09 €). Nessun dato dell'anno precedente.",
       "voce": "IVA da versare",
       "valore": 0,
       "formato": "euro"
@@ -586,25 +586,25 @@
       "id": "D2",
       "area": "Dashboard",
       "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
-      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.134,09 €). Nessun dato dell'anno precedente.",
       "voce": "TOTALE da accantonare",
-      "valore": 11044,
+      "valore": 10952.5,
       "formato": "euro"
     },
     {
       "id": "D2",
       "area": "Dashboard",
       "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
-      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.134,09 €). Nessun dato dell'anno precedente.",
       "voce": "Guadagno netto da inizio anno",
-      "valore": 23417.4,
+      "valore": 23451.32,
       "formato": "euro"
     },
     {
       "id": "D3",
       "area": "Dashboard",
       "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
-      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.194,18 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
       "voce": "Metodo di stima",
       "valore": 0,
       "formato": "testo",
@@ -614,16 +614,16 @@
       "id": "D3",
       "area": "Dashboard",
       "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
-      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.194,18 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
       "voce": "Imposte maturate da inizio anno",
-      "valore": 1971.85,
+      "valore": 1970.11,
       "formato": "euro"
     },
     {
       "id": "D3",
       "area": "Dashboard",
       "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
-      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.194,18 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
       "voce": "Imposte da accantonare (dopo ritenute e acconti versati)",
       "valore": 0,
       "formato": "euro"
@@ -632,7 +632,7 @@
       "id": "D3",
       "area": "Dashboard",
       "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
-      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.194,18 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
       "voce": "Quota A ancora da versare",
       "valore": 0,
       "formato": "euro"
@@ -641,16 +641,16 @@
       "id": "D3",
       "area": "Dashboard",
       "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
-      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.194,18 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
       "voce": "Quota B maturata (si paga l'anno prossimo)",
-      "valore": 8110.44,
+      "valore": 8064.73,
       "formato": "euro"
     },
     {
       "id": "D3",
       "area": "Dashboard",
       "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
-      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.194,18 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
       "voce": "IVA da versare",
       "valore": 0,
       "formato": "euro"
@@ -659,16 +659,16 @@
       "id": "D3",
       "area": "Dashboard",
       "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
-      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.194,18 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
       "voce": "TOTALE da accantonare",
-      "valore": 8110.44,
+      "valore": 8064.73,
       "formato": "euro"
     },
     {
       "id": "D3",
       "area": "Dashboard",
       "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
-      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.194,18 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
       "voce": "Impegni dell'anno precedente ancora da pagare",
       "valore": 0,
       "formato": "euro"
@@ -677,9 +677,9 @@
       "id": "D3",
       "area": "Dashboard",
       "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
-      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.194,18 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
       "voce": "Guadagno netto da inizio anno",
-      "valore": 48810.8,
+      "valore": 48823.33,
       "formato": "euro"
     },
     {
@@ -698,7 +698,7 @@
       "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
       "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
       "voce": "Imposte maturate da inizio anno",
-      "valore": 8949.86,
+      "valore": 8932.98,
       "formato": "euro"
     },
     {
@@ -707,7 +707,7 @@
       "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
       "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
       "voce": "Imposte da accantonare (dopo ritenute e acconti versati)",
-      "valore": 8949.86,
+      "valore": 8932.98,
       "formato": "euro"
     },
     {
@@ -716,7 +716,7 @@
       "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
       "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
       "voce": "Quota A ancora da versare",
-      "valore": 2057.1,
+      "valore": 2134.09,
       "formato": "euro"
     },
     {
@@ -725,7 +725,7 @@
       "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
       "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
       "voce": "Quota B maturata (si paga l'anno prossimo)",
-      "valore": 4877.28,
+      "valore": 4833.51,
       "formato": "euro"
     },
     {
@@ -743,7 +743,7 @@
       "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
       "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
       "voce": "TOTALE da accantonare",
-      "valore": 18550.64,
+      "valore": 18566.98,
       "formato": "euro"
     },
     {
@@ -752,7 +752,7 @@
       "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
       "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
       "voce": "Guadagno netto da inizio anno",
-      "valore": 15152.76,
+      "valore": 15175.24,
       "formato": "euro"
     },
     {
@@ -789,7 +789,7 @@
       "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
       "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
       "voce": "Quota A ancora da versare",
-      "valore": 2057.1,
+      "valore": 2134.09,
       "formato": "euro"
     },
     {
@@ -798,7 +798,7 @@
       "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
       "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
       "voce": "Quota B maturata (si paga l'anno prossimo)",
-      "valore": 1703.22,
+      "valore": 1690.89,
       "formato": "euro"
     },
     {
@@ -816,7 +816,7 @@
       "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
       "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
       "voce": "TOTALE da accantonare",
-      "valore": 5222.82,
+      "valore": 5287.48,
       "formato": "euro"
     },
     {
@@ -834,7 +834,7 @@
       "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
       "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
       "voce": "Guadagno netto da inizio anno",
-      "valore": 9546.85,
+      "valore": 9548.42,
       "formato": "euro"
     }
   ],
@@ -843,321 +843,429 @@
       "gruppo": "Forfettario",
       "voce": "Limite ricavi",
       "valore": "85.000,00 €",
-      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%"
+      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%",
+      "verificato": false
     },
     {
       "gruppo": "Forfettario",
       "voce": "Uscita immediata oltre",
       "valore": "100.000,00 €",
-      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%"
+      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%",
+      "verificato": false
     },
     {
       "gruppo": "Forfettario",
       "voce": "Coefficiente di redditività (ATECO 86.2x)",
       "valore": "78%",
-      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%"
+      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%",
+      "verificato": false
     },
     {
       "gruppo": "Forfettario",
       "voce": "Aliquota startup (primi 5 anni)",
       "valore": "5%",
-      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%"
+      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%",
+      "verificato": false
     },
     {
       "gruppo": "Forfettario",
       "voce": "Aliquota ordinaria",
       "valore": "15%",
-      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%"
+      "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%",
+      "verificato": false
+    },
+    {
+      "gruppo": "Forfettario: redditi da lavoro dipendente",
+      "voce": "Soglia 2026 (redditi 2025)",
+      "valore": "35.000,00 €",
+      "fonte": "L. 190/2014 art. 1 c. 57 lett. d-ter",
+      "nota": "Da confermare dal commercialista.",
+      "verificato": false
+    },
+    {
+      "gruppo": "Forfettario: redditi da lavoro dipendente",
+      "voce": "Soglia 2027 provvisoria (redditi 2026)",
+      "valore": "30.000,00 €",
+      "fonte": "L. 190/2014 art. 1 c. 57 lett. d-ter",
+      "nota": "da rivedere dopo la legge di bilancio 2027",
+      "verificato": false
     },
     {
       "gruppo": "IRPEF 2026",
       "voce": "Scaglione 1: 0 – 28.000,00 €",
       "valore": "23%",
-      "fonte": "L. 199/2025 (Legge di Bilancio 2026) art. 1 c. 3"
+      "fonte": "L. 199/2025 (Legge di Bilancio 2026) art. 1 c. 3",
+      "verificato": false
     },
     {
       "gruppo": "IRPEF 2026",
       "voce": "Scaglione 2: 28.000,00 € – 50.000,00 €",
       "valore": "33%",
-      "fonte": "L. 199/2025 (Legge di Bilancio 2026) art. 1 c. 3"
+      "fonte": "L. 199/2025 (Legge di Bilancio 2026) art. 1 c. 3",
+      "verificato": false
     },
     {
       "gruppo": "IRPEF 2026",
       "voce": "Scaglione 3: 50.000,00 € – oltre",
       "valore": "43%",
-      "fonte": "L. 199/2025 (Legge di Bilancio 2026) art. 1 c. 3"
+      "fonte": "L. 199/2025 (Legge di Bilancio 2026) art. 1 c. 3",
+      "verificato": false
     },
     {
       "gruppo": "Detrazione lavoro autonomo",
       "voce": "Fino a 5.500,00 €",
       "valore": "1.265,00 €",
-      "fonte": "Art. 13 c. 5 TUIR"
+      "fonte": "Art. 13 c. 5 TUIR",
+      "verificato": false
     },
     {
       "gruppo": "Detrazione lavoro autonomo",
       "voce": "Da 5.500,00 € a 28.000,00 €",
       "valore": "500,00 € + 765,00 € × (28.000 − reddito) / 22.500",
-      "fonte": "Art. 13 c. 5 TUIR"
+      "fonte": "Art. 13 c. 5 TUIR",
+      "verificato": false
     },
     {
       "gruppo": "Detrazione lavoro autonomo",
       "voce": "Da 28.000,00 € a 50.000,00 €",
       "valore": "500,00 € × (50.000 − reddito) / 22.000",
-      "fonte": "Art. 13 c. 5 TUIR"
+      "fonte": "Art. 13 c. 5 TUIR",
+      "verificato": false
     },
     {
       "gruppo": "Acconti",
       "voce": "Nessun acconto sotto",
       "valore": "51,65 €",
-      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%"
+      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%",
+      "verificato": false
     },
     {
       "gruppo": "Acconti",
       "voce": "Unica soluzione (novembre) sotto",
       "valore": "257,52 €",
-      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%"
+      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%",
+      "verificato": false
     },
     {
       "gruppo": "Acconti",
       "voce": "Percentuale acconto",
       "valore": "100%",
-      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%"
+      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%",
+      "verificato": false
     },
     {
       "gruppo": "Acconti",
       "voce": "Prima rata soggetti ISA/forfettari",
       "valore": "50%",
-      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%"
+      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%",
+      "verificato": false
     },
     {
       "gruppo": "Acconti",
       "voce": "Acconto addizionale comunale",
       "valore": "30%",
-      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%"
+      "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%",
+      "verificato": false
     },
     {
-      "gruppo": "ENPAM",
+      "gruppo": "ENPAM Quota A 2026",
       "voce": "Quota A fino a 30 anni",
-      "valore": "291,61 €",
-      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it",
-      "nota": "Importi Quota A 2026 discordanti tra le fonti (es. money.it riporta 304,73 / 591,47 / 1.109,92 / 2.049,83 e maternità 84,26). Verificare sul bollettino ENPAM."
+      "valore": "304,73 €",
+      "fonte": "enpam.it",
+      "nota": "enpam.it agg. 19/3/2026",
+      "verificato": true
     },
     {
-      "gruppo": "ENPAM",
+      "gruppo": "ENPAM Quota A 2026",
       "voce": "Quota A 30-35 anni",
-      "valore": "566,00 €",
-      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+      "valore": "591,47 €",
+      "fonte": "enpam.it",
+      "verificato": true
     },
     {
-      "gruppo": "ENPAM",
+      "gruppo": "ENPAM Quota A 2026",
       "voce": "Quota A 35-40 anni",
-      "valore": "1.062,12 €",
-      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+      "valore": "1.109,92 €",
+      "fonte": "enpam.it",
+      "verificato": true
     },
     {
-      "gruppo": "ENPAM",
+      "gruppo": "ENPAM Quota A 2026",
       "voce": "Quota A da 40 anni",
-      "valore": "1.961,56 €",
-      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+      "valore": "2.049,83 €",
+      "fonte": "enpam.it",
+      "verificato": true
     },
     {
-      "gruppo": "ENPAM",
-      "voce": "Contributo maternità",
-      "valore": "95,54 €",
-      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+      "gruppo": "ENPAM Quota A 2026",
+      "voce": "Contributo maternità (si somma alla fascia)",
+      "valore": "84,26 €",
+      "fonte": "enpam.it",
+      "verificato": true
     },
     {
-      "gruppo": "ENPAM",
+      "gruppo": "ENPAM Quota A 2026",
+      "voce": "Quota A studenti (non usata nei calcoli)",
+      "valore": "152,37 €",
+      "fonte": "enpam.it",
+      "verificato": true
+    },
+    {
+      "gruppo": "ENPAM Quota B",
       "voce": "Quota B aliquota intera",
       "valore": "19,5%",
-      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+      "fonte": "Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it",
+      "nota": "Aliquote e massimale della Quota B da verificare.",
+      "verificato": false
     },
     {
-      "gruppo": "ENPAM",
+      "gruppo": "ENPAM Quota B",
+      "voce": "Quota B aliquota ridotta (a scelta del medico)",
+      "valore": "9,75%",
+      "fonte": "Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it",
+      "verificato": false
+    },
+    {
+      "gruppo": "ENPAM Quota B",
       "voce": "Quota B massimale",
       "valore": "150.000,00 €",
-      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+      "fonte": "Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it",
+      "verificato": false
     },
     {
-      "gruppo": "ENPAM",
+      "gruppo": "ENPAM Quota B",
       "voce": "Quota B oltre massimale",
       "valore": "1%",
-      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+      "fonte": "Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it",
+      "verificato": false
     },
     {
-      "gruppo": "ENPAM",
+      "gruppo": "ENPAM soglie Quota B redditi 2025",
       "voce": "Soglia esente under 40",
       "valore": "5.446,77 €",
-      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+      "fonte": "enpam.it",
+      "nota": "Redditi 2025, Quota B pagata nel 2026. enpam.it agg. 3/2/2026",
+      "verificato": true
     },
     {
-      "gruppo": "ENPAM",
+      "gruppo": "ENPAM soglie Quota B redditi 2025",
       "voce": "Soglia esente over 40",
       "valore": "10.059,28 €",
-      "fonte": "Quota A: partitaiva.it / Fiscozen (2026); Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it"
+      "fonte": "enpam.it",
+      "verificato": true
+    },
+    {
+      "gruppo": "ENPAM soglie Quota B redditi 2026",
+      "voce": "Soglia esente under 40",
+      "valore": "5.691,90 €",
+      "fonte": "Stima LumiaMed",
+      "nota": "Stima: Quota A 2026 ÷ 19,5%. ENPAM la pubblica con il Modello D 2027",
+      "verificato": false
+    },
+    {
+      "gruppo": "ENPAM soglie Quota B redditi 2026",
+      "voce": "Soglia esente over 40",
+      "valore": "10.511,95 €",
+      "fonte": "Stima LumiaMed",
+      "verificato": false
+    },
+    {
+      "gruppo": "Detrazione lavoro dipendente",
+      "voce": "Nulla oltre (solo per l'avviso sugli altri redditi)",
+      "valore": "50.000,00 €",
+      "fonte": "Art. 13 c. 1 TUIR",
+      "nota": "Usata solo per l'avviso sugli altri redditi nell'ordinario: la detrazione per lavoro dipendente non è calcolata.",
+      "verificato": false
     },
     {
       "gruppo": "IVA e bollo",
       "voce": "Bollo: soglia",
       "valore": "77,47 €",
       "fonte": "DPR 642/72, tariffa art. 13",
-      "nota": "D.Lgs. 192/2024: dal 2025 i rimborsi di spese addebitate al cliente non concorrono al reddito di lavoro autonomo. Verificare se vale anche per il bollo e per i forfettari."
+      "nota": "D.Lgs. 192/2024: dal 2025 i rimborsi di spese addebitate al cliente non concorrono al reddito di lavoro autonomo. Verificare se vale anche per il bollo e per i forfettari.",
+      "verificato": false
     },
     {
       "gruppo": "IVA e bollo",
       "voce": "Bollo: importo",
       "valore": "2,00 €",
-      "fonte": "DPR 642/72, tariffa art. 13"
+      "fonte": "DPR 642/72, tariffa art. 13",
+      "verificato": false
     },
     {
       "gruppo": "IVA e bollo",
       "voce": "Bollo riaddebitato concorre al reddito",
       "valore": "no",
-      "fonte": "DPR 642/72, tariffa art. 13"
+      "fonte": "DPR 642/72, tariffa art. 13",
+      "verificato": false
     },
     {
       "gruppo": "IVA e bollo",
       "voce": "IVA aliquota prestazioni non sanitarie",
       "valore": "22%",
-      "fonte": "DPR 642/72, tariffa art. 13"
+      "fonte": "DPR 642/72, tariffa art. 13",
+      "verificato": false
     },
     {
       "gruppo": "IVA e bollo",
       "voce": "Interessi liquidazione trimestrale",
       "valore": "1%",
-      "fonte": "DPR 642/72, tariffa art. 13"
+      "fonte": "DPR 642/72, tariffa art. 13",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità affitto_studio",
       "valore": "100%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità utenze",
       "valore": "100%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità materiale_sanitario",
       "valore": "100%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità attrezzature",
       "valore": "100%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità assicurazione_rc",
       "valore": "100%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità formazione_ecm",
       "valore": "100%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità software",
       "valore": "100%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità telefono_internet",
       "valore": "80%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità auto",
       "valore": "20%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità ristoranti_alberghi",
       "valore": "75%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità commercialista",
       "valore": "100%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità quota_ordine",
       "valore": "100%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità personale",
       "valore": "100%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità contributi_enpam",
       "valore": "0%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità imposte_f24",
       "valore": "0%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità personale_non_deducibile",
       "valore": "0%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Spese (ordinario)",
       "voce": "Deducibilità altro",
       "valore": "100%",
-      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)"
+      "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+      "verificato": false
     },
     {
       "gruppo": "Scadenze 2026",
       "voce": "Saldo e 1° acconto ISA/forfettari",
       "valore": "2026-07-20",
-      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026"
+      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026",
+      "verificato": false
     },
     {
       "gruppo": "Scadenze 2026",
       "voce": "2° acconto",
       "valore": "2026-11-30",
-      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026"
+      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026",
+      "verificato": false
     },
     {
       "gruppo": "Scadenze 2026",
       "voce": "Dichiarazione dei redditi",
       "valore": "2026-10-31",
-      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026"
+      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026",
+      "verificato": false
     },
     {
       "gruppo": "Scadenze 2026",
       "voce": "Invio Sistema TS",
       "valore": "2026-01-31",
-      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026"
+      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026",
+      "verificato": false
     },
     {
       "gruppo": "Scadenze 2026",
       "voce": "Modello D ENPAM",
       "valore": "2026-07-31",
-      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026"
+      "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026",
+      "verificato": false
     }
   ]
 }

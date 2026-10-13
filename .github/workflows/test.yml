@@ -13,14 +13,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-      - run: npm ci
-      - name: Typecheck del motore (src/core, src/db)
-        run: npm run typecheck:core
+      # Solo vitest e typescript (ci/motore/package.json): i test del motore non dipendono da Expo.
+      - name: Installa vitest e typescript
+        run: |
+          (cd ci/motore && npm ci --no-audit --no-fund)
+          ln -s ci/motore/node_modules node_modules
+      - name: Typecheck del motore (senza Expo)
+        run: ci/motore/node_modules/.bin/tsc -p tsconfig.motore.json
       - name: Test dei calcoli fiscali
-        run: npm test
-      - name: La cartella src/core non deve importare React Native
+        run: ci/motore/node_modules/.bin/vitest run
+      - name: Il motore deve restare puro (niente React/Expo, orologio o numeri casuali)
         run: |
           if grep -rnE "from ['\"](react|react-native|expo[^'\"]*)['\"]" src/core; then
             echo "src/core deve restare logica pura: niente import di React/Expo."; exit 1
+          fi
+          if grep -rnE "Date\.now\(|new Date\(\)|Math\.random\(" src/core --include=*.ts --exclude-dir=__tests__; then
+            echo "src/core non legge la data di oggi e non usa numeri casuali: ricevili come parametri."; exit 1
+          fi
+          if grep -rnE "from ['\"]node:" src/core --include=*.ts --exclude-dir=__tests__; then
+            echo "src/core non usa le API di Node: deve poter essere tradotto in Swift."; exit 1
           fi

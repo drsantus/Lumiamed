@@ -5,9 +5,12 @@
 import math, json
 def R(x): return math.floor(x + 0.5)
 def pct(c, r): return R(c * r)
-QA_OVER40 = 196156 + 9554
-QA_35_40 = 106212 + 9554
-S_U40, S_O40, MASS = 544677, 1005928, 15000000
+# Quota A 2026 (enpam.it agg. 19/3/2026): fascia + maternità 84,26
+QA_OVER40 = 204983 + 8426
+QA_35_40 = 110992 + 8426
+# Soglie Quota B: redditi 2026 (stima, Quota B maturata) e redditi 2025 (Quota B pagata nel 2026)
+S_U40, S_O40, MASS = 569190, 1051195, 15000000
+S25_U40, S25_O40 = 544677, 1005928
 
 def irpef(imp):
     tot = 0; prev = 0
@@ -37,10 +40,14 @@ out = {}
 
 # D1 forfettario 30/6, over 40, 15%
 f = 181/365; ricavi = 4500000
-qbprec = qb(6240000, S_O40)
+qbprec = qb(6240000, S25_O40)
 V = R(ricavi / f); contr = QA_OVER40 + qbprec
 imposta_annua = pct(max(0, pct(V, .78) - min(contr, pct(V, .78))), .15)
 mat = R(imposta_annua * f); qbm = qb(pct(ricavi, .78), S_O40, f)
+su100 = lambda v: R(v * 10000 / ricavi)
+dove = dict(spese=0, imposte=su100(mat), contributi=su100(qbm + R(QA_OVER40 * f)))
+dove['netto'] = 10000 - dove['spese'] - dove['imposte'] - dove['contributi']
+out['D1_dove_vanno_100'] = dove
 out['D1'] = dict(imposteMaturate=mat, imposte=mat, quotaAResidua=0, quotaBMaturata=qbm, iva=0,
   daAccantonare=mat + qbm, impegni=200000 + qbprec, guadagnoNetto=ricavi - mat - qbm - R(QA_OVER40 * f))
 
@@ -55,7 +62,7 @@ out['D2'] = dict(imposteMaturate=mat, imposte=imposte, quotaAResidua=0, quotaBMa
 
 # D3 forfettario 15/12, 5%, versamenti senza riferimento
 f = 349/365; ricavi = 12*500000
-qbprec = qb(3900000, S_U40)
+qbprec = qb(3900000, S25_U40)
 contr = QA_35_40 + qbprec
 V = R(ricavi / f); rl = pct(V, .78)
 imposta_annua = pct(max(0, rl - min(contr, rl)), .05)
@@ -75,7 +82,7 @@ out['D4'] = dict(imposteMaturate=mat, imposte=mat, quotaAResidua=QA_OVER40, quot
 # D5 forfettario 20/2: aliquota effettiva dell'anno scorso
 f = 51/365; ricavi = 1300000
 mat = pct(ricavi, 900000 / 8000000); qbm = qb(pct(ricavi, .78), S_O40, f)
-qbprec = qb(6240000, S_O40)
+qbprec = qb(6240000, S25_O40)
 out['D5'] = dict(imposteMaturate=mat, imposte=mat, quotaAResidua=QA_OVER40, quotaBMaturata=qbm, iva=0,
   daAccantonare=mat + QA_OVER40 + qbm, impegni=200000 + qbprec, guadagnoNetto=ricavi - mat - qbm - R(QA_OVER40 * f))
 print(json.dumps(out, indent=1))

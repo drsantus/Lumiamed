@@ -1,18 +1,9 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { Slot } from 'expo-router';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
-
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
-  );
+/**
+ * SEGNAPOSTO. L'interfaccia di LumiaMed non è in questo progetto Expo:
+ * l'app per iPhone è SwiftUI e usa il motore di calcolo tradotto da src/core (vedi docs/PORTING.md e RORK.md).
+ */
+export default function Layout() {
+  return <Slot />;
 }

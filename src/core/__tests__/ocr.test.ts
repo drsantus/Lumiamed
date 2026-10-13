@@ -12,6 +12,22 @@ describe('parseImporto', () => {
   ])('%s -> %i', (raw, atteso) => {
     expect(parseImporto(raw)).toBe(atteso);
   });
+
+  it.each([
+    ['0', 0],
+    ['€ 1.234,56 EUR', 123_456],
+    ['12.345.678', 1_234_567_800],
+    ['1 234,56', 123_456],
+  ])('valido: %s -> %i', (raw, atteso) => {
+    expect(parseImporto(raw)).toBe(atteso);
+  });
+
+  it.each(['-12,50', '−12,50', '+5', '1e3', '1E3', '2e-2', '12,345', '1,234.567', '1.2.3', 'abc', '', ',', '12,5,0', 'Infinity'])(
+    'rifiutato: "%s" (niente negativi, notazione scientifica o più di 2 decimali)',
+    (raw) => {
+      expect(parseImporto(raw)).toBeUndefined();
+    },
+  );
 });
 
 const FATTURA_PAZIENTE = `

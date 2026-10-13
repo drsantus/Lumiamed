@@ -47,7 +47,7 @@ testo = [
     ("Come compilare (solo le celle GIALLE):", Font(name=FONT, bold=True)),
     ("1. Foglio 'Casi di prova': per ogni riga scelga 'Sì' o 'No' nella colonna 'Corretto?'.", BODY),
     ("2. Se è 'No', scriva il valore giusto in 'Valore corretto' e il motivo in 'Note'. La colonna 'Differenza' si calcola da sola.", BODY),
-    ("3. Foglio 'Parametri': confermi o corregga i parametri normativi 2026 usati dall'app.", BODY),
+    ("3. Foglio 'Parametri': confermi o corregga i parametri normativi usati dall'app (in particolare quelli 'da verificare').", BODY),
     ("", BODY),
     ("Note importanti:", Font(name=FONT, bold=True)),
     ("• Tutti i calcoli seguono il principio di cassa (ricavi incassati e spese pagate nell'anno).", BODY),
@@ -118,8 +118,8 @@ ws.cell(row=riep + 2, column=6, value=f"=COUNTA(A2:A{last})").font = BODY
 
 # ---------------- Foglio 3: parametri ----------------
 ps = wb.create_sheet("Parametri")
-ph = ["Gruppo", "Parametro", "Valore usato dall'app", "Fonte", "Nota", "Confermato?", "Valore corretto / commento"]
-pw = [22, 48, 34, 55, 50, 12, 40]
+ph = ["Gruppo", "Parametro", "Valore usato dall'app", "Fonte", "Nota", "Verificato", "Confermato?", "Valore corretto / commento"]
+pw = [22, 48, 34, 55, 50, 14, 12, 40]
 for col, (h, w) in enumerate(zip(ph, pw), start=1):
     c = ps.cell(row=1, column=col, value=h)
     c.font, c.fill, c.alignment, c.border = H_FONT, H_FILL, Alignment(wrap_text=True, vertical="center"), BORDER
@@ -128,18 +128,19 @@ ps.freeze_panes = "A2"
 dv2 = DataValidation(type="list", formula1='"Sì,No"', allow_blank=True)
 ps.add_data_validation(dv2)
 for r, par in enumerate(DATI["parametri"], start=2):
-    vals = [par["gruppo"], par["voce"], par["valore"], par["fonte"], par.get("nota") or ""]
+    vals = [par["gruppo"], par["voce"], par["valore"], par["fonte"], par.get("nota") or "",
+            "sì" if par.get("verificato") else "da verificare"]
     for col, v in enumerate(vals, start=1):
         c = ps.cell(row=r, column=col, value=v)
         c.font = BLUE if col == 3 else BODY
         c.alignment, c.border = WRAP, BORDER
-    for col in (6, 7):
+    for col in (7, 8):
         c = ps.cell(row=r, column=col)
         c.fill, c.border, c.font, c.alignment = INPUT_FILL, BORDER, BODY, WRAP
-    dv2.add(f"F{r}")
+    dv2.add(f"G{r}")
 plast = len(DATI["parametri"]) + 1
-ps.conditional_formatting.add(f"A2:G{plast}", FormulaRule(formula=[f'$F2="No"'], fill=PatternFill("solid", start_color="F8D7DA")))
-ps.auto_filter.ref = f"A1:G{plast}"
+ps.conditional_formatting.add(f"A2:H{plast}", FormulaRule(formula=[f'$G2="No"'], fill=PatternFill("solid", start_color="F8D7DA")))
+ps.auto_filter.ref = f"A1:H{plast}"
 ps.cell(row=2, column=5).comment = Comment("Le note segnalano i punti dove le fonti pubbliche non concordano.", "LumiaMed")
 
 wb.save(OUT)

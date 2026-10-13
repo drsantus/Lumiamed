@@ -1,13 +1,19 @@
 import { isoYear, lastDayOfMonth, primoGiornoLavorativo, ymd } from './dates';
 import type { Cents } from './money';
-import type { ParametriAnno } from './params';
+import { getParametri, type ParametriAnno } from './params';
 import type { IsoDate, Profilo } from './types';
 
 export type CategoriaScadenza = 'enpam' | 'imposte' | 'iva' | 'sts' | 'bollo' | 'dichiarazioni';
 
 export interface Scadenza {
+  /** Univoco all'interno dell'anno: con la finestra di 12 mesi la coppia (anno, id) è univoca. */
   id: string;
-  /** Data effettiva (già spostata al primo giorno lavorativo). */
+  /** Anno dello scadenziario a cui appartiene. */
+  anno: number;
+  /**
+   * Data effettiva: le scadenze fiscali che cadono di sabato, domenica o festivo slittano al primo giorno
+   * lavorativo; le scadenze ENPAM (Quota A, Quota B, Modello D) restano alla data nominale.
+   */
   data: IsoDate;
   /** Data nominale prevista dalla norma. */
   dataNominale: IsoDate;
@@ -84,7 +90,10 @@ export function generaScadenziario(opt: OpzioniScadenziario, p: ParametriAnno): 
   const add = (
     id: string, dataNominale: IsoDate, categoria: CategoriaScadenza,
     titolo: string, descrizione: string, importoStimato?: Cents,
-  ) => out.push({ id, data: primoGiornoLavorativo(dataNominale), dataNominale, categoria, titolo, descrizione, importoStimato });
+  ) => {
+    const enpam = categoria === 'enpam' || id === 'modelloD';
+    out.push({ id, anno, data: enpam ? dataNominale : primoGiornoLavorativo(dataNominale), dataNominale, categoria, titolo, descrizione, importoStimato });
+  };
 
   // Sistema Tessera Sanitaria
   add('sts', usaParametriAnno ? p.scadenze.invioSTS : ymd(anno, 1, 31), 'sts',
@@ -161,3 +170,42 @@ export function generaScadenziario(opt: OpzioniScadenziario, p: ParametriAnno): 
 /** Scadenze nei prossimi `giorni` giorni (per le notifiche e la dashboard). */
 export const scadenzeImminenti = (scadenze: Scadenza[], oggi: IsoDate, entro: IsoDate): Scadenza[] =>
   scadenze.filter((s) => s.data >= oggi && s.data <= entro);
+
+export interface OpzioniScadenziarioMobile {
+  oggi: IsoDate;
+  profilo: OpzioniScadenziario['profilo'];
+  haOperazioniIva: boolean;
+  /** Importi delle scadenze dell'anno di `oggi`. */
+  importi?: ImportiScadenze;
+  /**
+   * Importi noti delle scadenze dell'anno successivo. Le rate di Quota B di gennaio-giugno dell'anno
+   * successivo appartengono allo stesso ciclo di `importi.quotaB`: se non indicate le si prende da lì.
+   */
+  importiAnnoSuccessivo?: ImportiScadenze;
+}
+
+/**
+ * Scadenze dei prossimi 12 mesi: da oggi (compreso) allo stesso giorno dell'anno successivo (escluso).
+ * Unisce lo scadenziario dell'anno in corso e quello dell'anno successivo, ciascuno con i propri parametri,
+ * così a dicembre compaiono già il Sistema TS e le rate di gennaio.
+ */
+export function scadenzeProssimi12Mesi(opt: OpzioniScadenziarioMobile): Scadenza[] {
+  const anno = isoYear(opt.oggi);
+  const mese = Number(opt.oggi.slice(5, 7));
+  const giorno = ymd(anno + 1, mese, Number(opt.oggi.slice(8, 10)));
+  const fine = giorno <= lastDayOfMonth(anno + 1, mese) ? giorno : lastDayOfMonth(anno + 1, mese);
+  const corrente = generaScadenziario(
+    { anno, profilo: opt.profilo, haOperazioniIva: opt.haOperazioniIva, importi: opt.importi },
+    getParametri(anno).parametri,
+  );
+  const successivo = generaScadenziario(
+    {
+      anno: anno + 1, profilo: opt.profilo, haOperazioniIva: opt.haOperazioniIva,
+      importi: { quotaBCicloPrecedente: opt.importi?.quotaB, ...opt.importiAnnoSuccessivo },
+    },
+    getParametri(anno + 1).parametri,
+  );
+  return [...corrente, ...successivo]
+    .filter((s) => s.data >= opt.oggi && s.data < fine)
+    .sort((a, b) => (a.data === b.data ? a.anno - b.anno || a.id.localeCompare(b.id) : a.data.localeCompare(b.data)));
+}

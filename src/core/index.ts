@@ -20,3 +20,8 @@ export * from './ocr/parseInvoiceText';
 export * from './piani';
 export * from './riepilogo';
 export * from './report';
+export * from './storico';
+export * from './analisi';
+export * from './validazione';
+export * from './backup';
+export * from './versione';

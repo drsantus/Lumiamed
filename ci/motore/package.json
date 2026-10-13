@@ -1,0 +1,10 @@
+{
+  "name": "lumiamed-ci-motore",
+  "private": true,
+  "description": "Dipendenze minime per i test del motore in CI: vitest, typescript e i tipi di Node (per i test dei file golden), niente Expo.",
+  "devDependencies": {
+    "@types/node": "26.6.5",
+    "typescript": "6.0.3",
+    "vitest": "3.2.7"
+  }
+}

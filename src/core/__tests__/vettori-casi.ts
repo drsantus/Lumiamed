@@ -5,19 +5,24 @@
  * `npm run vettori` scrive golden/vettori.json da qui; vettori.test.ts li esegue sul motore
  * TypeScript e controlla che il JSON sia allineato a questo file.
  *
- * Gli attesi sono trascritti dalle asserzioni dei test o presi da scenari.ts:
- * non vengono MAI calcolati con il motore. Il formato è descritto in docs/PORTING.md.
+ * Gli attesi sono trascritti dalle asserzioni dei test o presi da scenari.ts: non vengono MAI
+ * calcolati con il motore e sono sempre valori letterali (i segnaposto stanno solo negli input).
+ * Unica eccezione: le ISTANTANEE (`istantanea: true`), una per scenario di scenari.ts, il cui atteso
+ * è l'output completo del motore salvato da scripts/esporta-vettori.ts: servono solo a verificare
+ * che il porting dia gli stessi risultati del TypeScript. Il formato è descritto in docs/PORTING.md.
  */
 import { euro } from '../money';
 import type { Fattura, Profilo, Spesa } from '../types';
 import {
   SCENARI_ACCONTI, SCENARI_DASHBOARD, SCENARI_FORFETTARIO, SCENARI_ORDINARIO, SCENARI_QUOTA_A, SCENARI_QUOTA_B,
 } from './scenari';
+import comunaliData from '../addizionali/data/comunali.json';
+import { vettoriPacchettiBC, type ComuneTabella } from './vettori-casi-bc';
 
+/** Valore osservato di una verifica: percorso nel risultato o espressione. */
 export type Espr =
   | number | string | boolean | null
   | { $: string }
-  | { $parametri: number; campo?: string }
   | { $somma: Espr[] }
   | { $diff: [Espr, Espr] }
   | { $prodotto: Espr[] }
@@ -25,16 +30,20 @@ export type Espr =
   | { $max: Espr[] }
   | { $abs: Espr }
   | { $lunghezza: Espr }
-  | { $righe: Espr };
+  | { $righe: Espr }
+  | { $uguali: [Espr, Espr] };
 
 export type Operatore =
   | 'uguale' | 'maggioreDi' | 'minoreDi' | 'minoreOUguale' | 'vicino'
-  | 'contiene' | 'nonContiene' | 'corrisponde' | 'jsonNonContiene' | 'ordinato';
+  | 'contiene' | 'nonContiene' | 'corrisponde' | 'jsonNonContiene' | 'ordinato' | 'tuttiNellIntervallo';
+
+/** Letterale JSON: gli attesi non contengono mai percorsi, espressioni o segnaposto. */
+export type Letterale = number | string | boolean | null | Letterale[] | { [k: string]: Letterale };
 
 export interface Verifica {
   valore: Espr;
   op: Operatore;
-  atteso?: Espr;
+  atteso?: Letterale;
   /** Solo per 'vicino': come toBeCloseTo di vitest, |valore − atteso| < 10^−cifre / 2. */
   cifre?: number;
 }
@@ -47,21 +56,27 @@ export interface Chiamata {
 
 export interface Vettore {
   id: string;
-  /** File › describe › it da cui viene il caso. */
+  /** File › describe › it da cui viene il caso (o scenario, per le istantanee). */
   origine: string;
   nota?: string;
+  /** Istantanea dell'output completo del motore: confronto esatto su tutte le chiavi. */
+  istantanea?: boolean;
   /** Forma semplice: una chiamata. */
   funzione?: string;
   input?: Record<string, unknown>;
-  /** Confronto parziale sul risultato (vedi docs/PORTING.md). */
+  /** Confronto parziale sul risultato (esatto per le istantanee). Solo valori letterali. */
   atteso?: unknown;
-  /** Forma con più chiamate: i percorsi delle verifiche iniziano con il nome della chiamata. */
+  /** Forma con più chiamate, eseguite in ordine: i percorsi delle verifiche iniziano con il nome della chiamata. */
   chiamate?: Record<string, Chiamata>;
   verifiche?: Verifica[];
 }
 
 export interface FileVettori {
   versione: number;
+  versioneMotore: string;
+  /** Data e ora di generazione (ISO 8601): non è confrontata dal test di allineamento. */
+  generatoIl: string;
+  numeroVettori: number;
   descrizione: string;
   convenzioni: Record<string, string>;
   vettori: Vettore[];
@@ -129,7 +144,9 @@ IVA 22% 110,00
 Totale 610,00
 `;
 
-export function costruisciVettori(): FileVettori {
+export type CasiVettori = Omit<FileVettori, 'versioneMotore' | 'generatoIl' | 'numeroVettori'>;
+
+export function costruisciVettori(): CasiVettori {
   const vettori: Vettore[] = [];
   const add = (v: Vettore) => vettori.push(v);
 
@@ -216,7 +233,7 @@ export function costruisciVettori(): FileVettori {
         addizionaleRegionale: a.addizionaleRegionaleProva, addizionaleComunale: a.addizionaleComunaleProva,
       },
       // Il test confronta `differenza` con impostaNetta attesa − ritenute in input.
-      verifiche: [{ valore: r('differenza'), op: 'uguale', atteso: { $diff: [a.impostaNetta, s.input.ritenute] } }],
+      verifiche: [{ valore: r('differenza'), op: 'uguale', atteso: a.impostaNetta - s.input.ritenute }],
     });
   }
   add({
@@ -289,13 +306,13 @@ export function costruisciVettori(): FileVettori {
     add({
       id: `enpam/quota-b-${s.id}`, origine: `${FISCALE} › ENPAM › Quota B ${s.id}: ${s.descrizione}`,
       funzione: 'quotaB',
-      input: { annoReddito: s.input.annoReddito, redditoProfessionale: s.input.redditoProfessionale, dataNascita: s.input.dataNascita, p: P() },
+      input: { annoReddito: s.input.annoReddito, redditoProfessionale: s.input.redditoProfessionale, dataNascita: s.input.dataNascita, p: P(s.input.annoReddito) },
       atteso: { soglia: s.atteso.soglia, totale: s.atteso.totale },
     });
   }
 
   const dAcc = 'Acconti';
-  const sommaRate: Verifica = { valore: { $somma: [r('primaRata'), r('secondaRata')] }, op: 'uguale', atteso: r('totale') };
+  const sommaRate: Verifica = { valore: { $diff: [{ $somma: [r('primaRata'), r('secondaRata')] }, r('totale')] }, op: 'uguale', atteso: 0 };
   for (const s of SCENARI_ACCONTI) {
     add({
       id: `acconti/${s.id}`, origine: `${FISCALE} › ${dAcc} › ${s.id}: ${s.descrizione}`,
@@ -327,9 +344,8 @@ export function costruisciVettori(): FileVettori {
 
   add({
     id: 'parametri/anno-vicino', origine: `${FISCALE} › Parametri › anno non in tabella: usa il più vicino e lo segnala`,
-    funzione: 'getParametri', input: { anno: 2027 },
-    atteso: { approssimati: true, parametri: { anno: 2027 } },
-    verifiche: [{ valore: r('parametri.irpef.scaglioni'), op: 'uguale', atteso: P(2026, 'irpef.scaglioni') }],
+    funzione: 'getParametri', input: { anno: 2028 },
+    atteso: { approssimati: true, parametri: { anno: 2028, forfettario: { sogliaRedditiDipendente: { importo: euro(30_000) } } } },
   });
 
   const dCom = 'Tabella comunale precaricata (dati MEF)';
@@ -444,7 +460,7 @@ export function costruisciVettori(): FileVettori {
       ],
       oggi: '2026-06-01', p: P(),
     },
-    verifiche: [{ valore: r('[*].giorni'), op: 'uguale', atteso: [120, 31] as unknown as Espr }],
+    verifiche: [{ valore: r('[*].giorni'), op: 'uguale', atteso: [120, 31] }],
   });
 
   const dIva = 'IVA ordinario';
@@ -507,28 +523,28 @@ export function costruisciVettori(): FileVettori {
   });
   riep('imposta-forfettaria', 'imposta forfettaria da inizio anno', { atteso: { daInizioAnno: { imposte: euro(750.35) } } });
   riep('quota-b-maturata', 'Quota B maturata: soglia in proporzione ai giorni trascorsi', {
-    atteso: { quotaBMaturata: { soglia: euro(2_701), totale: euro(2_515.31) } },
+    atteso: { quotaBMaturata: { soglia: 282_256, totale: 249_160 } },
   });
   riep('da-accantonare', 'da accantonare = imposte nette + Quota A residua + Quota B maturata + IVA', {
-    atteso: { quotaA: { totale: euro(950.94) }, accantonamento: { quotaAResidua: euro(358), metodo: 'proiezione' } },
+    atteso: { quotaA: { totale: 97_816 }, accantonamento: { quotaAResidua: 38_522, metodo: 'proiezione' } },
     verifiche: [
       {
-        valore: r('accantonamento.imposte'), op: 'uguale',
-        atteso: { $diff: [{ $diff: [r('accantonamento.imposteMaturate'), r('accantonamento.ritenute')] }, r('accantonamento.accontiVersati')] },
+        valore: { $diff: [r('accantonamento.imposte'), { $diff: [{ $diff: [r('accantonamento.imposteMaturate'), r('accantonamento.ritenute')] }, r('accantonamento.accontiVersati')] }] },
+        op: 'uguale', atteso: 0,
       },
       {
-        valore: r('daAccantonare'), op: 'uguale',
-        atteso: { $somma: [r('accantonamento.imposte'), r('accantonamento.quotaAResidua'), r('accantonamento.quotaBMaturata'), r('accantonamento.iva')] },
+        valore: { $diff: [r('daAccantonare'), { $somma: [r('accantonamento.imposte'), r('accantonamento.quotaAResidua'), r('accantonamento.quotaBMaturata'), r('accantonamento.iva')] }] },
+        op: 'uguale', atteso: 0,
       },
       { valore: r('avvisi[*].codice'), op: 'contiene', atteso: 'VERSAMENTI_DEDOTTI' },
     ],
   });
   riep('impegni-anno-precedente', 'impegni dell\'anno scorso: saldo 200 + Quota B 2025 su 20.000 € (2.837,88)', {
     atteso: { impegniAnnoPrecedente: { anno: 2025, saldoImposte: euro(200), saldoAddizionali: 0, quotaB: euro(2_837.88), totale: euro(3_037.88) } },
-    verifiche: [{ valore: r('liquiditaImpegnata'), op: 'uguale', atteso: { $somma: [r('daAccantonare'), euro(3_037.88)] } }],
+    verifiche: [{ valore: { $diff: [r('liquiditaImpegnata'), r('daAccantonare')] }, op: 'uguale', atteso: euro(3_037.88) }],
   });
   riep('percentuale-limite', 'percentuale verso il limite forfettario', {
-    verifiche: [{ valore: r('percentualeLimiteForfettario'), op: 'vicino', atteso: { $quoziente: [20_000, 85_000] }, cifre: 6 }],
+    verifiche: [{ valore: r('percentualeLimiteForfettario'), op: 'vicino', atteso: 20_000 / 85_000, cifre: 6 }],
   });
   riep('scadenze-importi', 'scadenze con importi stimati e saldo', {
     verifiche: [
@@ -557,17 +573,6 @@ export function costruisciVettori(): FileVettori {
     atteso: { daInizioAnno: { regime: 'ordinario' }, iva: { soloEsenti: true } },
     verifiche: [{ valore: r('scadenze[*].categoria'), op: 'nonContiene', atteso: 'iva' }],
   });
-
-  ([['free', 'fattura', 29, true], ['free', 'fattura', 30, false], ['pro', 'fattura', 10_000, true]] as const)
-    .forEach(([piano, tipo, usatiNelMese, consentito], i) => add({
-      id: `piani/limite-${i + 1}`, origine: `${RIEPILOGO} › Piani › limiti e funzioni`,
-      funzione: 'puoAggiungere', input: { piano, tipo, usatiNelMese }, atteso: { consentito },
-    }));
-  ([['free', 'report_pdf', false], ['pro', 'lettura_foto', true]] as const)
-    .forEach(([piano, funzione, atteso], i) => add({
-      id: `piani/funzione-${i + 1}`, origine: `${RIEPILOGO} › Piani › limiti e funzioni`,
-      funzione: 'puoUsare', input: { piano, funzione }, atteso,
-    }));
 
   const dCsv = 'Report CSV';
   const fattureCsv = [fattura({ numero: '1', nomePaziente: 'Mario Rossi', tipoPrestazione: 'Visita; controllo', imponibile: euro(150) })];
@@ -651,8 +656,8 @@ export function costruisciVettori(): FileVettori {
     },
     atteso: { accantonamento: { ritenute: euro(6_000) } },
     verifiche: [{
-      valore: r('accantonamento.imposte'), op: 'uguale',
-      atteso: { $max: [0, { $diff: [r('accantonamento.imposteMaturate'), euro(6_000)] }] },
+      valore: { $diff: [r('accantonamento.imposte'), { $max: [0, { $diff: [r('accantonamento.imposteMaturate'), euro(6_000)] }] }] },
+      op: 'uguale', atteso: 0,
     }],
   });
   const profNo5: Profilo = { ...profiloForf, requisitiStartup5: false };
@@ -676,7 +681,7 @@ export function costruisciVettori(): FileVettori {
       conIva: riepilogo({ oggi: '2026-06-30', profilo: ord, spese: [], fatture: [fattura({ imponibile: euro(12_000), trattamentoIva: 'imponibile_22', ...maggio })] }),
     },
     verifiche: [
-      { valore: r('conIva.guadagnoNetto'), op: 'uguale', atteso: r('esente.guadagnoNetto') },
+      { valore: { $diff: [r('conIva.guadagnoNetto'), r('esente.guadagnoNetto')] }, op: 'uguale', atteso: 0 },
       { valore: r('conIva.accantonamento.iva'), op: 'uguale', atteso: euro(2_666.4) },
       { valore: { $diff: [r('conIva.daAccantonare'), r('esente.daAccantonare')] }, op: 'uguale', atteso: euro(2_666.4) },
     ],
@@ -711,7 +716,7 @@ export function costruisciVettori(): FileVettori {
         spese: ['01', '02', '03'].map((m): Spesa => ({ id: m, data: `2026-${m}-28`, importo: euro(1_000), categoria: 'contributi_enpam' })),
       },
     },
-    verifiche: [{ valore: r('accantonamento.quotaAResidua'), op: 'uguale', atteso: r('quotaA.totale') }],
+    verifiche: [{ valore: { $diff: [r('accantonamento.quotaAResidua'), r('quotaA.totale')] }, op: 'uguale', atteso: 0 }],
   });
   add({
     id: 'correzioni/saldo-addizionali', origine: `${RIEPILOGO} › ${dCorr} › ordinario: la scadenza di luglio include il saldo delle addizionali`,
@@ -792,7 +797,7 @@ export function costruisciVettori(): FileVettori {
   }, {
     verifiche: [{
       valore: r('versamenti[spesaId~=^b1$]'), op: 'uguale',
-      atteso: [{ riferimento: { tributo: 'enpam_quota_b' }, importo: euro(5_103.22) }] as unknown as Espr,
+      atteso: [{ riferimento: { tributo: 'enpam_quota_b' }, importo: euro(5_103.22) }],
     }],
   });
   const qa = (id: string, data: string): Spesa => ({ id, data, importo: euro(2_057.1), categoria: 'contributi_enpam' });
@@ -839,7 +844,7 @@ export function costruisciVettori(): FileVettori {
     input: { opt: { anno: 2026, profilo: { regime: 'forfettario', ...base }, haOperazioniIva: false }, p: P() },
     verifiche: [
       data('sts', '2026-02-02'), data('quotaA-1', '2026-04-30'), data('modelloD', '2026-07-31'),
-      data('saldo-primo-acconto', '2026-07-20'), data('quotaB-1', '2026-11-02'), data('secondo-acconto', '2026-11-30'),
+      data('saldo-primo-acconto', '2026-07-20'), data('quotaB-1', '2026-10-31'), data('secondo-acconto', '2026-11-30'),
       { valore: r('[*].categoria'), op: 'nonContiene', atteso: 'iva' },
       { valore: r('[*].data'), op: 'ordinato' },
     ],
@@ -870,19 +875,66 @@ export function costruisciVettori(): FileVettori {
   add({
     id: 'scadenziario/anno-senza-parametri', origine: `${SCADENZIARIO} › ${dSca} › anno senza parametri: date standard`,
     funzione: 'generaScadenziario',
-    input: { opt: { anno: 2027, profilo: { regime: 'forfettario', ...base }, haOperazioniIva: false }, p: P(2027) },
-    verifiche: [{ valore: r('[id=saldo-primo-acconto].dataNominale'), op: 'uguale', atteso: '2027-06-30' }],
+    input: { opt: { anno: 2028, profilo: { regime: 'forfettario', ...base }, haOperazioniIva: false }, p: P(2028) },
+    verifiche: [
+      { valore: r('[id=saldo-primo-acconto].dataNominale'), op: 'uguale', atteso: '2028-06-30' },
+      { valore: r('[id=saldo-primo-acconto].descrizione'), op: 'contiene', atteso: 'data standard' },
+    ],
   });
 
+  vettoriPacchettiBC(add, fattura, profiloForf, Object.values(comunaliData as Record<string, ComuneTabella>));
+
+  // ───────────────────────── istantanee degli scenari ─────────────────────────
+  // L'atteso (output completo del motore) lo scrive scripts/esporta-vettori.ts.
+  const ist = (id: string, descrizione: string, funzione: string, input: Record<string, unknown>) => add({
+    id: `istantanea/${id}`, origine: `scenari.ts › ${id}: ${descrizione}`, istantanea: true, funzione, input,
+  });
+  for (const s of SCENARI_FORFETTARIO) {
+    ist(s.id, s.descrizione, 'calcolaForfettario', {
+      input: {
+        anno: s.input.anno, ricavi: s.input.ricavi, contributiVersati: s.input.contributiVersati,
+        profilo: { annoInizioAttivita: s.input.annoInizioAttivita, requisitiStartup5: s.input.requisitiStartup5 },
+      },
+      p: P(),
+    });
+  }
+  for (const s of SCENARI_ORDINARIO) {
+    ist(s.id, s.descrizione, 'calcolaOrdinario', {
+      input: {
+        anno: 2026, compensi: s.input.compensi,
+        spese: s.input.spese.map((x, i): Spesa => ({ id: `s${i}`, data: '2026-03-01', ...x })),
+        contributiVersati: s.input.contributiVersati, ritenuteSubite: s.input.ritenute,
+        profilo: { regione: 'LAZ', comuneCodiceCatastale: 'H501' }, tabelleAddizionali: TABELLE_PROVA,
+      },
+      p: P(),
+    });
+  }
+  for (const s of SCENARI_QUOTA_A) ist(s.id, s.descrizione, 'quotaA', { anno: s.input.anno, dataNascita: s.input.dataNascita, p: P() });
+  for (const s of SCENARI_QUOTA_B) {
+    ist(s.id, s.descrizione, 'quotaB', {
+      annoReddito: s.input.annoReddito, redditoProfessionale: s.input.redditoProfessionale, dataNascita: s.input.dataNascita, p: P(s.input.annoReddito),
+    });
+  }
+  for (const s of SCENARI_ACCONTI) ist(s.id, s.descrizione, 'pianoAcconti', { base: s.input.base, p: P() });
+  for (const sc of SCENARI_DASHBOARD) {
+    const fatture = sc.input.incassi.map((x, i) => fattura({
+      numero: `${sc.id}-${i + 1}`, dataFattura: x.data, dataIncasso: x.data, imponibile: x.imponibile,
+      trattamentoIva: x.trattamentoIva, destinatario: x.destinatario, ritenutaAcconto: x.ritenuta, bolloAddebitato: false,
+    }));
+    ist(sc.id, sc.descrizione, 'calcolaRiepilogo', { input: { oggi: sc.input.oggi, profilo: sc.input.profilo, fatture, spese: sc.input.spese } });
+  }
+
   return {
-    versione: 1,
-    descrizione: 'Vettori golden del motore LumiaMed: ogni caso dei test di src/core e di scenari.ts. Generato da src/core/__tests__/vettori-casi.ts con `npm run vettori`: non modificare a mano.',
+    versione: 2,
+    descrizione: 'Vettori golden del motore LumiaMed: ogni caso dei test di src/core e di scenari.ts, più le istantanee degli scenari. Generato da src/core/__tests__/vettori-casi.ts con `npm run vettori`: non modificare a mano.',
     convenzioni: {
       importi: 'centesimi interi (Cents)',
       date: 'stringhe ISO aaaa-mm-gg',
       percentuali: 'frazioni decimali (0.15 = 15%)',
-      null: 'nel confronto null equivale a campo assente/undefined',
-      parametri: '{"$parametri": anno} = getParametri(anno).parametri; con "campo" se ne prende solo quel percorso',
+      null: 'nel confronto parziale null equivale a campo assente/undefined',
+      attesi: 'sempre valori letterali: percorsi ed espressioni solo nel valore osservato delle verifiche',
+      segnaposto: 'solo negli input: {"$parametri": anno, "campo"?} e {"$risultatoDi": chiamata, "percorso"?}',
+      istantanee: 'istantanea: true = output completo del motore TypeScript, confronto esatto su tutte le chiavi',
       formato: 'vedi docs/PORTING.md, sezione "Vettori golden"',
     },
     vettori,

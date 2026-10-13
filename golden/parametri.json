@@ -1,0 +1,497 @@
+{
+  "versioneMotore": "1.0.0",
+  "generatoIl": "2026-10-13T13:17:29.454Z",
+  "descrizione": "Parametri normativi per anno come li restituisce getParametri(anno). Il 2025 è parziale: i campi di \"parziali.2025\" prevalgono su quelli dell'anno completo più vicino (2026), per questo approssimati = true.",
+  "anni": {
+    "2025": {
+      "parametri": {
+        "anno": 2025,
+        "forfettario": {
+          "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%",
+          "verificato": false,
+          "limiteRicavi": 8500000,
+          "limiteUscitaImmediata": 10000000,
+          "coefficienteDefault": 0.78,
+          "aliquotaStartup": 0.05,
+          "anniStartup": 5,
+          "aliquotaOrdinaria": 0.15,
+          "sogliaRedditiDipendente": {
+            "fonte": "L. 190/2014 art. 1 c. 57 lett. d-ter",
+            "verificato": false,
+            "nota": "Da confermare dal commercialista.",
+            "importo": 3500000
+          }
+        },
+        "irpef": {
+          "fonte": "L. 199/2025 (Legge di Bilancio 2026) art. 1 c. 3",
+          "verificato": false,
+          "scaglioni": [
+            {
+              "fino": 2800000,
+              "aliquota": 0.23
+            },
+            {
+              "fino": 5000000,
+              "aliquota": 0.33
+            },
+            {
+              "fino": null,
+              "aliquota": 0.43
+            }
+          ]
+        },
+        "detrazioneLavoroAutonomo": {
+          "fonte": "Art. 13 c. 5 TUIR",
+          "verificato": false,
+          "soglia1": 550000,
+          "importo1": 126500,
+          "soglia2": 2800000,
+          "base2": 50000,
+          "variabile2": 76500,
+          "soglia3": 5000000,
+          "base3": 50000
+        },
+        "acconti": {
+          "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%",
+          "verificato": false,
+          "sogliaNessunAcconto": 5165,
+          "sogliaUnicaSoluzione": 25752,
+          "percentuale": 1,
+          "primaRataIsa": 0.5,
+          "accontoAddizionaleComunale": 0.3
+        },
+        "enpam": {
+          "fonte": "Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it",
+          "verificato": false,
+          "nota": "Aliquote e massimale della Quota B da verificare.",
+          "quotaA": {
+            "fonte": "enpam.it",
+            "verificato": true,
+            "nota": "enpam.it agg. 19/3/2026",
+            "fasce": [
+              {
+                "finoEta": 29,
+                "importoAnnuo": 30473
+              },
+              {
+                "finoEta": 34,
+                "importoAnnuo": 59147
+              },
+              {
+                "finoEta": 39,
+                "importoAnnuo": 110992
+              },
+              {
+                "finoEta": null,
+                "importoAnnuo": 204983
+              }
+            ],
+            "contributoMaternita": 8426,
+            "studenti": 15237
+          },
+          "quotaB": {
+            "aliquotaIntera": 0.195,
+            "aliquotaOltreMassimale": 0.01,
+            "massimale": 15000000,
+            "sogliaEsenzione": {
+              "fonte": "enpam.it",
+              "verificato": true,
+              "nota": "Redditi 2025, Quota B pagata nel 2026. enpam.it agg. 3/2/2026",
+              "under40": 544677,
+              "over40": 1005928
+            }
+          }
+        },
+        "detrazioneLavoroDipendente": {
+          "fonte": "Art. 13 c. 1 TUIR",
+          "verificato": false,
+          "nota": "Usata solo per l'avviso sugli altri redditi nell'ordinario: la detrazione per lavoro dipendente non è calcolata.",
+          "nullaOltre": 5000000
+        },
+        "iva": {
+          "fonte": "DPR 633/72; art. 10 n. 18 esenzione prestazioni sanitarie",
+          "verificato": false,
+          "aliquotaOrdinaria": 0.22,
+          "interessiTrimestrali": 0.01
+        },
+        "bollo": {
+          "fonte": "DPR 642/72, tariffa art. 13",
+          "verificato": false,
+          "nota": "D.Lgs. 192/2024: dal 2025 i rimborsi di spese addebitate al cliente non concorrono al reddito di lavoro autonomo. Verificare se vale anche per il bollo e per i forfettari.",
+          "soglia": 7747,
+          "importo": 200,
+          "addebitatoConcorreAlReddito": false
+        },
+        "spese": {
+          "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+          "verificato": false,
+          "deducibilita": {
+            "affitto_studio": 1,
+            "utenze": 1,
+            "materiale_sanitario": 1,
+            "attrezzature": 1,
+            "assicurazione_rc": 1,
+            "formazione_ecm": 1,
+            "software": 1,
+            "telefono_internet": 0.8,
+            "auto": 0.2,
+            "ristoranti_alberghi": 0.75,
+            "commercialista": 1,
+            "quota_ordine": 1,
+            "personale": 1,
+            "contributi_enpam": 0,
+            "imposte_f24": 0,
+            "personale_non_deducibile": 0,
+            "altro": 1
+          },
+          "limiteRistorantiSuCompensi": 0.02,
+          "limiteFormazione": 1000000
+        },
+        "scadenze": {
+          "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026",
+          "verificato": false,
+          "saldoPrimoAccontoIsa": "2026-07-20",
+          "secondoAcconto": "2026-11-30",
+          "dichiarazioneRedditi": "2026-10-31",
+          "invioSTS": "2026-01-31",
+          "modelloD": "2026-07-31"
+        }
+      },
+      "approssimati": true
+    },
+    "2026": {
+      "parametri": {
+        "anno": 2026,
+        "forfettario": {
+          "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%",
+          "verificato": false,
+          "limiteRicavi": 8500000,
+          "limiteUscitaImmediata": 10000000,
+          "coefficienteDefault": 0.78,
+          "aliquotaStartup": 0.05,
+          "anniStartup": 5,
+          "aliquotaOrdinaria": 0.15,
+          "sogliaRedditiDipendente": {
+            "fonte": "L. 190/2014 art. 1 c. 57 lett. d-ter",
+            "verificato": false,
+            "nota": "Da confermare dal commercialista.",
+            "importo": 3500000
+          }
+        },
+        "irpef": {
+          "fonte": "L. 199/2025 (Legge di Bilancio 2026) art. 1 c. 3",
+          "verificato": false,
+          "scaglioni": [
+            {
+              "fino": 2800000,
+              "aliquota": 0.23
+            },
+            {
+              "fino": 5000000,
+              "aliquota": 0.33
+            },
+            {
+              "fino": null,
+              "aliquota": 0.43
+            }
+          ]
+        },
+        "detrazioneLavoroAutonomo": {
+          "fonte": "Art. 13 c. 5 TUIR",
+          "verificato": false,
+          "soglia1": 550000,
+          "importo1": 126500,
+          "soglia2": 2800000,
+          "base2": 50000,
+          "variabile2": 76500,
+          "soglia3": 5000000,
+          "base3": 50000
+        },
+        "acconti": {
+          "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%",
+          "verificato": false,
+          "sogliaNessunAcconto": 5165,
+          "sogliaUnicaSoluzione": 25752,
+          "percentuale": 1,
+          "primaRataIsa": 0.5,
+          "accontoAddizionaleComunale": 0.3
+        },
+        "enpam": {
+          "fonte": "Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it",
+          "verificato": false,
+          "nota": "Aliquote e massimale della Quota B da verificare.",
+          "quotaA": {
+            "fonte": "enpam.it",
+            "verificato": true,
+            "nota": "enpam.it agg. 19/3/2026",
+            "fasce": [
+              {
+                "finoEta": 29,
+                "importoAnnuo": 30473
+              },
+              {
+                "finoEta": 34,
+                "importoAnnuo": 59147
+              },
+              {
+                "finoEta": 39,
+                "importoAnnuo": 110992
+              },
+              {
+                "finoEta": null,
+                "importoAnnuo": 204983
+              }
+            ],
+            "contributoMaternita": 8426,
+            "studenti": 15237
+          },
+          "quotaB": {
+            "aliquotaIntera": 0.195,
+            "aliquotaOltreMassimale": 0.01,
+            "massimale": 15000000,
+            "sogliaEsenzione": {
+              "fonte": "Stima LumiaMed",
+              "verificato": false,
+              "nota": "Stima: Quota A 2026 ÷ 19,5%. ENPAM la pubblica con il Modello D 2027",
+              "under40": 569190,
+              "over40": 1051195
+            }
+          }
+        },
+        "detrazioneLavoroDipendente": {
+          "fonte": "Art. 13 c. 1 TUIR",
+          "verificato": false,
+          "nota": "Usata solo per l'avviso sugli altri redditi nell'ordinario: la detrazione per lavoro dipendente non è calcolata.",
+          "nullaOltre": 5000000
+        },
+        "iva": {
+          "fonte": "DPR 633/72; art. 10 n. 18 esenzione prestazioni sanitarie",
+          "verificato": false,
+          "aliquotaOrdinaria": 0.22,
+          "interessiTrimestrali": 0.01
+        },
+        "bollo": {
+          "fonte": "DPR 642/72, tariffa art. 13",
+          "verificato": false,
+          "nota": "D.Lgs. 192/2024: dal 2025 i rimborsi di spese addebitate al cliente non concorrono al reddito di lavoro autonomo. Verificare se vale anche per il bollo e per i forfettari.",
+          "soglia": 7747,
+          "importo": 200,
+          "addebitatoConcorreAlReddito": false
+        },
+        "spese": {
+          "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+          "verificato": false,
+          "deducibilita": {
+            "affitto_studio": 1,
+            "utenze": 1,
+            "materiale_sanitario": 1,
+            "attrezzature": 1,
+            "assicurazione_rc": 1,
+            "formazione_ecm": 1,
+            "software": 1,
+            "telefono_internet": 0.8,
+            "auto": 0.2,
+            "ristoranti_alberghi": 0.75,
+            "commercialista": 1,
+            "quota_ordine": 1,
+            "personale": 1,
+            "contributi_enpam": 0,
+            "imposte_f24": 0,
+            "personale_non_deducibile": 0,
+            "altro": 1
+          },
+          "limiteRistorantiSuCompensi": 0.02,
+          "limiteFormazione": 1000000
+        },
+        "scadenze": {
+          "fonte": "Proroga ISA/forfettari 2026 al 20 luglio (edotto.com, centrofiscale.com); Modello D: istruzioni ENPAM 2026",
+          "verificato": false,
+          "saldoPrimoAccontoIsa": "2026-07-20",
+          "secondoAcconto": "2026-11-30",
+          "dichiarazioneRedditi": "2026-10-31",
+          "invioSTS": "2026-01-31",
+          "modelloD": "2026-07-31"
+        }
+      },
+      "approssimati": false
+    },
+    "2027": {
+      "parametri": {
+        "anno": 2027,
+        "forfettario": {
+          "fonte": "L. 190/2014 art. 1 c. 54-89; coefficiente ATECO 86.2x = 78%",
+          "verificato": false,
+          "limiteRicavi": 8500000,
+          "limiteUscitaImmediata": 10000000,
+          "coefficienteDefault": 0.78,
+          "aliquotaStartup": 0.05,
+          "anniStartup": 5,
+          "aliquotaOrdinaria": 0.15,
+          "sogliaRedditiDipendente": {
+            "fonte": "L. 190/2014 art. 1 c. 57 lett. d-ter",
+            "verificato": false,
+            "nota": "da rivedere dopo la legge di bilancio 2027",
+            "importo": 3000000
+          },
+          "nota": "Provvisorio: copia del 2026, da rivedere dopo la legge di bilancio 2027."
+        },
+        "irpef": {
+          "fonte": "L. 199/2025 (Legge di Bilancio 2026) art. 1 c. 3",
+          "verificato": false,
+          "scaglioni": [
+            {
+              "fino": 2800000,
+              "aliquota": 0.23
+            },
+            {
+              "fino": 5000000,
+              "aliquota": 0.33
+            },
+            {
+              "fino": null,
+              "aliquota": 0.43
+            }
+          ],
+          "nota": "Provvisorio: copia del 2026, da rivedere dopo la legge di bilancio 2027."
+        },
+        "detrazioneLavoroAutonomo": {
+          "fonte": "Art. 13 c. 5 TUIR",
+          "verificato": false,
+          "soglia1": 550000,
+          "importo1": 126500,
+          "soglia2": 2800000,
+          "base2": 50000,
+          "variabile2": 76500,
+          "soglia3": 5000000,
+          "base3": 50000,
+          "nota": "Provvisorio: copia del 2026, da rivedere dopo la legge di bilancio 2027."
+        },
+        "acconti": {
+          "fonte": "Art. 17 DPR 435/2001; soggetti ISA e forfettari in due rate da 50%",
+          "verificato": false,
+          "sogliaNessunAcconto": 5165,
+          "sogliaUnicaSoluzione": 25752,
+          "percentuale": 1,
+          "primaRataIsa": 0.5,
+          "accontoAddizionaleComunale": 0.3,
+          "nota": "Provvisorio: copia del 2026, da rivedere dopo la legge di bilancio 2027."
+        },
+        "enpam": {
+          "fonte": "Quota B: istruzioni Modello D 2026 (Giornale della Previdenza) e enpam.it",
+          "verificato": false,
+          "nota": "Provvisorio: copia del 2026, da rivedere dopo la legge di bilancio 2027.",
+          "quotaA": {
+            "fonte": "enpam.it",
+            "verificato": false,
+            "nota": "Copia degli importi 2026: ENPAM pubblica quelli 2027 a inizio anno.",
+            "fasce": [
+              {
+                "finoEta": 29,
+                "importoAnnuo": 30473
+              },
+              {
+                "finoEta": 34,
+                "importoAnnuo": 59147
+              },
+              {
+                "finoEta": 39,
+                "importoAnnuo": 110992
+              },
+              {
+                "finoEta": null,
+                "importoAnnuo": 204983
+              }
+            ],
+            "contributoMaternita": 8426,
+            "studenti": 15237
+          },
+          "quotaB": {
+            "aliquotaIntera": 0.195,
+            "aliquotaOltreMassimale": 0.01,
+            "massimale": 15000000,
+            "sogliaEsenzione": {
+              "fonte": "Stima LumiaMed",
+              "verificato": false,
+              "nota": "Copia della stima 2026.",
+              "under40": 569190,
+              "over40": 1051195
+            }
+          }
+        },
+        "detrazioneLavoroDipendente": {
+          "fonte": "Art. 13 c. 1 TUIR",
+          "verificato": false,
+          "nota": "Usata solo per l'avviso sugli altri redditi nell'ordinario: la detrazione per lavoro dipendente non è calcolata.",
+          "nullaOltre": 5000000
+        },
+        "iva": {
+          "fonte": "DPR 633/72; art. 10 n. 18 esenzione prestazioni sanitarie",
+          "verificato": false,
+          "aliquotaOrdinaria": 0.22,
+          "interessiTrimestrali": 0.01,
+          "nota": "Provvisorio: copia del 2026, da rivedere dopo la legge di bilancio 2027."
+        },
+        "bollo": {
+          "fonte": "DPR 642/72, tariffa art. 13",
+          "verificato": false,
+          "nota": "D.Lgs. 192/2024: dal 2025 i rimborsi di spese addebitate al cliente non concorrono al reddito di lavoro autonomo. Verificare se vale anche per il bollo e per i forfettari.",
+          "soglia": 7747,
+          "importo": 200,
+          "addebitatoConcorreAlReddito": false
+        },
+        "spese": {
+          "fonte": "Art. 54 TUIR (prima della riforma D.Lgs. 192/2024: verificare le novità sul reddito di lavoro autonomo)",
+          "verificato": false,
+          "deducibilita": {
+            "affitto_studio": 1,
+            "utenze": 1,
+            "materiale_sanitario": 1,
+            "attrezzature": 1,
+            "assicurazione_rc": 1,
+            "formazione_ecm": 1,
+            "software": 1,
+            "telefono_internet": 0.8,
+            "auto": 0.2,
+            "ristoranti_alberghi": 0.75,
+            "commercialista": 1,
+            "quota_ordine": 1,
+            "personale": 1,
+            "contributi_enpam": 0,
+            "imposte_f24": 0,
+            "personale_non_deducibile": 0,
+            "altro": 1
+          },
+          "limiteRistorantiSuCompensi": 0.02,
+          "limiteFormazione": 1000000
+        },
+        "scadenze": {
+          "fonte": "Date standard (nessuna proroga nota)",
+          "verificato": false,
+          "nota": "Provvisorio: copia del 2026, da rivedere dopo la legge di bilancio 2027.",
+          "saldoPrimoAccontoIsa": "2027-06-30",
+          "secondoAcconto": "2027-11-30",
+          "dichiarazioneRedditi": "2027-10-31",
+          "invioSTS": "2027-01-31",
+          "modelloD": "2027-07-31"
+        }
+      },
+      "approssimati": false
+    }
+  },
+  "parziali": {
+    "2025": {
+      "anno": 2025,
+      "enpam": {
+        "quotaB": {
+          "sogliaEsenzione": {
+            "fonte": "enpam.it",
+            "verificato": true,
+            "nota": "Redditi 2025, Quota B pagata nel 2026. enpam.it agg. 3/2/2026",
+            "under40": 544677,
+            "over40": 1005928
+          }
+        }
+      }
+    }
+  }
+}

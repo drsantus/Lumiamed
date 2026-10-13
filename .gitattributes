@@ -1,0 +1,4 @@
+# File di dati del motore e file golden: byte identici su ogni sistema (golden/checksum.json ne
+# verifica lo SHA-256). Nessuna conversione dei fine riga.
+src/core/addizionali/data/*.json -text
+golden/*.json -text
