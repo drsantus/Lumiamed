@@ -1,5 +1,5 @@
 {
-  "generato": "2026-10-12T08:32:35.883Z",
+  "generato": "2026-10-13T10:15:18.320Z",
   "righe": [
     {
       "id": "F1",
@@ -443,6 +443,398 @@
       "input": "Imposta anno precedente (rigo differenza) 1.435,00 €",
       "voce": "2° acconto (novembre)",
       "valore": 717.5,
+      "formato": "euro"
+    },
+    {
+      "id": "D1",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "voce": "Metodo di stima",
+      "valore": 0,
+      "formato": "testo",
+      "testo": "imposta annua stimata × frazione d'anno"
+    },
+    {
+      "id": "D1",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "voce": "Imposte maturate da inizio anno",
+      "valore": 4352.79,
+      "formato": "euro"
+    },
+    {
+      "id": "D1",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "voce": "Imposte da accantonare (dopo ritenute e acconti versati)",
+      "valore": 4352.79,
+      "formato": "euro"
+    },
+    {
+      "id": "D1",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "voce": "Quota A ancora da versare",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "D1",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "voce": "Quota B maturata (si paga l'anno prossimo)",
+      "valore": 5871.78,
+      "formato": "euro"
+    },
+    {
+      "id": "D1",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "voce": "IVA da versare",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "D1",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "voce": "TOTALE da accantonare",
+      "valore": 10224.57,
+      "formato": "euro"
+    },
+    {
+      "id": "D1",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "voce": "Impegni dell'anno precedente ancora da pagare",
+      "valore": 12206.44,
+      "formato": "euro"
+    },
+    {
+      "id": "D1",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
+      "input": "Oggi 30/6/2026. Nato nel 1975, attività dal 2018, aliquota 15%. Incassi 7.500 € al mese da gennaio a giugno (45.000 €). Quota A 2026 versata il 30/4 (2.057,10 €). Anno 2025: imposta 9.000 €, acconti versati 7.000 €, ricavi 80.000 €, reddito 62.400 €. Quota A e B in unica soluzione.",
+      "voce": "Guadagno netto da inizio anno",
+      "valore": 33755.33,
+      "formato": "euro"
+    },
+    {
+      "id": "D2",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "voce": "Metodo di stima",
+      "valore": 0,
+      "formato": "testo",
+      "testo": "imposta annua stimata × frazione d'anno"
+    },
+    {
+      "id": "D2",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "voce": "Imposte maturate da inizio anno",
+      "valore": 14185.14,
+      "formato": "euro"
+    },
+    {
+      "id": "D2",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "voce": "Imposte da accantonare (dopo ritenute e acconti versati)",
+      "valore": 3385.14,
+      "formato": "euro"
+    },
+    {
+      "id": "D2",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "voce": "Quota A ancora da versare",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "D2",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "voce": "Quota B maturata (si paga l'anno prossimo)",
+      "valore": 7658.86,
+      "formato": "euro"
+    },
+    {
+      "id": "D2",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "voce": "IVA da versare",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "D2",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "voce": "TOTALE da accantonare",
+      "valore": 11044,
+      "formato": "euro"
+    },
+    {
+      "id": "D2",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
+      "input": "Oggi 30/9/2026. Ordinario, Sardegna (addizionale regionale 1,23%), comune non impostato. Nato nel 1975. Compensi 6.000 € al mese da strutture (gennaio-settembre, esenti IVA) con ritenuta di 1.200 € ciascuno. Affitto studio 800 € al mese. Quota A versata il 30/4 (2.057,10 €). Nessun dato dell'anno precedente.",
+      "voce": "Guadagno netto da inizio anno",
+      "valore": 23417.4,
+      "formato": "euro"
+    },
+    {
+      "id": "D3",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "voce": "Metodo di stima",
+      "valore": 0,
+      "formato": "testo",
+      "testo": "imposta annua stimata × frazione d'anno"
+    },
+    {
+      "id": "D3",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "voce": "Imposte maturate da inizio anno",
+      "valore": 1971.85,
+      "formato": "euro"
+    },
+    {
+      "id": "D3",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "voce": "Imposte da accantonare (dopo ritenute e acconti versati)",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "D3",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "voce": "Quota A ancora da versare",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "D3",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "voce": "Quota B maturata (si paga l'anno prossimo)",
+      "valore": 8110.44,
+      "formato": "euro"
+    },
+    {
+      "id": "D3",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "voce": "IVA da versare",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "D3",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "voce": "TOTALE da accantonare",
+      "valore": 8110.44,
+      "formato": "euro"
+    },
+    {
+      "id": "D3",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "voce": "Impegni dell'anno precedente ancora da pagare",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "D3",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
+      "input": "Oggi 15/12/2026. Nato nel 1990, attività dal 2023 con requisiti per il 5%. Incassi 5.000 € al mese (60.000 €). Anno 2025: imposta 2.000 €, nessun acconto, ricavi 50.000 €, reddito 39.000 €. Versamenti senza indicazione: ENPAM 1.157,66 € il 30/4; F24 3.000 € il 20/7; ENPAM 6.542,88 € il 2/11; F24 1.000 € il 30/11.",
+      "voce": "Guadagno netto da inizio anno",
+      "valore": 48810.8,
+      "formato": "euro"
+    },
+    {
+      "id": "D4",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
+      "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
+      "voce": "Metodo di stima",
+      "valore": 0,
+      "formato": "testo",
+      "testo": "imposta annua stimata × frazione d'anno"
+    },
+    {
+      "id": "D4",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
+      "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
+      "voce": "Imposte maturate da inizio anno",
+      "valore": 8949.86,
+      "formato": "euro"
+    },
+    {
+      "id": "D4",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
+      "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
+      "voce": "Imposte da accantonare (dopo ritenute e acconti versati)",
+      "valore": 8949.86,
+      "formato": "euro"
+    },
+    {
+      "id": "D4",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
+      "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
+      "voce": "Quota A ancora da versare",
+      "valore": 2057.1,
+      "formato": "euro"
+    },
+    {
+      "id": "D4",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
+      "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
+      "voce": "Quota B maturata (si paga l'anno prossimo)",
+      "valore": 4877.28,
+      "formato": "euro"
+    },
+    {
+      "id": "D4",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
+      "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
+      "voce": "IVA da versare",
+      "valore": 2666.4,
+      "formato": "euro"
+    },
+    {
+      "id": "D4",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
+      "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
+      "voce": "TOTALE da accantonare",
+      "valore": 18550.64,
+      "formato": "euro"
+    },
+    {
+      "id": "D4",
+      "area": "Dashboard",
+      "descrizione": "Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
+      "input": "Oggi 30/6/2026. Ordinario, Sardegna, nato nel 1975. Incassati 18.000 € esenti il 10/3 e 12.000 € + IVA 22% il 12/5 (perizia). Nessuna spesa, Quota A non ancora versata. IVA del 2° trimestre (2.640 € + 1% di interessi) da versare il 20/8.",
+      "voce": "Guadagno netto da inizio anno",
+      "valore": 15152.76,
+      "formato": "euro"
+    },
+    {
+      "id": "D5",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
+      "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
+      "voce": "Metodo di stima",
+      "valore": 0,
+      "formato": "testo",
+      "testo": "aliquota effettiva dell'anno precedente"
+    },
+    {
+      "id": "D5",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
+      "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
+      "voce": "Imposte maturate da inizio anno",
+      "valore": 1462.5,
+      "formato": "euro"
+    },
+    {
+      "id": "D5",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
+      "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
+      "voce": "Imposte da accantonare (dopo ritenute e acconti versati)",
+      "valore": 1462.5,
+      "formato": "euro"
+    },
+    {
+      "id": "D5",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
+      "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
+      "voce": "Quota A ancora da versare",
+      "valore": 2057.1,
+      "formato": "euro"
+    },
+    {
+      "id": "D5",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
+      "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
+      "voce": "Quota B maturata (si paga l'anno prossimo)",
+      "valore": 1703.22,
+      "formato": "euro"
+    },
+    {
+      "id": "D5",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
+      "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
+      "voce": "IVA da versare",
+      "valore": 0,
+      "formato": "euro"
+    },
+    {
+      "id": "D5",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
+      "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
+      "voce": "TOTALE da accantonare",
+      "valore": 5222.82,
+      "formato": "euro"
+    },
+    {
+      "id": "D5",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
+      "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
+      "voce": "Impegni dell'anno precedente ancora da pagare",
+      "valore": 12206.44,
+      "formato": "euro"
+    },
+    {
+      "id": "D5",
+      "area": "Dashboard",
+      "descrizione": "Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
+      "input": "Oggi 20/2/2026 (51° giorno: proiezione non affidabile). Nato nel 1975, aliquota 15%. Incassati 7.000 € il 15/1 e 6.000 € il 10/2. Anno 2025: imposta 9.000 €, acconti 7.000 €, ricavi 80.000 €, reddito 62.400 €. Nessun versamento nel 2026.",
+      "voce": "Guadagno netto da inizio anno",
+      "valore": 9546.85,
       "formato": "euro"
     }
   ],
