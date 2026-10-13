@@ -8,6 +8,7 @@ export * from './types';
 export * from './dates';
 export * from './params';
 export * from './movimenti';
+export * from './versamenti';
 export * from './forfettario';
 export * from './ordinario';
 export * from './enpam';

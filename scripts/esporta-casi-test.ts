@@ -9,7 +9,7 @@ import path from 'node:path';
 import { formatEuro } from '../src/core/money';
 import { getParametri } from '../src/core/params';
 import {
-  SCENARI_ACCONTI, SCENARI_FORFETTARIO, SCENARI_ORDINARIO, SCENARI_QUOTA_A, SCENARI_QUOTA_B,
+  SCENARI_ACCONTI, SCENARI_DASHBOARD, SCENARI_FORFETTARIO, SCENARI_ORDINARIO, SCENARI_QUOTA_A, SCENARI_QUOTA_B,
 } from '../src/core/__tests__/scenari';
 
 const e = (c: number) => c / 100;
@@ -56,6 +56,22 @@ for (const s of SCENARI_ACCONTI) {
   righe.push({ ...base, voce: 'Modalità', valore: 0, formato: 'testo', testo: s.atteso.modalita.replace('_', ' ') });
   righe.push({ ...base, voce: '1° acconto (giugno/luglio)', valore: e(s.atteso.primaRata), formato: 'euro' });
   righe.push({ ...base, voce: '2° acconto (novembre)', valore: e(s.atteso.secondaRata), formato: 'euro' });
+}
+
+for (const s of SCENARI_DASHBOARD) {
+  const base = { id: s.id, area: 'Dashboard', descrizione: s.descrizione, input: s.inputTesto };
+  const a = s.atteso;
+  righe.push({ ...base, voce: 'Metodo di stima', valore: 0, formato: 'testo', testo: a.metodo === 'proiezione' ? 'imposta annua stimata × frazione d\'anno' : 'aliquota effettiva dell\'anno precedente' });
+  righe.push({ ...base, voce: 'Imposte maturate da inizio anno', valore: e(a.imposteMaturate), formato: 'euro' });
+  righe.push({ ...base, voce: 'Imposte da accantonare (dopo ritenute e acconti versati)', valore: e(a.imposte), formato: 'euro' });
+  righe.push({ ...base, voce: 'Quota A ancora da versare', valore: e(a.quotaAResidua), formato: 'euro' });
+  righe.push({ ...base, voce: 'Quota B maturata (si paga l\'anno prossimo)', valore: e(a.quotaBMaturata), formato: 'euro' });
+  righe.push({ ...base, voce: 'IVA da versare', valore: e(a.iva), formato: 'euro' });
+  righe.push({ ...base, voce: 'TOTALE da accantonare', valore: e(a.daAccantonare), formato: 'euro' });
+  if (a.impegniAnnoPrecedente !== undefined) {
+    righe.push({ ...base, voce: 'Impegni dell\'anno precedente ancora da pagare', valore: e(a.impegniAnnoPrecedente), formato: 'euro' });
+  }
+  righe.push({ ...base, voce: 'Guadagno netto da inizio anno', valore: e(a.guadagnoNetto), formato: 'euro' });
 }
 
 const p = getParametri(2026).parametri;

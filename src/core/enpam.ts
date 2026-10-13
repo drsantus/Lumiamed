@@ -51,16 +51,23 @@ export interface DettaglioQuotaB {
  * - Forfettario: reddito = ricavi × coefficiente (rigo LM34, prima dei contributi).
  * - Ordinario: reddito = compensi − spese deducibili (quadro RE, senza togliere i contributi).
  * La parte già coperta dalla Quota A (soglia) è esente. Solo libero professionista puro (aliquota intera).
+ *
+ * `frazioneAnno` (0-1) serve per la Quota B MATURATA da inizio anno: soglia e massimale
+ * si riducono in proporzione, come la Quota A maturata. Con 1 (default) è la Quota B dell'anno intero.
  */
 export function quotaB(
   annoReddito: number,
   redditoProfessionale: Cents,
   dataNascita: IsoDate,
   p: ParametriAnno,
+  frazioneAnno = 1,
 ): DettaglioQuotaB {
+  const f = Math.min(1, Math.max(0, frazioneAnno));
   const eta = etaAl(dataNascita, ymd(annoReddito, 12, 31));
-  const soglia = eta < 40 ? p.enpam.quotaB.sogliaUnder40 : p.enpam.quotaB.sogliaOver40;
-  const { massimale, aliquotaIntera, aliquotaOltreMassimale } = p.enpam.quotaB;
+  const sogliaAnnua = eta < 40 ? p.enpam.quotaB.sogliaUnder40 : p.enpam.quotaB.sogliaOver40;
+  const soglia = Math.round(sogliaAnnua * f);
+  const massimale = Math.round(p.enpam.quotaB.massimale * f);
+  const { aliquotaIntera, aliquotaOltreMassimale } = p.enpam.quotaB;
   const reddito = clampMin0(redditoProfessionale);
 
   if (reddito <= soglia) {

@@ -25,6 +25,8 @@ export interface ImportiScadenze {
   /** Quota B sui redditi di due anni fa (rate che cadono tra gennaio e giugno di quest'anno). */
   quotaBCicloPrecedente?: Cents;
   saldoImposte?: Cents;
+  /** Ordinario: saldo delle addizionali dell'anno precedente (regionale intera, comunale al netto dell'acconto). */
+  saldoAddizionali?: Cents;
   primoAcconto?: Cents;
   secondoAcconto?: Cents;
   accontoAddizionaleComunale?: Cents;
@@ -46,11 +48,23 @@ const RATE_QUOTA_B: Record<Profilo['rateQuotaB'], [number, number][]> = {
   9: [[0, 10], [0, 11], [0, 12], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [1, 6]],
 };
 
+/** Quota della Quota B (redditi dell'anno scorso) che scade entro l'anno in corso, in base al piano di rate. */
+export const frazioneQuotaBNellAnno = (rate: Profilo['rateQuotaB']): number =>
+  RATE_QUOTA_B[rate].filter(([rel]) => rel === 0).length / RATE_QUOTA_B[rate].length;
+
 const dividi = (totale: Cents | undefined, parti: number, indice: number): Cents | undefined => {
   if (totale === undefined) return undefined;
   const base = Math.floor(totale / parti);
   return indice === parti - 1 ? totale - base * (parti - 1) : base;
 };
+
+/** Quota A scaduta entro il mese indicato (compresa la rata del mese), secondo il piano di rate. */
+export const quotaADovutaEntro = (rate: Profilo['rateQuotaA'], totale: Cents, mese: number): Cents =>
+  RATE_QUOTA_A[rate].reduce((acc, m, i) => (m <= mese ? acc + (dividi(totale, RATE_QUOTA_A[rate].length, i) as Cents) : acc), 0);
+
+/** true se nel mese scade una rata di Quota B (redditi dell'anno scorso o di due anni fa). */
+export const rataQuotaBNelMese = (rate: Profilo['rateQuotaB'], mese: number): boolean =>
+  RATE_QUOTA_B[rate].some(([, m]) => m === mese);
 
 export interface OpzioniScadenziario {
   anno: number;
@@ -112,7 +126,7 @@ export function generaScadenziario(opt: OpzioniScadenziario, p: ParametriAnno): 
   const dataSaldo = usaParametriAnno ? p.scadenze.saldoPrimoAccontoIsa : ymd(anno, 6, 30);
   const saldoEAcconto =
     imp.saldoImposte !== undefined || imp.primoAcconto !== undefined
-      ? (imp.saldoImposte ?? 0) + (imp.primoAcconto ?? 0) + (imp.accontoAddizionaleComunale ?? 0)
+      ? (imp.saldoImposte ?? 0) + (imp.saldoAddizionali ?? 0) + (imp.primoAcconto ?? 0) + (imp.accontoAddizionaleComunale ?? 0)
       : undefined;
   add('saldo-primo-acconto', dataSaldo, 'imposte',
     `Saldo ${anno - 1} e 1° acconto ${anno}`,

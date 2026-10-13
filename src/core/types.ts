@@ -48,6 +48,12 @@ export interface DatiAnnoPrecedente {
   accontiVersati?: Cents;
   /** Reddito libero-professionale dell'anno precedente (base della Quota B pagata quest'anno). */
   redditoProfessionale?: Cents;
+  /** Ritenute d'acconto subite l'anno precedente (solo ordinario): servono per l'aliquota effettiva. */
+  ritenute?: Cents;
+  /** Addizionale regionale dovuta per l'anno precedente (solo ordinario): si paga tutta a saldo. */
+  addizionaleRegionale?: Cents;
+  /** Acconto dell'addizionale comunale già versato per l'anno precedente. Se assente si stima il 30%. */
+  accontoAddizionaleComunaleVersato?: Cents;
 }
 
 export type RegioneCode =
@@ -112,6 +118,28 @@ export type CategoriaSpesa =
   | 'personale_non_deducibile'
   | 'altro';
 
+/** Tributo a cui si riferisce un versamento con F24 o a ENPAM. */
+export type TributoVersamento =
+  /** IRPEF (ordinario) o imposta sostitutiva (forfettario). */
+  | 'imposta'
+  | 'addizionale_regionale'
+  | 'addizionale_comunale'
+  | 'iva'
+  | 'enpam_quota_a'
+  | 'enpam_quota_b';
+
+export interface RiferimentoVersamento {
+  tributo: TributoVersamento;
+  /**
+   * Anno di competenza: anno d'imposta per imposte, addizionali e IVA;
+   * anno del contributo per la Quota A; anno del REDDITO per la Quota B
+   * (la Quota B pagata a ottobre 2026 ha anno 2025).
+   */
+  anno: number;
+  /** Imposte e addizionali: saldo dell'anno indicato oppure acconto. */
+  tipo?: 'saldo' | 'acconto';
+}
+
 export interface Spesa {
   id: string;
   /** Data del pagamento (principio di cassa). */
@@ -124,6 +152,11 @@ export interface Spesa {
   descrizione?: string;
   /** Percentuale di deducibilità personalizzata (0-1). Se assente usa quella della categoria. */
   deducibilitaPersonalizzata?: number;
+  /**
+   * Solo per le categorie 'imposte_f24' e 'contributi_enpam': a cosa si riferisce il versamento.
+   * L'interfaccia deve chiederlo. Se manca, il motore lo attribuisce in base alla data e lo segnala.
+   */
+  riferimento?: RiferimentoVersamento;
 }
 
 export interface Avviso {

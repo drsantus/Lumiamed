@@ -7,6 +7,8 @@ import { puoAggiungere, puoUsare } from '../piani';
 import { csvFatture, csvSpese } from '../report';
 import { calcolaRiepilogo } from '../riepilogo';
 import type { Fattura, Profilo, Spesa } from '../types';
+import { attribuisciVersamenti } from '../versamenti';
+import { SCENARI_DASHBOARD } from './scenari';
 
 const p = getParametri(2026).parametri;
 
@@ -104,10 +106,26 @@ describe('Riepilogo (dashboard)', () => {
     expect(r.daInizioAnno.imposte).toBe(euro(750.35));
   });
 
-  it('da accantonare = imposta + Quota B maturata + Quota A non ancora versata', () => {
-    // Quota B: 15.600 − 5.446,77 = 10.153,23 × 19,5% = 1.979,88
-    expect(r.quotaBMaturata.totale).toBe(euro(1_979.88));
-    expect(r.daAccantonare).toBe(r.daInizioAnno.imposte + r.quotaBMaturata.totale);
+  it('Quota B maturata: soglia in proporzione ai giorni trascorsi', () => {
+    // 15.600 − 5.446,77 × 181/365 = 15.600 − 2.701,00 = 12.899,00 × 19,5% = 2.515,31
+    expect(r.quotaBMaturata.soglia).toBe(euro(2_701));
+    expect(r.quotaBMaturata.totale).toBe(euro(2_515.31));
+  });
+
+  it('da accantonare = imposte nette + Quota A residua + Quota B maturata + IVA', () => {
+    const a = r.accantonamento;
+    // Quota A 2026 (34 anni fino a maggio, 35 da giugno) = 950,94; versati 592,94 il 30/4 (senza riferimento: attribuiti alla Quota A)
+    expect(r.quotaA.totale).toBe(euro(950.94));
+    expect(a.quotaAResidua).toBe(euro(358));
+    expect(a.metodo).toBe('proiezione');
+    expect(a.imposte).toBe(a.imposteMaturate - a.ritenute - a.accontiVersati);
+    expect(r.daAccantonare).toBe(a.imposte + a.quotaAResidua + a.quotaBMaturata + a.iva);
+    expect(r.avvisi.map((x) => x.codice)).toContain('VERSAMENTI_DEDOTTI');
+  });
+
+  it('impegni dell\'anno scorso: saldo 200 + Quota B 2025 su 20.000 € (2.837,88)', () => {
+    expect(r.impegniAnnoPrecedente).toEqual({ anno: 2025, saldoImposte: euro(200), saldoAddizionali: 0, quotaB: euro(2_837.88), totale: euro(3_037.88) });
+    expect(r.liquiditaImpegnata).toBe(r.daAccantonare + euro(3_037.88));
   });
 
   it('percentuale verso il limite forfettario', () => {
@@ -164,5 +182,171 @@ describe('Report CSV', () => {
   it('spese', () => {
     const csv = csvSpese([{ id: '1', data: '2026-01-02', importo: euro(10), categoria: 'altro' }], 2026);
     expect(csv.split('\n')).toHaveLength(2);
+  });
+});
+
+describe('Dashboard — scenari per il commercialista', () => {
+  it.each(SCENARI_DASHBOARD)('$id: $descrizione', (sc) => {
+    const fatture = sc.input.incassi.map((x, i) => fattura({
+      numero: `${sc.id}-${i + 1}`, dataFattura: x.data, dataIncasso: x.data, imponibile: x.imponibile,
+      trattamentoIva: x.trattamentoIva, destinatario: x.destinatario, ritenutaAcconto: x.ritenuta, bolloAddebitato: false,
+    }));
+    const r = calcolaRiepilogo({ oggi: sc.input.oggi, profilo: sc.input.profilo, fatture, spese: sc.input.spese });
+    const a = r.accantonamento;
+    expect(a.metodo).toBe(sc.atteso.metodo);
+    expect(a.imposteMaturate).toBe(sc.atteso.imposteMaturate);
+    expect(a.imposte).toBe(sc.atteso.imposte);
+    expect(a.quotaAResidua).toBe(sc.atteso.quotaAResidua);
+    expect(a.quotaBMaturata).toBe(sc.atteso.quotaBMaturata);
+    expect(a.iva).toBe(sc.atteso.iva);
+    expect(r.daAccantonare).toBe(sc.atteso.daAccantonare);
+    expect(r.impegniAnnoPrecedente?.totale).toBe(sc.atteso.impegniAnnoPrecedente);
+    expect(r.guadagnoNetto).toBe(sc.atteso.guadagnoNetto);
+  });
+});
+
+describe('Correzioni del 13/10 sui numeri della dashboard', () => {
+  const ord: Profilo = { ...profiloForf, regime: 'ordinario', dataNascita: '1980-01-01', regione: 'SAR' };
+  const mensili = (annuo: number, extra: Partial<Fattura> = {}) => Array.from({ length: 12 }, (_, i) => {
+    const d = `2026-${String(i + 1).padStart(2, '0')}-15`;
+    return fattura({ imponibile: euro(annuo / 12), dataFattura: d, dataIncasso: d, trattamentoIva: 'esente_art10', bolloAddebitato: false, ...extra });
+  });
+
+  it('ordinario: le imposte maturate seguono l\'imposta annua, non gli scaglioni sul reddito parziale', () => {
+    const fatt = mensili(90_000);
+    const fine = calcolaRiepilogo({ oggi: '2026-12-31', profilo: ord, fatture: fatt, spese: [] });
+    const marzo = calcolaRiepilogo({ oggi: '2026-03-31', profilo: ord, fatture: fatt, spese: [] });
+    const quotaAttesa = fine.accantonamento.imposteMaturate * (marzo.ricavi / fine.ricavi);
+    // prima della correzione: −40,5%
+    expect(Math.abs(marzo.accantonamento.imposteMaturate / quotaAttesa - 1)).toBeLessThan(0.02);
+  });
+
+  it('ritenute subite tolte dal da accantonare', () => {
+    const fatt = [fattura({ imponibile: euro(30_000), trattamentoIva: 'esente_art10', bolloAddebitato: false, destinatario: 'struttura', ritenutaAcconto: euro(6_000), dataFattura: '2026-06-01', dataIncasso: '2026-06-01' })];
+    const r = calcolaRiepilogo({ oggi: '2026-06-30', profilo: ord, fatture: fatt, spese: [] });
+    expect(r.accantonamento.ritenute).toBe(euro(6_000));
+    expect(r.accantonamento.imposte).toBe(Math.max(0, r.accantonamento.imposteMaturate - euro(6_000)));
+  });
+
+  it('acconti F24 già versati tolti dal da accantonare', () => {
+    const prof: Profilo = { ...profiloForf, requisitiStartup5: false };
+    const fatt = mensili(60_000, { trattamentoIva: 'forfettario_no_iva' });
+    const senza = calcolaRiepilogo({ oggi: '2026-12-01', profilo: prof, fatture: fatt, spese: [] });
+    const con = calcolaRiepilogo({
+      oggi: '2026-12-01', profilo: prof, fatture: fatt,
+      spese: [{ id: 'f24', data: '2026-11-30', importo: euro(3_000), categoria: 'imposte_f24', riferimento: { tributo: 'imposta', anno: 2026, tipo: 'acconto' } }],
+    });
+    expect(senza.daAccantonare - con.daAccantonare).toBe(euro(3_000));
+  });
+
+  it('IVA 22%: il netto non sottrae l\'IVA, il da accantonare la include', () => {
+    const esente = [fattura({ imponibile: euro(12_000), trattamentoIva: 'esente_art10', bolloAddebitato: false, dataFattura: '2026-05-01', dataIncasso: '2026-05-01' })];
+    const conIva = [fattura({ imponibile: euro(12_000), trattamentoIva: 'imponibile_22', bolloAddebitato: false, dataFattura: '2026-05-01', dataIncasso: '2026-05-01' })];
+    const a = calcolaRiepilogo({ oggi: '2026-06-30', profilo: ord, fatture: esente, spese: [] });
+    const b = calcolaRiepilogo({ oggi: '2026-06-30', profilo: ord, fatture: conIva, spese: [] });
+    expect(b.guadagnoNetto).toBe(a.guadagnoNetto);
+    expect(b.accantonamento.iva).toBe(euro(2_666.4)); // 2.640 + 1% di interessi
+    expect(b.daAccantonare - a.daAccantonare).toBe(euro(2_666.4));
+  });
+
+  it('proiezione: la Quota B dell\'anno scorso che scade entro dicembre è deducibile', () => {
+    const prof: Profilo = { ...profiloForf, requisitiStartup5: false, dataNascita: '1980-01-01', annoPrecedente: { anno: 2025, impostaDifferenza: euro(8_000), redditoProfessionale: euro(70_000) } };
+    const fatt = mensili(90_000, { trattamentoIva: 'forfettario_no_iva' });
+    const unica = calcolaRiepilogo({ oggi: '2026-06-30', profilo: prof, fatture: fatt, spese: [] });
+    const noveRate = calcolaRiepilogo({ oggi: '2026-06-30', profilo: { ...prof, rateQuotaB: 9 }, fatture: fatt, spese: [] });
+    const qbPrec = euro(11_688.44); // (70.000 − 10.059,28) × 19,5%
+    // con 9 rate solo 3 (ottobre-dicembre) cadono nel 2026: deducibile 1/3
+    const atteso = qbPrec * (2 / 3) * 0.15; // 1.168,84 di imposta in più con 9 rate
+    expect(Math.abs(noveRate.proiezione.imposte - unica.proiezione.imposte - atteso)).toBeLessThanOrEqual(1);
+  });
+
+  it('Quota A non sparisce quando a gennaio-marzo si pagano rate di Quota B', () => {
+    const fatt = mensili(60_000, { trattamentoIva: 'forfettario_no_iva' });
+    const rate: Spesa[] = ['01', '02', '03'].map((m) => ({ id: m, data: `2026-${m}-28`, importo: euro(1_000), categoria: 'contributi_enpam' }));
+    const r = calcolaRiepilogo({ oggi: '2026-04-15', profilo: { ...profiloForf, rateQuotaB: 9 }, fatture: fatt, spese: rate });
+    expect(r.accantonamento.quotaAResidua).toBe(r.quotaA.totale);
+  });
+
+  it('ordinario: la scadenza di luglio include il saldo delle addizionali', () => {
+    const prof: Profilo = {
+      ...ord,
+      annoPrecedente: { anno: 2025, impostaDifferenza: euro(15_000), accontiVersati: euro(12_000), addizionaleRegionale: euro(760), addizionaleComunale: euro(500), redditoProfessionale: euro(70_000) },
+    };
+    const r = calcolaRiepilogo({ oggi: '2026-06-01', profilo: prof, fatture: mensili(70_000), spese: [] });
+    // saldo 3.000 + addizionali (760 + 500 − 30% di 500 = 1.110) + 1° acconto 7.500 + acconto comunale 150
+    expect(r.scadenze.find((s) => s.id === 'saldo-primo-acconto')?.importoStimato).toBe(euro(11_760));
+    expect(r.impegniAnnoPrecedente?.saldoAddizionali).toBe(euro(1_110));
+  });
+
+  it('forfettario: passaggio dal 5% al 15% riproporziona l\'aliquota dell\'anno scorso', () => {
+    const prof: Profilo = {
+      ...profiloForf, annoInizioAttivita: 2021, requisitiStartup5: true,
+      annoPrecedente: { anno: 2025, impostaDifferenza: euro(2_000), ricavi: euro(50_000) },
+    };
+    const r = calcolaRiepilogo({ oggi: '2026-02-10', profilo: prof, fatture: [fattura({ imponibile: euro(10_000), dataIncasso: '2026-01-20' })], spese: [] });
+    // 2.000 / 50.000 = 4% al 5% → 12% al 15%
+    expect(r.accantonamento.metodo).toBe('anno_precedente');
+    expect(r.accantonamento.imposteMaturate).toBe(euro(1_200));
+  });
+});
+
+describe('Attribuzione dei versamenti senza riferimento', () => {
+  it('F24 di luglio: prima il saldo dell\'anno scorso, poi il primo acconto', () => {
+    const r = attribuisciVersamenti(
+      [{ id: 'a', data: '2026-07-20', importo: euro(3_000), categoria: 'imposte_f24' }],
+      { anno: 2026, oggi: '2026-12-31', quotaAAnnua: 0, saldoImposteAnnoPrecedente: euro(2_000) },
+    );
+    expect(r.versamenti.map((v) => [v.riferimento.anno, v.riferimento.tipo, v.importo])).toEqual([[2025, 'saldo', euro(2_000)], [2026, 'acconto', euro(1_000)]]);
+  });
+
+  it('ENPAM da aprile: prima la Quota A fino al suo importo, il resto è Quota B', () => {
+    const r = attribuisciVersamenti(
+      [{ id: 'a', data: '2026-10-31', importo: euro(5_000), categoria: 'contributi_enpam' }],
+      { anno: 2026, oggi: '2026-12-31', quotaAAnnua: euro(2_000) },
+    );
+    expect(r.versamenti.map((v) => [v.riferimento.tributo, v.riferimento.anno, v.importo])).toEqual([
+      ['enpam_quota_a', 2026, euro(2_000)], ['enpam_quota_b', 2025, euro(3_000)],
+    ]);
+  });
+
+  it('F24 di marzo senza riferimento: non attribuito, con avviso', () => {
+    const r = attribuisciVersamenti([{ id: 'a', data: '2026-03-16', importo: euro(500), categoria: 'imposte_f24' }], { anno: 2026, oggi: '2026-12-31', quotaAAnnua: 0 });
+    expect(r.versamenti).toHaveLength(0);
+    expect(r.avvisi.map((a) => a.codice)).toContain('VERSAMENTI_NON_ATTRIBUITI');
+  });
+
+  it('il riferimento indicato dall\'utente vince sulla data', () => {
+    const r = attribuisciVersamenti(
+      [{ id: 'a', data: '2026-07-20', importo: euro(800), categoria: 'imposte_f24', riferimento: { tributo: 'iva', anno: 2026 } }],
+      { anno: 2026, oggi: '2026-12-31', quotaAAnnua: 0, saldoImposteAnnoPrecedente: euro(2_000) },
+    );
+    expect(r.versamenti[0]).toMatchObject({ importo: euro(800), dedotto: false, riferimento: { tributo: 'iva' } });
+    expect(r.avvisi).toHaveLength(0);
+  });
+
+  it('Quota A in 4 rate: la rata di Quota B di ottobre non copre l\'ultima rata di Quota A', () => {
+    const enpam = (id: string, data: string, importo: number): Spesa => ({ id, data, importo: euro(importo), categoria: 'contributi_enpam' });
+    const r = attribuisciVersamenti(
+      [enpam('a1', '2026-04-30', 514.27), enpam('a2', '2026-06-30', 514.27), enpam('a3', '2026-09-30', 514.27), enpam('b1', '2026-10-31', 5_103.22)],
+      { anno: 2026, oggi: '2026-10-31', quotaAAnnua: euro(2_057.1), rateQuotaA: 4, rateQuotaB: 2 },
+    );
+    expect(r.versamenti.filter((v) => v.spesaId === 'b1').map((v) => [v.riferimento.tributo, v.importo])).toEqual([['enpam_quota_b', euro(5_103.22)]]);
+  });
+
+  it('ENPAM a luglio oltre la Quota A (pagata due volte): eccedenza non attribuita, con avviso', () => {
+    const qa = (id: string, data: string): Spesa => ({ id, data, importo: euro(2_057.1), categoria: 'contributi_enpam' });
+    const r = attribuisciVersamenti([qa('a', '2026-04-30'), qa('b', '2026-07-15')], { anno: 2026, oggi: '2026-07-31', quotaAAnnua: euro(2_057.1) });
+    expect(r.versamenti.map((v) => [v.spesaId, v.riferimento.tributo, v.importo])).toEqual([['a', 'enpam_quota_a', euro(2_057.1)]]);
+    expect(r.avvisi.map((a) => a.codice)).toContain('VERSAMENTI_ENPAM_ECCEDENTI');
+  });
+
+  it('F24 di agosto nell\'ordinario con IVA: prima l\'IVA del 2° trimestre, poi le imposte', () => {
+    const r = attribuisciVersamenti(
+      [{ id: 'a', data: '2026-08-20', importo: euro(3_000), categoria: 'imposte_f24' }],
+      { anno: 2026, oggi: '2026-08-31', quotaAAnnua: 0, ivaTrimestri: { 2: euro(2_666.4) } },
+    );
+    expect(r.versamenti.map((v) => [v.riferimento.tributo, v.riferimento.tipo, v.importo])).toEqual([
+      ['iva', undefined, euro(2_666.4)], ['imposta', 'acconto', euro(333.6)],
+    ]);
   });
 });
