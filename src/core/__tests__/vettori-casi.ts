@@ -458,6 +458,18 @@ export function costruisciVettori(): FileVettori {
     funzione: 'proRata', input: { fatture, anno: 2026 }, atteso,
   }));
   add({
+    id: 'iva/pro-rata-esatto', origine: `${RIEPILOGO} › ${dIva} › pro-rata esatto non sale di un punto per la virgola mobile`,
+    funzione: 'proRata',
+    input: {
+      fatture: [
+        fattura({ trattamentoIva: 'imponibile_22', imponibile: euro(7), dataFattura: '2026-03-10', bolloAddebitato: false }),
+        fattura({ trattamentoIva: 'esente_art10', imponibile: euro(93), dataFattura: '2026-03-10' }),
+      ],
+      anno: 2026,
+    },
+    atteso: 0.07,
+  });
+  add({
     id: 'iva/liquidazione-t1', origine: `${RIEPILOGO} › ${dIva} › liquidazione 1° trimestre con interessi 1%`,
     funzione: 'liquidazioniIva', input: { fatture: fattureIva, spese: speseIva, anno: 2026, p: P() },
     verifiche: [

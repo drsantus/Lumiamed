@@ -1725,6 +1725,43 @@
       "atteso": 1
     },
     {
+      "id": "iva/pro-rata-esatto",
+      "origine": "riepilogo.test.ts › IVA ordinario › pro-rata esatto non sale di un punto per la virgola mobile",
+      "funzione": "proRata",
+      "input": {
+        "fatture": [
+          {
+            "id": "f8",
+            "numero": "8",
+            "dataFattura": "2026-03-10",
+            "imponibile": 700,
+            "trattamentoIva": "imponibile_22",
+            "bolloAddebitato": false,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "incassata",
+            "dataIncasso": "2026-01-15",
+            "origine": "manuale"
+          },
+          {
+            "id": "f9",
+            "numero": "9",
+            "dataFattura": "2026-03-10",
+            "imponibile": 9300,
+            "trattamentoIva": "esente_art10",
+            "bolloAddebitato": true,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "incassata",
+            "dataIncasso": "2026-01-15",
+            "origine": "manuale"
+          }
+        ],
+        "anno": 2026
+      },
+      "atteso": 0.07
+    },
+    {
       "id": "iva/liquidazione-t1",
       "origine": "riepilogo.test.ts › IVA ordinario › liquidazione 1° trimestre con interessi 1%",
       "funzione": "liquidazioniIva",
@@ -1826,8 +1863,8 @@
           },
           "fatture": [
             {
-              "id": "f8",
-              "numero": "8",
+              "id": "f10",
+              "numero": "10",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -1839,8 +1876,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f9",
-              "numero": "9",
+              "id": "f11",
+              "numero": "11",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -1852,8 +1889,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f10",
-              "numero": "10",
+              "id": "f12",
+              "numero": "12",
               "dataFattura": "2026-01-15",
               "imponibile": 50000,
               "trattamentoIva": "forfettario_no_iva",
@@ -1865,8 +1902,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f11",
-              "numero": "11",
+              "id": "f13",
+              "numero": "13",
               "dataFattura": "2026-03-01",
               "imponibile": 30000,
               "trattamentoIva": "forfettario_no_iva",
@@ -1877,8 +1914,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f12",
-              "numero": "12",
+              "id": "f14",
+              "numero": "14",
               "dataFattura": "2025-11-10",
               "imponibile": 15000,
               "trattamentoIva": "forfettario_no_iva",
@@ -1937,8 +1974,8 @@
           },
           "fatture": [
             {
-              "id": "f8",
-              "numero": "8",
+              "id": "f10",
+              "numero": "10",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -1950,8 +1987,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f9",
-              "numero": "9",
+              "id": "f11",
+              "numero": "11",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -1963,8 +2000,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f10",
-              "numero": "10",
+              "id": "f12",
+              "numero": "12",
               "dataFattura": "2026-01-15",
               "imponibile": 50000,
               "trattamentoIva": "forfettario_no_iva",
@@ -1976,8 +2013,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f11",
-              "numero": "11",
+              "id": "f13",
+              "numero": "13",
               "dataFattura": "2026-03-01",
               "imponibile": 30000,
               "trattamentoIva": "forfettario_no_iva",
@@ -1988,8 +2025,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f12",
-              "numero": "12",
+              "id": "f14",
+              "numero": "14",
               "dataFattura": "2025-11-10",
               "imponibile": 15000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2048,8 +2085,8 @@
           },
           "fatture": [
             {
-              "id": "f8",
-              "numero": "8",
+              "id": "f10",
+              "numero": "10",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2061,8 +2098,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f9",
-              "numero": "9",
+              "id": "f11",
+              "numero": "11",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2074,8 +2111,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f10",
-              "numero": "10",
+              "id": "f12",
+              "numero": "12",
               "dataFattura": "2026-01-15",
               "imponibile": 50000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2087,8 +2124,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f11",
-              "numero": "11",
+              "id": "f13",
+              "numero": "13",
               "dataFattura": "2026-03-01",
               "imponibile": 30000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2099,8 +2136,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f12",
-              "numero": "12",
+              "id": "f14",
+              "numero": "14",
               "dataFattura": "2025-11-10",
               "imponibile": 15000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2160,8 +2197,8 @@
           },
           "fatture": [
             {
-              "id": "f8",
-              "numero": "8",
+              "id": "f10",
+              "numero": "10",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2173,8 +2210,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f9",
-              "numero": "9",
+              "id": "f11",
+              "numero": "11",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2186,8 +2223,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f10",
-              "numero": "10",
+              "id": "f12",
+              "numero": "12",
               "dataFattura": "2026-01-15",
               "imponibile": 50000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2199,8 +2236,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f11",
-              "numero": "11",
+              "id": "f13",
+              "numero": "13",
               "dataFattura": "2026-03-01",
               "imponibile": 30000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2211,8 +2248,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f12",
-              "numero": "12",
+              "id": "f14",
+              "numero": "14",
               "dataFattura": "2025-11-10",
               "imponibile": 15000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2329,8 +2366,8 @@
           },
           "fatture": [
             {
-              "id": "f8",
-              "numero": "8",
+              "id": "f10",
+              "numero": "10",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2342,8 +2379,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f9",
-              "numero": "9",
+              "id": "f11",
+              "numero": "11",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2355,8 +2392,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f10",
-              "numero": "10",
+              "id": "f12",
+              "numero": "12",
               "dataFattura": "2026-01-15",
               "imponibile": 50000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2368,8 +2405,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f11",
-              "numero": "11",
+              "id": "f13",
+              "numero": "13",
               "dataFattura": "2026-03-01",
               "imponibile": 30000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2380,8 +2417,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f12",
-              "numero": "12",
+              "id": "f14",
+              "numero": "14",
               "dataFattura": "2025-11-10",
               "imponibile": 15000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2460,8 +2497,8 @@
           },
           "fatture": [
             {
-              "id": "f8",
-              "numero": "8",
+              "id": "f10",
+              "numero": "10",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2473,8 +2510,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f9",
-              "numero": "9",
+              "id": "f11",
+              "numero": "11",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2486,8 +2523,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f10",
-              "numero": "10",
+              "id": "f12",
+              "numero": "12",
               "dataFattura": "2026-01-15",
               "imponibile": 50000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2499,8 +2536,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f11",
-              "numero": "11",
+              "id": "f13",
+              "numero": "13",
               "dataFattura": "2026-03-01",
               "imponibile": 30000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2511,8 +2548,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f12",
-              "numero": "12",
+              "id": "f14",
+              "numero": "14",
               "dataFattura": "2025-11-10",
               "imponibile": 15000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2581,8 +2618,8 @@
           },
           "fatture": [
             {
-              "id": "f8",
-              "numero": "8",
+              "id": "f10",
+              "numero": "10",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2594,8 +2631,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f9",
-              "numero": "9",
+              "id": "f11",
+              "numero": "11",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2607,8 +2644,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f10",
-              "numero": "10",
+              "id": "f12",
+              "numero": "12",
               "dataFattura": "2026-01-15",
               "imponibile": 50000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2620,8 +2657,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f11",
-              "numero": "11",
+              "id": "f13",
+              "numero": "13",
               "dataFattura": "2026-03-01",
               "imponibile": 30000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2632,8 +2669,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f12",
-              "numero": "12",
+              "id": "f14",
+              "numero": "14",
               "dataFattura": "2025-11-10",
               "imponibile": 15000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2703,8 +2740,8 @@
           },
           "fatture": [
             {
-              "id": "f8",
-              "numero": "8",
+              "id": "f10",
+              "numero": "10",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2716,8 +2753,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f9",
-              "numero": "9",
+              "id": "f11",
+              "numero": "11",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2729,8 +2766,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f10",
-              "numero": "10",
+              "id": "f12",
+              "numero": "12",
               "dataFattura": "2026-01-15",
               "imponibile": 50000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2742,8 +2779,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f11",
-              "numero": "11",
+              "id": "f13",
+              "numero": "13",
               "dataFattura": "2026-03-01",
               "imponibile": 30000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2754,8 +2791,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f12",
-              "numero": "12",
+              "id": "f14",
+              "numero": "14",
               "dataFattura": "2025-11-10",
               "imponibile": 15000,
               "trattamentoIva": "forfettario_no_iva",
@@ -2831,8 +2868,8 @@
           },
           "fatture": [
             {
-              "id": "f13",
-              "numero": "13",
+              "id": "f15",
+              "numero": "15",
               "dataFattura": "2026-01-15",
               "imponibile": 3000000,
               "trattamentoIva": "esente_art10",
@@ -2944,7 +2981,7 @@
       "input": {
         "fatture": [
           {
-            "id": "f14",
+            "id": "f16",
             "numero": "1",
             "dataFattura": "2026-01-15",
             "imponibile": 15000,
@@ -3002,7 +3039,7 @@
       "input": {
         "fatture": [
           {
-            "id": "f14",
+            "id": "f16",
             "numero": "1",
             "dataFattura": "2026-01-15",
             "imponibile": 15000,
@@ -3087,7 +3124,7 @@
           },
           "fatture": [
             {
-              "id": "f15",
+              "id": "f17",
               "numero": "D1-1",
               "dataFattura": "2026-01-15",
               "imponibile": 750000,
@@ -3100,7 +3137,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f16",
+              "id": "f18",
               "numero": "D1-2",
               "dataFattura": "2026-02-15",
               "imponibile": 750000,
@@ -3113,7 +3150,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f17",
+              "id": "f19",
               "numero": "D1-3",
               "dataFattura": "2026-03-15",
               "imponibile": 750000,
@@ -3126,7 +3163,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f18",
+              "id": "f20",
               "numero": "D1-4",
               "dataFattura": "2026-04-15",
               "imponibile": 750000,
@@ -3139,7 +3176,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f19",
+              "id": "f21",
               "numero": "D1-5",
               "dataFattura": "2026-05-15",
               "imponibile": 750000,
@@ -3152,7 +3189,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f20",
+              "id": "f22",
               "numero": "D1-6",
               "dataFattura": "2026-06-15",
               "imponibile": 750000,
@@ -3214,7 +3251,7 @@
           },
           "fatture": [
             {
-              "id": "f21",
+              "id": "f23",
               "numero": "D2-1",
               "dataFattura": "2026-01-10",
               "imponibile": 600000,
@@ -3228,7 +3265,7 @@
               "ritenutaAcconto": 120000
             },
             {
-              "id": "f22",
+              "id": "f24",
               "numero": "D2-2",
               "dataFattura": "2026-02-10",
               "imponibile": 600000,
@@ -3242,7 +3279,7 @@
               "ritenutaAcconto": 120000
             },
             {
-              "id": "f23",
+              "id": "f25",
               "numero": "D2-3",
               "dataFattura": "2026-03-10",
               "imponibile": 600000,
@@ -3256,7 +3293,7 @@
               "ritenutaAcconto": 120000
             },
             {
-              "id": "f24",
+              "id": "f26",
               "numero": "D2-4",
               "dataFattura": "2026-04-10",
               "imponibile": 600000,
@@ -3270,7 +3307,7 @@
               "ritenutaAcconto": 120000
             },
             {
-              "id": "f25",
+              "id": "f27",
               "numero": "D2-5",
               "dataFattura": "2026-05-10",
               "imponibile": 600000,
@@ -3284,7 +3321,7 @@
               "ritenutaAcconto": 120000
             },
             {
-              "id": "f26",
+              "id": "f28",
               "numero": "D2-6",
               "dataFattura": "2026-06-10",
               "imponibile": 600000,
@@ -3298,7 +3335,7 @@
               "ritenutaAcconto": 120000
             },
             {
-              "id": "f27",
+              "id": "f29",
               "numero": "D2-7",
               "dataFattura": "2026-07-10",
               "imponibile": 600000,
@@ -3312,7 +3349,7 @@
               "ritenutaAcconto": 120000
             },
             {
-              "id": "f28",
+              "id": "f30",
               "numero": "D2-8",
               "dataFattura": "2026-08-10",
               "imponibile": 600000,
@@ -3326,7 +3363,7 @@
               "ritenutaAcconto": 120000
             },
             {
-              "id": "f29",
+              "id": "f31",
               "numero": "D2-9",
               "dataFattura": "2026-09-10",
               "imponibile": 600000,
@@ -3447,7 +3484,7 @@
           },
           "fatture": [
             {
-              "id": "f30",
+              "id": "f32",
               "numero": "D3-1",
               "dataFattura": "2026-01-05",
               "imponibile": 500000,
@@ -3460,7 +3497,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f31",
+              "id": "f33",
               "numero": "D3-2",
               "dataFattura": "2026-02-05",
               "imponibile": 500000,
@@ -3473,7 +3510,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f32",
+              "id": "f34",
               "numero": "D3-3",
               "dataFattura": "2026-03-05",
               "imponibile": 500000,
@@ -3486,7 +3523,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f33",
+              "id": "f35",
               "numero": "D3-4",
               "dataFattura": "2026-04-05",
               "imponibile": 500000,
@@ -3499,7 +3536,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f34",
+              "id": "f36",
               "numero": "D3-5",
               "dataFattura": "2026-05-05",
               "imponibile": 500000,
@@ -3512,7 +3549,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f35",
+              "id": "f37",
               "numero": "D3-6",
               "dataFattura": "2026-06-05",
               "imponibile": 500000,
@@ -3525,7 +3562,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f36",
+              "id": "f38",
               "numero": "D3-7",
               "dataFattura": "2026-07-05",
               "imponibile": 500000,
@@ -3538,7 +3575,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f37",
+              "id": "f39",
               "numero": "D3-8",
               "dataFattura": "2026-08-05",
               "imponibile": 500000,
@@ -3551,7 +3588,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f38",
+              "id": "f40",
               "numero": "D3-9",
               "dataFattura": "2026-09-05",
               "imponibile": 500000,
@@ -3564,7 +3601,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f39",
+              "id": "f41",
               "numero": "D3-10",
               "dataFattura": "2026-10-05",
               "imponibile": 500000,
@@ -3577,7 +3614,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f40",
+              "id": "f42",
               "numero": "D3-11",
               "dataFattura": "2026-11-05",
               "imponibile": 500000,
@@ -3590,7 +3627,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f41",
+              "id": "f43",
               "numero": "D3-12",
               "dataFattura": "2026-12-05",
               "imponibile": 500000,
@@ -3666,7 +3703,7 @@
           },
           "fatture": [
             {
-              "id": "f42",
+              "id": "f44",
               "numero": "D4-1",
               "dataFattura": "2026-03-10",
               "imponibile": 1800000,
@@ -3679,7 +3716,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f43",
+              "id": "f45",
               "numero": "D4-2",
               "dataFattura": "2026-05-12",
               "imponibile": 1200000,
@@ -3734,7 +3771,7 @@
           },
           "fatture": [
             {
-              "id": "f44",
+              "id": "f46",
               "numero": "D5-1",
               "dataFattura": "2026-01-15",
               "imponibile": 700000,
@@ -3747,7 +3784,7 @@
               "origine": "manuale"
             },
             {
-              "id": "f45",
+              "id": "f47",
               "numero": "D5-2",
               "dataFattura": "2026-02-10",
               "imponibile": 600000,
@@ -3800,8 +3837,8 @@
               },
               "fatture": [
                 {
-                  "id": "f46",
-                  "numero": "46",
+                  "id": "f48",
+                  "numero": "48",
                   "dataFattura": "2026-01-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3813,8 +3850,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f47",
-                  "numero": "47",
+                  "id": "f49",
+                  "numero": "49",
                   "dataFattura": "2026-02-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3826,8 +3863,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f48",
-                  "numero": "48",
+                  "id": "f50",
+                  "numero": "50",
                   "dataFattura": "2026-03-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3839,8 +3876,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f49",
-                  "numero": "49",
+                  "id": "f51",
+                  "numero": "51",
                   "dataFattura": "2026-04-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3852,8 +3889,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f50",
-                  "numero": "50",
+                  "id": "f52",
+                  "numero": "52",
                   "dataFattura": "2026-05-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3865,8 +3902,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f51",
-                  "numero": "51",
+                  "id": "f53",
+                  "numero": "53",
                   "dataFattura": "2026-06-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3878,8 +3915,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f52",
-                  "numero": "52",
+                  "id": "f54",
+                  "numero": "54",
                   "dataFattura": "2026-07-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3891,8 +3928,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f53",
-                  "numero": "53",
+                  "id": "f55",
+                  "numero": "55",
                   "dataFattura": "2026-08-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3904,8 +3941,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f54",
-                  "numero": "54",
+                  "id": "f56",
+                  "numero": "56",
                   "dataFattura": "2026-09-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3917,8 +3954,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f55",
-                  "numero": "55",
+                  "id": "f57",
+                  "numero": "57",
                   "dataFattura": "2026-10-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3930,8 +3967,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f56",
-                  "numero": "56",
+                  "id": "f58",
+                  "numero": "58",
                   "dataFattura": "2026-11-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3943,8 +3980,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f57",
-                  "numero": "57",
+                  "id": "f59",
+                  "numero": "59",
                   "dataFattura": "2026-12-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3977,8 +4014,8 @@
               },
               "fatture": [
                 {
-                  "id": "f46",
-                  "numero": "46",
+                  "id": "f48",
+                  "numero": "48",
                   "dataFattura": "2026-01-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -3990,8 +4027,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f47",
-                  "numero": "47",
+                  "id": "f49",
+                  "numero": "49",
                   "dataFattura": "2026-02-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -4003,8 +4040,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f48",
-                  "numero": "48",
+                  "id": "f50",
+                  "numero": "50",
                   "dataFattura": "2026-03-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -4016,8 +4053,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f49",
-                  "numero": "49",
+                  "id": "f51",
+                  "numero": "51",
                   "dataFattura": "2026-04-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -4029,8 +4066,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f50",
-                  "numero": "50",
+                  "id": "f52",
+                  "numero": "52",
                   "dataFattura": "2026-05-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -4042,8 +4079,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f51",
-                  "numero": "51",
+                  "id": "f53",
+                  "numero": "53",
                   "dataFattura": "2026-06-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -4055,8 +4092,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f52",
-                  "numero": "52",
+                  "id": "f54",
+                  "numero": "54",
                   "dataFattura": "2026-07-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -4068,8 +4105,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f53",
-                  "numero": "53",
+                  "id": "f55",
+                  "numero": "55",
                   "dataFattura": "2026-08-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -4081,8 +4118,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f54",
-                  "numero": "54",
+                  "id": "f56",
+                  "numero": "56",
                   "dataFattura": "2026-09-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -4094,8 +4131,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f55",
-                  "numero": "55",
+                  "id": "f57",
+                  "numero": "57",
                   "dataFattura": "2026-10-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -4107,8 +4144,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f56",
-                  "numero": "56",
+                  "id": "f58",
+                  "numero": "58",
                   "dataFattura": "2026-11-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -4120,8 +4157,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f57",
-                  "numero": "57",
+                  "id": "f59",
+                  "numero": "59",
                   "dataFattura": "2026-12-15",
                   "imponibile": 750000,
                   "trattamentoIva": "esente_art10",
@@ -4196,8 +4233,8 @@
           "spese": [],
           "fatture": [
             {
-              "id": "f58",
-              "numero": "58",
+              "id": "f60",
+              "numero": "60",
               "dataFattura": "2026-06-01",
               "imponibile": 3000000,
               "trattamentoIva": "esente_art10",
@@ -4259,8 +4296,8 @@
               },
               "fatture": [
                 {
-                  "id": "f59",
-                  "numero": "59",
+                  "id": "f61",
+                  "numero": "61",
                   "dataFattura": "2026-01-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4272,8 +4309,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f60",
-                  "numero": "60",
+                  "id": "f62",
+                  "numero": "62",
                   "dataFattura": "2026-02-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4285,8 +4322,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f61",
-                  "numero": "61",
+                  "id": "f63",
+                  "numero": "63",
                   "dataFattura": "2026-03-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4298,8 +4335,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f62",
-                  "numero": "62",
+                  "id": "f64",
+                  "numero": "64",
                   "dataFattura": "2026-04-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4311,8 +4348,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f63",
-                  "numero": "63",
+                  "id": "f65",
+                  "numero": "65",
                   "dataFattura": "2026-05-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4324,8 +4361,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f64",
-                  "numero": "64",
+                  "id": "f66",
+                  "numero": "66",
                   "dataFattura": "2026-06-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4337,8 +4374,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f65",
-                  "numero": "65",
+                  "id": "f67",
+                  "numero": "67",
                   "dataFattura": "2026-07-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4350,8 +4387,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f66",
-                  "numero": "66",
+                  "id": "f68",
+                  "numero": "68",
                   "dataFattura": "2026-08-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4363,8 +4400,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f67",
-                  "numero": "67",
+                  "id": "f69",
+                  "numero": "69",
                   "dataFattura": "2026-09-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4376,8 +4413,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f68",
-                  "numero": "68",
+                  "id": "f70",
+                  "numero": "70",
                   "dataFattura": "2026-10-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4389,8 +4426,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f69",
-                  "numero": "69",
+                  "id": "f71",
+                  "numero": "71",
                   "dataFattura": "2026-11-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4402,8 +4439,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f70",
-                  "numero": "70",
+                  "id": "f72",
+                  "numero": "72",
                   "dataFattura": "2026-12-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4435,8 +4472,8 @@
               },
               "fatture": [
                 {
-                  "id": "f59",
-                  "numero": "59",
+                  "id": "f61",
+                  "numero": "61",
                   "dataFattura": "2026-01-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4448,8 +4485,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f60",
-                  "numero": "60",
+                  "id": "f62",
+                  "numero": "62",
                   "dataFattura": "2026-02-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4461,8 +4498,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f61",
-                  "numero": "61",
+                  "id": "f63",
+                  "numero": "63",
                   "dataFattura": "2026-03-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4474,8 +4511,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f62",
-                  "numero": "62",
+                  "id": "f64",
+                  "numero": "64",
                   "dataFattura": "2026-04-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4487,8 +4524,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f63",
-                  "numero": "63",
+                  "id": "f65",
+                  "numero": "65",
                   "dataFattura": "2026-05-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4500,8 +4537,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f64",
-                  "numero": "64",
+                  "id": "f66",
+                  "numero": "66",
                   "dataFattura": "2026-06-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4513,8 +4550,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f65",
-                  "numero": "65",
+                  "id": "f67",
+                  "numero": "67",
                   "dataFattura": "2026-07-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4526,8 +4563,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f66",
-                  "numero": "66",
+                  "id": "f68",
+                  "numero": "68",
                   "dataFattura": "2026-08-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4539,8 +4576,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f67",
-                  "numero": "67",
+                  "id": "f69",
+                  "numero": "69",
                   "dataFattura": "2026-09-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4552,8 +4589,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f68",
-                  "numero": "68",
+                  "id": "f70",
+                  "numero": "70",
                   "dataFattura": "2026-10-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4565,8 +4602,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f69",
-                  "numero": "69",
+                  "id": "f71",
+                  "numero": "71",
                   "dataFattura": "2026-11-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4578,8 +4615,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f70",
-                  "numero": "70",
+                  "id": "f72",
+                  "numero": "72",
                   "dataFattura": "2026-12-15",
                   "imponibile": 500000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4647,8 +4684,8 @@
               "spese": [],
               "fatture": [
                 {
-                  "id": "f71",
-                  "numero": "71",
+                  "id": "f73",
+                  "numero": "73",
                   "dataFattura": "2026-05-01",
                   "imponibile": 1200000,
                   "trattamentoIva": "esente_art10",
@@ -4681,8 +4718,8 @@
               "spese": [],
               "fatture": [
                 {
-                  "id": "f72",
-                  "numero": "72",
+                  "id": "f74",
+                  "numero": "74",
                   "dataFattura": "2026-05-01",
                   "imponibile": 1200000,
                   "trattamentoIva": "imponibile_22",
@@ -4757,8 +4794,8 @@
               },
               "fatture": [
                 {
-                  "id": "f73",
-                  "numero": "73",
+                  "id": "f75",
+                  "numero": "75",
                   "dataFattura": "2026-01-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4770,8 +4807,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f74",
-                  "numero": "74",
+                  "id": "f76",
+                  "numero": "76",
                   "dataFattura": "2026-02-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4783,8 +4820,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f75",
-                  "numero": "75",
+                  "id": "f77",
+                  "numero": "77",
                   "dataFattura": "2026-03-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4796,8 +4833,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f76",
-                  "numero": "76",
+                  "id": "f78",
+                  "numero": "78",
                   "dataFattura": "2026-04-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4809,8 +4846,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f77",
-                  "numero": "77",
+                  "id": "f79",
+                  "numero": "79",
                   "dataFattura": "2026-05-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4822,8 +4859,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f78",
-                  "numero": "78",
+                  "id": "f80",
+                  "numero": "80",
                   "dataFattura": "2026-06-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4835,8 +4872,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f79",
-                  "numero": "79",
+                  "id": "f81",
+                  "numero": "81",
                   "dataFattura": "2026-07-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4848,8 +4885,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f80",
-                  "numero": "80",
+                  "id": "f82",
+                  "numero": "82",
                   "dataFattura": "2026-08-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4861,8 +4898,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f81",
-                  "numero": "81",
+                  "id": "f83",
+                  "numero": "83",
                   "dataFattura": "2026-09-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4874,8 +4911,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f82",
-                  "numero": "82",
+                  "id": "f84",
+                  "numero": "84",
                   "dataFattura": "2026-10-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4887,8 +4924,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f83",
-                  "numero": "83",
+                  "id": "f85",
+                  "numero": "85",
                   "dataFattura": "2026-11-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4900,8 +4937,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f84",
-                  "numero": "84",
+                  "id": "f86",
+                  "numero": "86",
                   "dataFattura": "2026-12-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4938,8 +4975,8 @@
               },
               "fatture": [
                 {
-                  "id": "f73",
-                  "numero": "73",
+                  "id": "f75",
+                  "numero": "75",
                   "dataFattura": "2026-01-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4951,8 +4988,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f74",
-                  "numero": "74",
+                  "id": "f76",
+                  "numero": "76",
                   "dataFattura": "2026-02-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4964,8 +5001,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f75",
-                  "numero": "75",
+                  "id": "f77",
+                  "numero": "77",
                   "dataFattura": "2026-03-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4977,8 +5014,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f76",
-                  "numero": "76",
+                  "id": "f78",
+                  "numero": "78",
                   "dataFattura": "2026-04-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -4990,8 +5027,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f77",
-                  "numero": "77",
+                  "id": "f79",
+                  "numero": "79",
                   "dataFattura": "2026-05-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -5003,8 +5040,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f78",
-                  "numero": "78",
+                  "id": "f80",
+                  "numero": "80",
                   "dataFattura": "2026-06-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -5016,8 +5053,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f79",
-                  "numero": "79",
+                  "id": "f81",
+                  "numero": "81",
                   "dataFattura": "2026-07-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -5029,8 +5066,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f80",
-                  "numero": "80",
+                  "id": "f82",
+                  "numero": "82",
                   "dataFattura": "2026-08-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -5042,8 +5079,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f81",
-                  "numero": "81",
+                  "id": "f83",
+                  "numero": "83",
                   "dataFattura": "2026-09-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -5055,8 +5092,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f82",
-                  "numero": "82",
+                  "id": "f84",
+                  "numero": "84",
                   "dataFattura": "2026-10-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -5068,8 +5105,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f83",
-                  "numero": "83",
+                  "id": "f85",
+                  "numero": "85",
                   "dataFattura": "2026-11-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -5081,8 +5118,8 @@
                   "origine": "manuale"
                 },
                 {
-                  "id": "f84",
-                  "numero": "84",
+                  "id": "f86",
+                  "numero": "86",
                   "dataFattura": "2026-12-15",
                   "imponibile": 750000,
                   "trattamentoIva": "forfettario_no_iva",
@@ -5152,8 +5189,8 @@
           },
           "fatture": [
             {
-              "id": "f59",
-              "numero": "59",
+              "id": "f61",
+              "numero": "61",
               "dataFattura": "2026-01-15",
               "imponibile": 500000,
               "trattamentoIva": "forfettario_no_iva",
@@ -5165,8 +5202,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f60",
-              "numero": "60",
+              "id": "f62",
+              "numero": "62",
               "dataFattura": "2026-02-15",
               "imponibile": 500000,
               "trattamentoIva": "forfettario_no_iva",
@@ -5178,8 +5215,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f61",
-              "numero": "61",
+              "id": "f63",
+              "numero": "63",
               "dataFattura": "2026-03-15",
               "imponibile": 500000,
               "trattamentoIva": "forfettario_no_iva",
@@ -5191,8 +5228,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f62",
-              "numero": "62",
+              "id": "f64",
+              "numero": "64",
               "dataFattura": "2026-04-15",
               "imponibile": 500000,
               "trattamentoIva": "forfettario_no_iva",
@@ -5204,8 +5241,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f63",
-              "numero": "63",
+              "id": "f65",
+              "numero": "65",
               "dataFattura": "2026-05-15",
               "imponibile": 500000,
               "trattamentoIva": "forfettario_no_iva",
@@ -5217,8 +5254,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f64",
-              "numero": "64",
+              "id": "f66",
+              "numero": "66",
               "dataFattura": "2026-06-15",
               "imponibile": 500000,
               "trattamentoIva": "forfettario_no_iva",
@@ -5230,8 +5267,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f65",
-              "numero": "65",
+              "id": "f67",
+              "numero": "67",
               "dataFattura": "2026-07-15",
               "imponibile": 500000,
               "trattamentoIva": "forfettario_no_iva",
@@ -5243,8 +5280,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f66",
-              "numero": "66",
+              "id": "f68",
+              "numero": "68",
               "dataFattura": "2026-08-15",
               "imponibile": 500000,
               "trattamentoIva": "forfettario_no_iva",
@@ -5256,8 +5293,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f67",
-              "numero": "67",
+              "id": "f69",
+              "numero": "69",
               "dataFattura": "2026-09-15",
               "imponibile": 500000,
               "trattamentoIva": "forfettario_no_iva",
@@ -5269,8 +5306,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f68",
-              "numero": "68",
+              "id": "f70",
+              "numero": "70",
               "dataFattura": "2026-10-15",
               "imponibile": 500000,
               "trattamentoIva": "forfettario_no_iva",
@@ -5282,8 +5319,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f69",
-              "numero": "69",
+              "id": "f71",
+              "numero": "71",
               "dataFattura": "2026-11-15",
               "imponibile": 500000,
               "trattamentoIva": "forfettario_no_iva",
@@ -5295,8 +5332,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f70",
-              "numero": "70",
+              "id": "f72",
+              "numero": "72",
               "dataFattura": "2026-12-15",
               "imponibile": 500000,
               "trattamentoIva": "forfettario_no_iva",
@@ -5352,8 +5389,8 @@
           "spese": [],
           "fatture": [
             {
-              "id": "f85",
-              "numero": "85",
+              "id": "f87",
+              "numero": "87",
               "dataFattura": "2026-01-15",
               "imponibile": 583333,
               "trattamentoIva": "esente_art10",
@@ -5365,8 +5402,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f86",
-              "numero": "86",
+              "id": "f88",
+              "numero": "88",
               "dataFattura": "2026-02-15",
               "imponibile": 583333,
               "trattamentoIva": "esente_art10",
@@ -5378,8 +5415,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f87",
-              "numero": "87",
+              "id": "f89",
+              "numero": "89",
               "dataFattura": "2026-03-15",
               "imponibile": 583333,
               "trattamentoIva": "esente_art10",
@@ -5391,8 +5428,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f88",
-              "numero": "88",
+              "id": "f90",
+              "numero": "90",
               "dataFattura": "2026-04-15",
               "imponibile": 583333,
               "trattamentoIva": "esente_art10",
@@ -5404,8 +5441,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f89",
-              "numero": "89",
+              "id": "f91",
+              "numero": "91",
               "dataFattura": "2026-05-15",
               "imponibile": 583333,
               "trattamentoIva": "esente_art10",
@@ -5417,8 +5454,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f90",
-              "numero": "90",
+              "id": "f92",
+              "numero": "92",
               "dataFattura": "2026-06-15",
               "imponibile": 583333,
               "trattamentoIva": "esente_art10",
@@ -5430,8 +5467,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f91",
-              "numero": "91",
+              "id": "f93",
+              "numero": "93",
               "dataFattura": "2026-07-15",
               "imponibile": 583333,
               "trattamentoIva": "esente_art10",
@@ -5443,8 +5480,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f92",
-              "numero": "92",
+              "id": "f94",
+              "numero": "94",
               "dataFattura": "2026-08-15",
               "imponibile": 583333,
               "trattamentoIva": "esente_art10",
@@ -5456,8 +5493,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f93",
-              "numero": "93",
+              "id": "f95",
+              "numero": "95",
               "dataFattura": "2026-09-15",
               "imponibile": 583333,
               "trattamentoIva": "esente_art10",
@@ -5469,8 +5506,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f94",
-              "numero": "94",
+              "id": "f96",
+              "numero": "96",
               "dataFattura": "2026-10-15",
               "imponibile": 583333,
               "trattamentoIva": "esente_art10",
@@ -5482,8 +5519,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f95",
-              "numero": "95",
+              "id": "f97",
+              "numero": "97",
               "dataFattura": "2026-11-15",
               "imponibile": 583333,
               "trattamentoIva": "esente_art10",
@@ -5495,8 +5532,8 @@
               "origine": "manuale"
             },
             {
-              "id": "f96",
-              "numero": "96",
+              "id": "f98",
+              "numero": "98",
               "dataFattura": "2026-12-15",
               "imponibile": 583333,
               "trattamentoIva": "esente_art10",
@@ -5567,8 +5604,8 @@
           },
           "fatture": [
             {
-              "id": "f97",
-              "numero": "97",
+              "id": "f99",
+              "numero": "99",
               "dataFattura": "2026-01-15",
               "imponibile": 1000000,
               "trattamentoIva": "forfettario_no_iva",

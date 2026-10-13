@@ -20,7 +20,14 @@ export function proRata(fatture: Fattura[], anno: number): number {
   const esenti = sum(delAnno.filter((f) => f.trattamentoIva === 'esente_art10').map((f) => f.imponibile));
   if (imponibili === 0) return 0;
   if (esenti === 0) return 1;
-  return Math.ceil((imponibili / (imponibili + esenti)) * 100) / 100;
+  // Arrotondamento per eccesso in aritmetica intera: (imponibili / totale) × 100 in virgola mobile
+  // può superare l'intero (7 / 100 × 100 = 7,000000000000001) e far salire il pro-rata di un punto.
+  const numeratore = imponibili * 100;
+  const totale = imponibili + esenti;
+  let punti = Math.ceil(numeratore / totale);
+  if ((punti - 1) * totale >= numeratore) punti -= 1;
+  else if (punti * totale < numeratore) punti += 1;
+  return punti / 100;
 }
 
 export interface LiquidazioneTrimestre {

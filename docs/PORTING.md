@@ -20,7 +20,7 @@ non i vettori. Le regole fiscali cambiano solo in TypeScript (vedi `AGENTS.md`),
 ## Vettori golden
 
 `golden/vettori.json` contiene **ogni caso** dei file `src/core/__tests__/*.test.ts` e di `scenari.ts`
-(127 vettori). Gli attesi sono trascritti dalle asserzioni dei test o presi da `scenari.ts`: non sono
+(128 vettori). Gli attesi sono trascritti dalle asserzioni dei test o presi da `scenari.ts`: non sono
 mai prodotti eseguendo il motore.
 
 - Sorgente: `src/core/__tests__/vettori-casi.ts` (legge `scenari.ts`, quindi gli scenari del commercialista non sono duplicati).
@@ -381,7 +381,7 @@ Firme TypeScript come nel sorgente. `p: ParametriAnno` è sempre l'ultimo argome
 | `quotaB` | `soglia = round(sogliaAnnua × f)`, `massimale = round(massimale × f)`, poi `pct` sulle due basi |
 | `proiezioneAnnua` | `round(valore / frazioneAnno)`, con `frazioneAnno = min(1, giorniTrascorsi / giorniAnno)` non arrotondata |
 | `calcolaRiepilogo` | spese, IVA e ritenute proiettate: `round(v / f)`; Quota B dell'anno scorso nell'anno: `round(qb × frazioneQuotaBNellAnno)`; imposte maturate: `round(imposteProiettate × f)`; Quota A maturata: `round(totale × f)` |
-| `proRata` | `ceil((imponibili / (imponibili + esenti)) × 100) / 100`, risultato `Double` (es. `0.2`) |
+| `proRata` | punti = arrotondamento per eccesso intero di `imponibili × 100 / (imponibili + esenti)`; risultato `punti / 100` in `Double` (es. `0.2`) |
 | `generaScadenziario` (rate) | `base = floor(totale / parti)` per ogni rata, l'ultima prende `totale − base × (parti − 1)`: la somma resta esatta |
 | `pianoAcconti` | `secondaRata = totale − primaRata` (nessun centesimo perso) |
 | `parseInvoiceText` | imponibile ricavato dal totale con IVA: `round(valore / 1.22)` |
@@ -393,9 +393,9 @@ il confronto `impostaStimata > baseStorica × 1.2` in `confrontaAcconti`.
 Divisioni intere: `Math.floor(a / b)` in JS arrotonda verso −∞; la `/` tra `Int` in Swift tronca verso zero.
 Sono uguali solo con operandi non negativi (oggi sempre così nello scadenziario).
 
-**Attenzione a `proRata`**: il calcolo in `Double` può superare l'intero, e allora `ceil` sale di un punto. Con imponibili 7
-ed esenti 93 il rapporto è 7,000000000000001 e il pro-rata diventa 0,08 invece di 0,07. Swift deve riprodurlo così com'è
-finché il motore TypeScript non viene corretto.
+**`proRata` va calcolato in aritmetica intera**: in `Double`, `(7 / 100) × 100` vale 7,000000000000001 e `ceil` salirebbe
+a 8. Il motore calcola i punti percentuali come arrotondamento per eccesso **intero** di `imponibili × 100 / (imponibili + esenti)`;
+in Swift con `Int`: `(imponibili * 100 + totale - 1) / totale` (operandi positivi). Il vettore `iva/pro-rata-esatto` lo verifica.
 
 ---
 

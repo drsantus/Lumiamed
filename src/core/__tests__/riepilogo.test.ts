@@ -66,6 +66,15 @@ describe('IVA ordinario', () => {
     expect(proRata([fatture[1]], 2026)).toBe(1);
   });
 
+  it('pro-rata esatto non sale di un punto per la virgola mobile', () => {
+    // 7 / (7 + 93) × 100 in virgola mobile vale 7,000000000000001
+    const f = [
+      fattura({ trattamentoIva: 'imponibile_22', imponibile: euro(7), dataFattura: '2026-03-10', bolloAddebitato: false }),
+      fattura({ trattamentoIva: 'esente_art10', imponibile: euro(93), dataFattura: '2026-03-10' }),
+    ];
+    expect(proRata(f, 2026)).toBe(0.07);
+  });
+
   it('liquidazione 1° trimestre con interessi 1%', () => {
     const r = liquidazioniIva(fatture, spese, 2026, p);
     const t1 = r.trimestri[0];
