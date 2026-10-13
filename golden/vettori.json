@@ -1,0 +1,6200 @@
+{
+  "versione": 1,
+  "descrizione": "Vettori golden del motore LumiaMed: ogni caso dei test di src/core e di scenari.ts. Generato da src/core/__tests__/vettori-casi.ts con `npm run vettori`: non modificare a mano.",
+  "convenzioni": {
+    "importi": "centesimi interi (Cents)",
+    "date": "stringhe ISO aaaa-mm-gg",
+    "percentuali": "frazioni decimali (0.15 = 15%)",
+    "null": "nel confronto null equivale a campo assente/undefined",
+    "parametri": "{\"$parametri\": anno} = getParametri(anno).parametri; con \"campo\" se ne prende solo quel percorso",
+    "formato": "vedi docs/PORTING.md, sezione \"Vettori golden\""
+  },
+  "vettori": [
+    {
+      "id": "forfettario/F1",
+      "origine": "fiscale.test.ts › Forfettario — scenari validati dal commercialista › F1: Giovane medico al 5° anno con requisiti startup, 40.000 € incassati, 2.500 € di ENPAM versati",
+      "funzione": "calcolaForfettario",
+      "input": {
+        "input": {
+          "anno": 2026,
+          "ricavi": 4000000,
+          "contributiVersati": 250000,
+          "profilo": {
+            "annoInizioAttivita": 2022,
+            "requisitiStartup5": true
+          }
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "redditoLordo": 3120000,
+        "imponibile": 2870000,
+        "aliquota": 0.05,
+        "impostaSostitutiva": 143500
+      }
+    },
+    {
+      "id": "forfettario/F2",
+      "origine": "fiscale.test.ts › Forfettario — scenari validati dal commercialista › F2: Medico al 6° anno (aliquota 15%), 60.000 € incassati, 4.000 € di ENPAM versati",
+      "funzione": "calcolaForfettario",
+      "input": {
+        "input": {
+          "anno": 2026,
+          "ricavi": 6000000,
+          "contributiVersati": 400000,
+          "profilo": {
+            "annoInizioAttivita": 2021,
+            "requisitiStartup5": true
+          }
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "redditoLordo": 4680000,
+        "imponibile": 4280000,
+        "aliquota": 0.15,
+        "impostaSostitutiva": 642000
+      }
+    },
+    {
+      "id": "forfettario/F3",
+      "origine": "fiscale.test.ts › Forfettario — scenari validati dal commercialista › F3: Primo anno senza requisiti startup (15%), 25.000 € incassati, nessun contributo versato",
+      "funzione": "calcolaForfettario",
+      "input": {
+        "input": {
+          "anno": 2026,
+          "ricavi": 2500000,
+          "contributiVersati": 0,
+          "profilo": {
+            "annoInizioAttivita": 2026,
+            "requisitiStartup5": false
+          }
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "redditoLordo": 1950000,
+        "imponibile": 1950000,
+        "aliquota": 0.15,
+        "impostaSostitutiva": 292500
+      }
+    },
+    {
+      "id": "forfettario/F4",
+      "origine": "fiscale.test.ts › Forfettario — scenari validati dal commercialista › F4: Contributi superiori al reddito: 5.000 € incassati, 5.000 € di ENPAM versati",
+      "funzione": "calcolaForfettario",
+      "input": {
+        "input": {
+          "anno": 2026,
+          "ricavi": 500000,
+          "contributiVersati": 500000,
+          "profilo": {
+            "annoInizioAttivita": 2025,
+            "requisitiStartup5": true
+          }
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "redditoLordo": 390000,
+        "imponibile": 0,
+        "aliquota": 0.05,
+        "impostaSostitutiva": 0
+      }
+    },
+    {
+      "id": "forfettario/aliquota-1",
+      "origine": "fiscale.test.ts › Forfettario — scenari validati dal commercialista › 5% solo nei primi 5 anni e solo con i requisiti",
+      "funzione": "aliquotaForfettario",
+      "input": {
+        "anno": 2026,
+        "profilo": {
+          "annoInizioAttivita": 2022,
+          "requisitiStartup5": true
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": 0.05
+    },
+    {
+      "id": "forfettario/aliquota-2",
+      "origine": "fiscale.test.ts › Forfettario — scenari validati dal commercialista › 5% solo nei primi 5 anni e solo con i requisiti",
+      "funzione": "aliquotaForfettario",
+      "input": {
+        "anno": 2027,
+        "profilo": {
+          "annoInizioAttivita": 2022,
+          "requisitiStartup5": true
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": 0.15
+    },
+    {
+      "id": "forfettario/aliquota-3",
+      "origine": "fiscale.test.ts › Forfettario — scenari validati dal commercialista › 5% solo nei primi 5 anni e solo con i requisiti",
+      "funzione": "aliquotaForfettario",
+      "input": {
+        "anno": 2026,
+        "profilo": {
+          "annoInizioAttivita": 2022,
+          "requisitiStartup5": false
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": 0.15
+    },
+    {
+      "id": "forfettario/avvisi-limite-1",
+      "origine": "fiscale.test.ts › Forfettario — scenari validati dal commercialista › avvisa oltre 85.000 € e oltre 100.000 €",
+      "funzione": "calcolaForfettario",
+      "input": {
+        "input": {
+          "anno": 2026,
+          "ricavi": 9000000,
+          "contributiVersati": 0,
+          "profilo": {
+            "annoInizioAttivita": 2020,
+            "requisitiStartup5": false
+          }
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "avvisi[*].codice"
+          },
+          "op": "contiene",
+          "atteso": "FORF_USCITA_ANNO_PROSSIMO"
+        }
+      ]
+    },
+    {
+      "id": "forfettario/avvisi-limite-2",
+      "origine": "fiscale.test.ts › Forfettario — scenari validati dal commercialista › avvisa oltre 85.000 € e oltre 100.000 €",
+      "funzione": "calcolaForfettario",
+      "input": {
+        "input": {
+          "anno": 2026,
+          "ricavi": 10500000,
+          "contributiVersati": 0,
+          "profilo": {
+            "annoInizioAttivita": 2020,
+            "requisitiStartup5": false
+          }
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "avvisi[*].codice"
+          },
+          "op": "contiene",
+          "atteso": "FORF_USCITA_IMMEDIATA"
+        }
+      ]
+    },
+    {
+      "id": "forfettario/avvisi-limite-3",
+      "origine": "fiscale.test.ts › Forfettario — scenari validati dal commercialista › avvisa oltre 85.000 € e oltre 100.000 €",
+      "funzione": "calcolaForfettario",
+      "input": {
+        "input": {
+          "anno": 2026,
+          "ricavi": 8000000,
+          "contributiVersati": 0,
+          "profilo": {
+            "annoInizioAttivita": 2020,
+            "requisitiStartup5": false
+          }
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "avvisi[*].codice"
+          },
+          "op": "contiene",
+          "atteso": "FORF_VICINO_LIMITE"
+        }
+      ]
+    },
+    {
+      "id": "forfettario/contributi-eccedenti",
+      "origine": "fiscale.test.ts › Forfettario — scenari validati dal commercialista › contributi eccedenti il reddito: imponibile zero e avviso",
+      "funzione": "calcolaForfettario",
+      "input": {
+        "input": {
+          "anno": 2026,
+          "ricavi": 500000,
+          "contributiVersati": 500000,
+          "profilo": {
+            "annoInizioAttivita": 2025,
+            "requisitiStartup5": true
+          }
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "contributiEccedenti": 110000
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "avvisi[*].codice"
+          },
+          "op": "contiene",
+          "atteso": "FORF_CONTRIBUTI_ECCEDENTI"
+        }
+      ]
+    },
+    {
+      "id": "irpef/scaglioni-0",
+      "origine": "fiscale.test.ts › IRPEF — scaglioni 2026 (23% / 33% / 43%) › imponibile 0 -> imposta lorda 0",
+      "funzione": "impostaProgressiva",
+      "input": {
+        "imponibile": 0,
+        "scaglioni": {
+          "$parametri": 2026,
+          "campo": "irpef.scaglioni"
+        }
+      },
+      "atteso": {
+        "totale": 0
+      }
+    },
+    {
+      "id": "irpef/scaglioni-2800000",
+      "origine": "fiscale.test.ts › IRPEF — scaglioni 2026 (23% / 33% / 43%) › imponibile 2800000 -> imposta lorda 644000",
+      "funzione": "impostaProgressiva",
+      "input": {
+        "imponibile": 2800000,
+        "scaglioni": {
+          "$parametri": 2026,
+          "campo": "irpef.scaglioni"
+        }
+      },
+      "atteso": {
+        "totale": 644000
+      }
+    },
+    {
+      "id": "irpef/scaglioni-4000000",
+      "origine": "fiscale.test.ts › IRPEF — scaglioni 2026 (23% / 33% / 43%) › imponibile 4000000 -> imposta lorda 1040000",
+      "funzione": "impostaProgressiva",
+      "input": {
+        "imponibile": 4000000,
+        "scaglioni": {
+          "$parametri": 2026,
+          "campo": "irpef.scaglioni"
+        }
+      },
+      "atteso": {
+        "totale": 1040000
+      }
+    },
+    {
+      "id": "irpef/scaglioni-5000000",
+      "origine": "fiscale.test.ts › IRPEF — scaglioni 2026 (23% / 33% / 43%) › imponibile 5000000 -> imposta lorda 1370000",
+      "funzione": "impostaProgressiva",
+      "input": {
+        "imponibile": 5000000,
+        "scaglioni": {
+          "$parametri": 2026,
+          "campo": "irpef.scaglioni"
+        }
+      },
+      "atteso": {
+        "totale": 1370000
+      }
+    },
+    {
+      "id": "irpef/scaglioni-6000000",
+      "origine": "fiscale.test.ts › IRPEF — scaglioni 2026 (23% / 33% / 43%) › imponibile 6000000 -> imposta lorda 1800000",
+      "funzione": "impostaProgressiva",
+      "input": {
+        "imponibile": 6000000,
+        "scaglioni": {
+          "$parametri": 2026,
+          "campo": "irpef.scaglioni"
+        }
+      },
+      "atteso": {
+        "totale": 1800000
+      }
+    },
+    {
+      "id": "irpef/detrazione-500000",
+      "origine": "fiscale.test.ts › IRPEF — scaglioni 2026 (23% / 33% / 43%) › detrazione lavoro autonomo: reddito 500000 -> 126500",
+      "funzione": "detrazioneLavoroAutonomo",
+      "input": {
+        "redditoComplessivo": 500000,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": 126500
+    },
+    {
+      "id": "irpef/detrazione-550000",
+      "origine": "fiscale.test.ts › IRPEF — scaglioni 2026 (23% / 33% / 43%) › detrazione lavoro autonomo: reddito 550000 -> 126500",
+      "funzione": "detrazioneLavoroAutonomo",
+      "input": {
+        "redditoComplessivo": 550000,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": 126500
+    },
+    {
+      "id": "irpef/detrazione-2000000",
+      "origine": "fiscale.test.ts › IRPEF — scaglioni 2026 (23% / 33% / 43%) › detrazione lavoro autonomo: reddito 2000000 -> 77200",
+      "funzione": "detrazioneLavoroAutonomo",
+      "input": {
+        "redditoComplessivo": 2000000,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": 77200
+    },
+    {
+      "id": "irpef/detrazione-2800000",
+      "origine": "fiscale.test.ts › IRPEF — scaglioni 2026 (23% / 33% / 43%) › detrazione lavoro autonomo: reddito 2800000 -> 50000",
+      "funzione": "detrazioneLavoroAutonomo",
+      "input": {
+        "redditoComplessivo": 2800000,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": 50000
+    },
+    {
+      "id": "irpef/detrazione-3500000",
+      "origine": "fiscale.test.ts › IRPEF — scaglioni 2026 (23% / 33% / 43%) › detrazione lavoro autonomo: reddito 3500000 -> 34091",
+      "funzione": "detrazioneLavoroAutonomo",
+      "input": {
+        "redditoComplessivo": 3500000,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": 34091
+    },
+    {
+      "id": "irpef/detrazione-5000000",
+      "origine": "fiscale.test.ts › IRPEF — scaglioni 2026 (23% / 33% / 43%) › detrazione lavoro autonomo: reddito 5000000 -> 0",
+      "funzione": "detrazioneLavoroAutonomo",
+      "input": {
+        "redditoComplessivo": 5000000,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": 0
+    },
+    {
+      "id": "irpef/detrazione-6000000",
+      "origine": "fiscale.test.ts › IRPEF — scaglioni 2026 (23% / 33% / 43%) › detrazione lavoro autonomo: reddito 6000000 -> 0",
+      "funzione": "detrazioneLavoroAutonomo",
+      "input": {
+        "redditoComplessivo": 6000000,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": 0
+    },
+    {
+      "id": "ordinario/O1",
+      "origine": "fiscale.test.ts › Ordinario — scenari validati dal commercialista › O1: Specialista con 70.000 € di compensi; affitto 6.000, telefono 1.000 (80%), ristoranti 2.000 (75% ma max 2% dei compensi); ENPAM versato 8.000",
+      "funzione": "calcolaOrdinario",
+      "input": {
+        "input": {
+          "anno": 2026,
+          "compensi": 7000000,
+          "spese": [
+            {
+              "id": "s0",
+              "data": "2026-03-01",
+              "categoria": "affitto_studio",
+              "importo": 600000
+            },
+            {
+              "id": "s1",
+              "data": "2026-03-01",
+              "categoria": "telefono_internet",
+              "importo": 100000
+            },
+            {
+              "id": "s2",
+              "data": "2026-03-01",
+              "categoria": "ristoranti_alberghi",
+              "importo": 200000
+            }
+          ],
+          "contributiVersati": 800000,
+          "ritenuteSubite": 0,
+          "profilo": {
+            "regione": "LAZ",
+            "comuneCodiceCatastale": "H501"
+          },
+          "tabelleAddizionali": {
+            "regionali": {
+              "LAZ": {
+                "regione": "LAZ",
+                "anno": 2026,
+                "fonte": "prova",
+                "scaglioni": [
+                  {
+                    "fino": 1500000,
+                    "aliquota": 0.0173
+                  },
+                  {
+                    "fino": 2800000,
+                    "aliquota": 0.0273
+                  },
+                  {
+                    "fino": 5000000,
+                    "aliquota": 0.0293
+                  },
+                  {
+                    "fino": null,
+                    "aliquota": 0.0333
+                  }
+                ]
+              }
+            },
+            "comunali": {
+              "H501": {
+                "codiceCatastale": "H501",
+                "comune": "Roma",
+                "provincia": "RM",
+                "anno": 2026,
+                "aliquotaUnica": 0.008,
+                "esenzione": {
+                  "soglia": 1000000,
+                  "tipo": "esclusione"
+                }
+              }
+            }
+          }
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "speseDeducibili": 820000,
+        "redditoProfessionale": 6180000,
+        "imponibile": 5380000,
+        "impostaLorda": 1533400,
+        "detrazioneLavoroAutonomo": 0,
+        "impostaNetta": 1533400,
+        "addizionaleRegionale": 138554,
+        "addizionaleComunale": 43040
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "differenza"
+          },
+          "op": "uguale",
+          "atteso": {
+            "$diff": [
+              1533400,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ordinario/O2",
+      "origine": "fiscale.test.ts › Ordinario — scenari validati dal commercialista › O2: Medico con 30.000 € di compensi, 4.000 € di materiale sanitario, 6.000 € di ENPAM versato, 2.000 € di ritenute subite",
+      "funzione": "calcolaOrdinario",
+      "input": {
+        "input": {
+          "anno": 2026,
+          "compensi": 3000000,
+          "spese": [
+            {
+              "id": "s0",
+              "data": "2026-03-01",
+              "categoria": "materiale_sanitario",
+              "importo": 400000
+            }
+          ],
+          "contributiVersati": 600000,
+          "ritenuteSubite": 200000,
+          "profilo": {
+            "regione": "LAZ",
+            "comuneCodiceCatastale": "H501"
+          },
+          "tabelleAddizionali": {
+            "regionali": {
+              "LAZ": {
+                "regione": "LAZ",
+                "anno": 2026,
+                "fonte": "prova",
+                "scaglioni": [
+                  {
+                    "fino": 1500000,
+                    "aliquota": 0.0173
+                  },
+                  {
+                    "fino": 2800000,
+                    "aliquota": 0.0273
+                  },
+                  {
+                    "fino": 5000000,
+                    "aliquota": 0.0293
+                  },
+                  {
+                    "fino": null,
+                    "aliquota": 0.0333
+                  }
+                ]
+              }
+            },
+            "comunali": {
+              "H501": {
+                "codiceCatastale": "H501",
+                "comune": "Roma",
+                "provincia": "RM",
+                "anno": 2026,
+                "aliquotaUnica": 0.008,
+                "esenzione": {
+                  "soglia": 1000000,
+                  "tipo": "esclusione"
+                }
+              }
+            }
+          }
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "speseDeducibili": 400000,
+        "redditoProfessionale": 2600000,
+        "imponibile": 2000000,
+        "impostaLorda": 460000,
+        "detrazioneLavoroAutonomo": 56800,
+        "impostaNetta": 403200,
+        "addizionaleRegionale": 39600,
+        "addizionaleComunale": 16000
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "differenza"
+          },
+          "op": "uguale",
+          "atteso": {
+            "$diff": [
+              403200,
+              200000
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ordinario/addizionali-senza-irpef",
+      "origine": "fiscale.test.ts › Ordinario — scenari validati dal commercialista › senza IRPEF netta le addizionali non sono dovute",
+      "funzione": "calcolaOrdinario",
+      "input": {
+        "input": {
+          "anno": 2026,
+          "compensi": 500000,
+          "spese": [],
+          "contributiVersati": 0,
+          "ritenuteSubite": 0,
+          "profilo": {
+            "regione": "LAZ",
+            "comuneCodiceCatastale": "H501"
+          },
+          "tabelleAddizionali": {
+            "regionali": {
+              "LAZ": {
+                "regione": "LAZ",
+                "anno": 2026,
+                "fonte": "prova",
+                "scaglioni": [
+                  {
+                    "fino": 1500000,
+                    "aliquota": 0.0173
+                  },
+                  {
+                    "fino": 2800000,
+                    "aliquota": 0.0273
+                  },
+                  {
+                    "fino": 5000000,
+                    "aliquota": 0.0293
+                  },
+                  {
+                    "fino": null,
+                    "aliquota": 0.0333
+                  }
+                ]
+              }
+            },
+            "comunali": {
+              "H501": {
+                "codiceCatastale": "H501",
+                "comune": "Roma",
+                "provincia": "RM",
+                "anno": 2026,
+                "aliquotaUnica": 0.008,
+                "esenzione": {
+                  "soglia": 1000000,
+                  "tipo": "esclusione"
+                }
+              }
+            }
+          }
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "impostaNetta": 0,
+        "addizionaleRegionale": 0,
+        "addizionaleComunale": 0
+      }
+    },
+    {
+      "id": "ordinario/limite-formazione-iva-detratta",
+      "origine": "fiscale.test.ts › Ordinario — scenari validati dal commercialista › formazione limitata a 10.000 € e IVA detratta esclusa dal costo",
+      "funzione": "speseDeducibili",
+      "input": {
+        "spese": [
+          {
+            "id": "1",
+            "data": "2026-01-10",
+            "importo": 1200000,
+            "categoria": "formazione_ecm"
+          },
+          {
+            "id": "2",
+            "data": "2026-01-10",
+            "importo": 122000,
+            "iva": 22000,
+            "categoria": "software"
+          }
+        ],
+        "compensi": 5000000,
+        "p": {
+          "$parametri": 2026
+        },
+        "percentualeDetrazioneIva": 0.5
+      },
+      "atteso": {
+        "perCategoria": {
+          "formazione_ecm": {
+            "deducibile": 1000000
+          },
+          "software": {
+            "deducibile": 111000
+          }
+        }
+      }
+    },
+    {
+      "id": "ordinario/avviso-ammortamento",
+      "origine": "fiscale.test.ts › Ordinario — scenari validati dal commercialista › segnala le attrezzature da ammortizzare",
+      "funzione": "speseDeducibili",
+      "input": {
+        "spese": [
+          {
+            "id": "1",
+            "data": "2026-02-01",
+            "importo": 300000,
+            "categoria": "attrezzature",
+            "descrizione": "Ecografo"
+          }
+        ],
+        "compensi": 5000000,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "avvisi[0].codice"
+          },
+          "op": "uguale",
+          "atteso": "SPESA_AMMORTAMENTO"
+        }
+      ]
+    },
+    {
+      "id": "addizionali/regione-non-in-tabella",
+      "origine": "fiscale.test.ts › Addizionali › regione non in tabella: aliquota base 1,23% e avviso",
+      "funzione": "addizionaleRegionale",
+      "input": {
+        "imponibile": 1000000,
+        "regione": "SAR",
+        "tabelle": {
+          "regionali": {},
+          "comunali": {}
+        }
+      },
+      "atteso": {
+        "importo": 12300
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "avvisi[0].codice"
+          },
+          "op": "uguale",
+          "atteso": "ADD_REG_NON_TROVATA"
+        }
+      ]
+    },
+    {
+      "id": "addizionali/comunale-esclusione",
+      "origine": "fiscale.test.ts › Addizionali › comunale: esclusione sotto soglia e franchigia",
+      "funzione": "addizionaleComunale",
+      "input": {
+        "imponibile": 900000,
+        "codiceCatastale": "H501",
+        "tabelle": {
+          "regionali": {
+            "LAZ": {
+              "regione": "LAZ",
+              "anno": 2026,
+              "fonte": "prova",
+              "scaglioni": [
+                {
+                  "fino": 1500000,
+                  "aliquota": 0.0173
+                },
+                {
+                  "fino": 2800000,
+                  "aliquota": 0.0273
+                },
+                {
+                  "fino": 5000000,
+                  "aliquota": 0.0293
+                },
+                {
+                  "fino": null,
+                  "aliquota": 0.0333
+                }
+              ]
+            }
+          },
+          "comunali": {
+            "H501": {
+              "codiceCatastale": "H501",
+              "comune": "Roma",
+              "provincia": "RM",
+              "anno": 2026,
+              "aliquotaUnica": 0.008,
+              "esenzione": {
+                "soglia": 1000000,
+                "tipo": "esclusione"
+              }
+            }
+          }
+        }
+      },
+      "atteso": {
+        "importo": 0
+      }
+    },
+    {
+      "id": "addizionali/comunale-franchigia",
+      "origine": "fiscale.test.ts › Addizionali › comunale: esclusione sotto soglia e franchigia",
+      "funzione": "addizionaleComunale",
+      "input": {
+        "imponibile": 2000000,
+        "codiceCatastale": "x000",
+        "tabelle": {
+          "regionali": {},
+          "comunali": {
+            "X000": {
+              "codiceCatastale": "X000",
+              "comune": "Prova",
+              "provincia": "PR",
+              "anno": 2026,
+              "aliquotaUnica": 0.008,
+              "esenzione": {
+                "soglia": 1000000,
+                "tipo": "franchigia"
+              }
+            }
+          }
+        }
+      },
+      "atteso": {
+        "importo": 8000
+      }
+    },
+    {
+      "id": "enpam/quota-a-A1",
+      "origine": "fiscale.test.ts › ENPAM › Quota A A1: Compie 30 anni il 15/3/2026: 3 mesi a 291,61 €/anno e 9 mesi a 566 €/anno, più maternità 95,54",
+      "funzione": "quotaA",
+      "input": {
+        "anno": 2026,
+        "dataNascita": "1996-03-15",
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "totale": 59294
+      }
+    },
+    {
+      "id": "enpam/quota-a-A2",
+      "origine": "fiscale.test.ts › ENPAM › Quota A A2: Over 40 tutto l'anno: 1.961,56 + maternità 95,54",
+      "funzione": "quotaA",
+      "input": {
+        "anno": 2026,
+        "dataNascita": "1980-06-01",
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "totale": 205710
+      }
+    },
+    {
+      "id": "enpam/quota-b-B1",
+      "origine": "fiscale.test.ts › ENPAM › Quota B B1: Under 40, reddito forfettario (LM34) 31.200 €: 19,5% sulla parte oltre 5.446,77 €",
+      "funzione": "quotaB",
+      "input": {
+        "annoReddito": 2026,
+        "redditoProfessionale": 3120000,
+        "dataNascita": "1991-05-10",
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "soglia": 544677,
+        "totale": 502188
+      }
+    },
+    {
+      "id": "enpam/quota-b-B2",
+      "origine": "fiscale.test.ts › ENPAM › Quota B B2: Over 40, reddito 160.000 €: 19,5% fino a 150.000 (oltre la soglia di 10.059,28) + 1% sull'eccedenza",
+      "funzione": "quotaB",
+      "input": {
+        "annoReddito": 2026,
+        "redditoProfessionale": 16000000,
+        "dataNascita": "1975-01-01",
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "soglia": 1005928,
+        "totale": 2738844
+      }
+    },
+    {
+      "id": "enpam/quota-b-B3",
+      "origine": "fiscale.test.ts › ENPAM › Quota B B3: Under 40 con reddito sotto la soglia: nessuna Quota B",
+      "funzione": "quotaB",
+      "input": {
+        "annoReddito": 2026,
+        "redditoProfessionale": 500000,
+        "dataNascita": "1995-01-01",
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "soglia": 544677,
+        "totale": 0
+      }
+    },
+    {
+      "id": "acconti/AC1",
+      "origine": "fiscale.test.ts › Acconti › AC1: Imposta anno precedente 50 €: nessun acconto",
+      "funzione": "pianoAcconti",
+      "input": {
+        "base": 5000,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "modalita": "nessuno",
+        "primaRata": 0,
+        "secondaRata": 0
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$somma": [
+              {
+                "$": "primaRata"
+              },
+              {
+                "$": "secondaRata"
+              }
+            ]
+          },
+          "op": "uguale",
+          "atteso": {
+            "$": "totale"
+          }
+        }
+      ]
+    },
+    {
+      "id": "acconti/AC2",
+      "origine": "fiscale.test.ts › Acconti › AC2: Imposta anno precedente 200 €: acconto unico a novembre",
+      "funzione": "pianoAcconti",
+      "input": {
+        "base": 20000,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "modalita": "unica_soluzione",
+        "primaRata": 0,
+        "secondaRata": 20000
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$somma": [
+              {
+                "$": "primaRata"
+              },
+              {
+                "$": "secondaRata"
+              }
+            ]
+          },
+          "op": "uguale",
+          "atteso": {
+            "$": "totale"
+          }
+        }
+      ]
+    },
+    {
+      "id": "acconti/AC3",
+      "origine": "fiscale.test.ts › Acconti › AC3: Imposta anno precedente 1.435 €: due rate da 50% (soggetti ISA/forfettari)",
+      "funzione": "pianoAcconti",
+      "input": {
+        "base": 143500,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "modalita": "due_rate",
+        "primaRata": 71750,
+        "secondaRata": 71750
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$somma": [
+              {
+                "$": "primaRata"
+              },
+              {
+                "$": "secondaRata"
+              }
+            ]
+          },
+          "op": "uguale",
+          "atteso": {
+            "$": "totale"
+          }
+        }
+      ]
+    },
+    {
+      "id": "acconti/rate-dispari",
+      "origine": "fiscale.test.ts › Acconti › rate dispari: la somma resta esatta",
+      "funzione": "pianoAcconti",
+      "input": {
+        "base": 143501,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$somma": [
+              {
+                "$": "primaRata"
+              },
+              {
+                "$": "secondaRata"
+              }
+            ]
+          },
+          "op": "uguale",
+          "atteso": 143501
+        }
+      ]
+    },
+    {
+      "id": "acconti/previsionale-conviene",
+      "origine": "fiscale.test.ts › Acconti › previsionale conviene se quest'anno si guadagna meno",
+      "funzione": "confrontaAcconti",
+      "input": {
+        "baseStorica": 500000,
+        "impostaStimataAnnoCorrente": 300000,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": {
+        "risparmioPrevisionale": 200000
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "avvisi[0].codice"
+          },
+          "op": "uguale",
+          "atteso": "ACCONTI_PREVISIONALE_CONVIENE"
+        }
+      ]
+    },
+    {
+      "id": "acconti/proiezione-meta-anno",
+      "origine": "fiscale.test.ts › Acconti › proiezione lineare a metà anno",
+      "nota": "Il 2 luglio 2026 è il 183° giorno: il test attende Math.round(1000000 / (183 / 365)).",
+      "funzione": "proiezioneAnnua",
+      "input": {
+        "valoreDaInizioAnno": 1000000,
+        "oggi": "2026-07-02"
+      },
+      "atteso": {
+        "affidabile": true,
+        "valoreAnnuo": 1994536
+      }
+    },
+    {
+      "id": "acconti/proiezione-poco-affidabile",
+      "origine": "fiscale.test.ts › Acconti › proiezione lineare a metà anno",
+      "funzione": "proiezioneAnnua",
+      "input": {
+        "valoreDaInizioAnno": 100000,
+        "oggi": "2026-01-20"
+      },
+      "atteso": {
+        "affidabile": false
+      }
+    },
+    {
+      "id": "parametri/anno-vicino",
+      "origine": "fiscale.test.ts › Parametri › anno non in tabella: usa il più vicino e lo segnala",
+      "funzione": "getParametri",
+      "input": {
+        "anno": 2027
+      },
+      "atteso": {
+        "approssimati": true,
+        "parametri": {
+          "anno": 2027
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "parametri.irpef.scaglioni"
+          },
+          "op": "uguale",
+          "atteso": {
+            "$parametri": 2026,
+            "campo": "irpef.scaglioni"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tabelle/comuni-caricati",
+      "origine": "fiscale.test.ts › Tabella comunale precaricata (dati MEF) › contiene migliaia di comuni",
+      "funzione": "tabelleCaricate",
+      "input": {},
+      "verifiche": [
+        {
+          "valore": {
+            "$": "comuni"
+          },
+          "op": "maggioreDi",
+          "atteso": 3000
+        }
+      ]
+    },
+    {
+      "id": "tabelle/comunale-A006-20000",
+      "origine": "fiscale.test.ts › Tabella comunale precaricata (dati MEF) › Abbadia San Salvatore: 0,6% con esenzione fino a 12.000 €",
+      "funzione": "addizionaleComunale",
+      "input": {
+        "imponibile": 2000000,
+        "codiceCatastale": "A006"
+      },
+      "atteso": {
+        "importo": 12000
+      }
+    },
+    {
+      "id": "tabelle/comunale-A006-11000",
+      "origine": "fiscale.test.ts › Tabella comunale precaricata (dati MEF) › Abbadia San Salvatore: 0,6% con esenzione fino a 12.000 €",
+      "funzione": "addizionaleComunale",
+      "input": {
+        "imponibile": 1100000,
+        "codiceCatastale": "A006"
+      },
+      "atteso": {
+        "importo": 0
+      }
+    },
+    {
+      "id": "tabelle/comunale-A005-40000",
+      "origine": "fiscale.test.ts › Tabella comunale precaricata (dati MEF) › Abbadia Lariana: scaglioni 0,76% / 0,77% / 0,8% con esenzione 15.000 €",
+      "funzione": "addizionaleComunale",
+      "input": {
+        "imponibile": 4000000,
+        "codiceCatastale": "A005"
+      },
+      "atteso": {
+        "importo": 30520
+      }
+    },
+    {
+      "id": "tabelle/regionale-SAR-40000",
+      "origine": "fiscale.test.ts › Tabella regionale precaricata (dati MEF 2026) › Sardegna: 1,23% unica",
+      "funzione": "addizionaleRegionale",
+      "input": {
+        "imponibile": 4000000,
+        "regione": "SAR"
+      },
+      "atteso": {
+        "importo": 49200
+      }
+    },
+    {
+      "id": "tabelle/regionale-LOM-40000",
+      "origine": "fiscale.test.ts › Tabella regionale precaricata (dati MEF 2026) › Lombardia: progressiva 1,23 / 1,58 / 1,72 / 1,73",
+      "funzione": "addizionaleRegionale",
+      "input": {
+        "imponibile": 4000000,
+        "regione": "LOM"
+      },
+      "atteso": {
+        "importo": 59630
+      }
+    },
+    {
+      "id": "tabelle/regionale-FVG-15000",
+      "origine": "fiscale.test.ts › Tabella regionale precaricata (dati MEF 2026) › Friuli VG: 0,70% su tutto fino a 15.000, poi 1,23% su tutto",
+      "funzione": "addizionaleRegionale",
+      "input": {
+        "imponibile": 1500000,
+        "regione": "FVG"
+      },
+      "atteso": {
+        "importo": 10500
+      }
+    },
+    {
+      "id": "tabelle/regionale-FVG-20000",
+      "origine": "fiscale.test.ts › Tabella regionale precaricata (dati MEF 2026) › Friuli VG: 0,70% su tutto fino a 15.000, poi 1,23% su tutto",
+      "funzione": "addizionaleRegionale",
+      "input": {
+        "imponibile": 2000000,
+        "regione": "FVG"
+      },
+      "atteso": {
+        "importo": 24600
+      }
+    },
+    {
+      "id": "tabelle/regionale-LAZ-28000",
+      "origine": "fiscale.test.ts › Tabella regionale precaricata (dati MEF 2026) › Lazio: 1,73% su tutto fino a 28.000; detrazione 60 € tra 28.000 e 30.000",
+      "funzione": "addizionaleRegionale",
+      "input": {
+        "imponibile": 2800000,
+        "regione": "LAZ"
+      },
+      "atteso": {
+        "importo": 48440
+      }
+    },
+    {
+      "id": "tabelle/regionale-LAZ-29000",
+      "origine": "fiscale.test.ts › Tabella regionale precaricata (dati MEF 2026) › Lazio: 1,73% su tutto fino a 28.000; detrazione 60 € tra 28.000 e 30.000",
+      "funzione": "addizionaleRegionale",
+      "input": {
+        "imponibile": 2900000,
+        "regione": "LAZ"
+      },
+      "atteso": {
+        "importo": 66570
+      }
+    },
+    {
+      "id": "tabelle/regionale-VDA-15000",
+      "origine": "fiscale.test.ts › Tabella regionale precaricata (dati MEF 2026) › Valle d'Aosta: esente fino a 15.000, poi 1,23% su tutto",
+      "funzione": "addizionaleRegionale",
+      "input": {
+        "imponibile": 1500000,
+        "regione": "VDA"
+      },
+      "atteso": {
+        "importo": 0
+      }
+    },
+    {
+      "id": "tabelle/regionale-VDA-20000",
+      "origine": "fiscale.test.ts › Tabella regionale precaricata (dati MEF 2026) › Valle d'Aosta: esente fino a 15.000, poi 1,23% su tutto",
+      "funzione": "addizionaleRegionale",
+      "input": {
+        "imponibile": 2000000,
+        "regione": "VDA"
+      },
+      "atteso": {
+        "importo": 24600
+      }
+    },
+    {
+      "id": "tabelle/regioni-caricate",
+      "origine": "fiscale.test.ts › Tabella regionale precaricata (dati MEF 2026) › tutte le 21 regioni/province presenti",
+      "funzione": "tabelleCaricate",
+      "input": {},
+      "atteso": {
+        "regioni": 21
+      }
+    },
+    {
+      "id": "ocr/importo-1",
+      "origine": "ocr.test.ts › parseImporto › 150,00 -> 15000",
+      "funzione": "parseImporto",
+      "input": {
+        "raw": "150,00"
+      },
+      "atteso": 15000
+    },
+    {
+      "id": "ocr/importo-2",
+      "origine": "ocr.test.ts › parseImporto › 1.234,56 -> 123456",
+      "funzione": "parseImporto",
+      "input": {
+        "raw": "1.234,56"
+      },
+      "atteso": 123456
+    },
+    {
+      "id": "ocr/importo-3",
+      "origine": "ocr.test.ts › parseImporto › € 80 -> 8000",
+      "funzione": "parseImporto",
+      "input": {
+        "raw": "€ 80"
+      },
+      "atteso": 8000
+    },
+    {
+      "id": "ocr/importo-4",
+      "origine": "ocr.test.ts › parseImporto › 1,234.56 -> 123456",
+      "funzione": "parseImporto",
+      "input": {
+        "raw": "1,234.56"
+      },
+      "atteso": 123456
+    },
+    {
+      "id": "ocr/importo-5",
+      "origine": "ocr.test.ts › parseImporto › 12.50 -> 1250",
+      "funzione": "parseImporto",
+      "input": {
+        "raw": "12.50"
+      },
+      "atteso": 1250
+    },
+    {
+      "id": "ocr/importo-6",
+      "origine": "ocr.test.ts › parseImporto › 2.000 -> 200000",
+      "funzione": "parseImporto",
+      "input": {
+        "raw": "2.000"
+      },
+      "atteso": 200000
+    },
+    {
+      "id": "ocr/fattura-paziente",
+      "origine": "ocr.test.ts › parseInvoiceText › fattura a paziente esente con bollo",
+      "funzione": "parseInvoiceText",
+      "input": {
+        "text": "\nDott.ssa Maria Bianchi\nMedico Chirurgo - Specialista in Dermatologia\nVia Roma 10, 09010 Portoscuso (SU)\nP.IVA 01234567890\nFATTURA N. 45/2026 del 12/03/2026\nSpett.le RSSMRA80A01H501U\nVisita dermatologica specialistica      150,00\nOperazione esente IVA ai sensi dell'art. 10 n. 18 DPR 633/72\nMarca da bollo assolta                    2,00\nTOTALE DOCUMENTO € 152,00\n"
+      },
+      "atteso": {
+        "numero": {
+          "valore": "45/2026"
+        },
+        "dataFattura": {
+          "valore": "2026-03-12"
+        },
+        "totale": {
+          "valore": 15200
+        },
+        "bollo": {
+          "valore": true
+        },
+        "trattamentoIva": {
+          "valore": "esente_art10"
+        },
+        "imponibile": {
+          "valore": 15000
+        },
+        "contieneCodiceFiscale": true
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "tipoPrestazione.valore"
+          },
+          "op": "corrisponde",
+          "atteso": "Visita dermatologica"
+        },
+        {
+          "valore": {
+            "$": ""
+          },
+          "op": "jsonNonContiene",
+          "atteso": "RSSMRA80A01H501U"
+        }
+      ]
+    },
+    {
+      "id": "ocr/fattura-forfettario",
+      "origine": "ocr.test.ts › parseInvoiceText › fattura forfettario",
+      "funzione": "parseInvoiceText",
+      "input": {
+        "text": "\nDr. Luca Verdi\nFattura nr. 7 del 03-02-2026\nEcografia addominale\nCompenso € 120,00\nOperazione effettuata ai sensi dell'art. 1, commi 54-89, Legge n. 190/2014 regime forfettario\nImposta di bollo 2,00\nTotale da pagare 122,00\n"
+      },
+      "atteso": {
+        "numero": {
+          "valore": "7"
+        },
+        "dataFattura": {
+          "valore": "2026-02-03"
+        },
+        "imponibile": {
+          "valore": 12000
+        },
+        "totale": {
+          "valore": 12200
+        },
+        "trattamentoIva": {
+          "valore": "forfettario_no_iva"
+        }
+      }
+    },
+    {
+      "id": "ocr/fattura-iva",
+      "origine": "ocr.test.ts › parseInvoiceText › fattura con IVA 22%",
+      "funzione": "parseInvoiceText",
+      "input": {
+        "text": "\nFattura 12/A\nData: 15/04/2026\nPerizia medico-legale\nImponibile 500,00\nIVA 22% 110,00\nTotale 610,00\n"
+      },
+      "atteso": {
+        "numero": {
+          "valore": "12/A"
+        },
+        "dataFattura": {
+          "valore": "2026-04-15"
+        },
+        "imponibile": {
+          "valore": 50000
+        },
+        "totale": {
+          "valore": 61000
+        },
+        "trattamentoIva": {
+          "valore": "imponibile_22"
+        },
+        "bollo": {
+          "valore": false
+        }
+      }
+    },
+    {
+      "id": "ocr/testo-illeggibile",
+      "origine": "ocr.test.ts › parseInvoiceText › testo illeggibile: nessun crash e avvisi",
+      "funzione": "parseInvoiceText",
+      "input": {
+        "text": "@@@ ### ..."
+      },
+      "atteso": {
+        "totale": null
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$lunghezza": {
+              "$": "avvisi"
+            }
+          },
+          "op": "maggioreDi",
+          "atteso": 0
+        }
+      ]
+    },
+    {
+      "id": "movimenti/bollo-1",
+      "origine": "riepilogo.test.ts › Movimenti › bollo dovuto solo sopra 77,47 € e senza IVA",
+      "funzione": "bolloDovuto",
+      "input": {
+        "f": {
+          "imponibile": 7747,
+          "trattamentoIva": "esente_art10"
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": false
+    },
+    {
+      "id": "movimenti/bollo-2",
+      "origine": "riepilogo.test.ts › Movimenti › bollo dovuto solo sopra 77,47 € e senza IVA",
+      "funzione": "bolloDovuto",
+      "input": {
+        "f": {
+          "imponibile": 7748,
+          "trattamentoIva": "esente_art10"
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": true
+    },
+    {
+      "id": "movimenti/bollo-3",
+      "origine": "riepilogo.test.ts › Movimenti › bollo dovuto solo sopra 77,47 € e senza IVA",
+      "funzione": "bolloDovuto",
+      "input": {
+        "f": {
+          "imponibile": 50000,
+          "trattamentoIva": "imponibile_22"
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": false
+    },
+    {
+      "id": "movimenti/principio-di-cassa",
+      "origine": "riepilogo.test.ts › Movimenti › principio di cassa: conta la data di incasso, non della fattura",
+      "funzione": "ricaviAnno",
+      "input": {
+        "fatture": [
+          {
+            "id": "f1",
+            "numero": "1",
+            "dataFattura": "2025-12-20",
+            "imponibile": 20000,
+            "trattamentoIva": "forfettario_no_iva",
+            "bolloAddebitato": true,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "incassata",
+            "dataIncasso": "2026-01-10",
+            "origine": "manuale"
+          },
+          {
+            "id": "f2",
+            "numero": "2",
+            "dataFattura": "2026-12-20",
+            "imponibile": 30000,
+            "trattamentoIva": "forfettario_no_iva",
+            "bolloAddebitato": true,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "da_incassare",
+            "origine": "manuale"
+          }
+        ],
+        "anno": 2026,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": 20000
+    },
+    {
+      "id": "movimenti/netto-incassato",
+      "origine": "riepilogo.test.ts › Movimenti › netto incassato toglie la ritenuta",
+      "funzione": "nettoIncassato",
+      "input": {
+        "f": {
+          "id": "f3",
+          "numero": "3",
+          "dataFattura": "2026-01-15",
+          "imponibile": 100000,
+          "trattamentoIva": "esente_art10",
+          "bolloAddebitato": false,
+          "destinatario": "struttura",
+          "elettronica": false,
+          "stato": "incassata",
+          "dataIncasso": "2026-01-15",
+          "origine": "manuale",
+          "ritenutaAcconto": 20000
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "atteso": 80000
+    },
+    {
+      "id": "movimenti/crediti-aperti",
+      "origine": "riepilogo.test.ts › Movimenti › crediti aperti ordinati dal più vecchio",
+      "funzione": "creditiAperti",
+      "input": {
+        "fatture": [
+          {
+            "id": "f4",
+            "numero": "4",
+            "dataFattura": "2026-05-01",
+            "imponibile": 10000,
+            "trattamentoIva": "forfettario_no_iva",
+            "bolloAddebitato": true,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "da_incassare",
+            "origine": "manuale"
+          },
+          {
+            "id": "f5",
+            "numero": "5",
+            "dataFattura": "2026-02-01",
+            "imponibile": 10000,
+            "trattamentoIva": "forfettario_no_iva",
+            "bolloAddebitato": true,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "da_incassare",
+            "origine": "manuale"
+          }
+        ],
+        "oggi": "2026-06-01",
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "[*].giorni"
+          },
+          "op": "uguale",
+          "atteso": [
+            120,
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iva/pro-rata-1",
+      "origine": "riepilogo.test.ts › IVA ordinario › pro-rata arrotondato all'unità superiore",
+      "funzione": "proRata",
+      "input": {
+        "fatture": [
+          {
+            "id": "f6",
+            "numero": "6",
+            "dataFattura": "2026-02-10",
+            "imponibile": 800000,
+            "trattamentoIva": "esente_art10",
+            "bolloAddebitato": true,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "incassata",
+            "dataIncasso": "2026-01-15",
+            "origine": "manuale"
+          },
+          {
+            "id": "f7",
+            "numero": "7",
+            "dataFattura": "2026-03-10",
+            "imponibile": 200000,
+            "trattamentoIva": "imponibile_22",
+            "bolloAddebitato": false,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "incassata",
+            "dataIncasso": "2026-01-15",
+            "origine": "manuale"
+          }
+        ],
+        "anno": 2026
+      },
+      "atteso": 0.2
+    },
+    {
+      "id": "iva/pro-rata-2",
+      "origine": "riepilogo.test.ts › IVA ordinario › pro-rata arrotondato all'unità superiore",
+      "funzione": "proRata",
+      "input": {
+        "fatture": [
+          {
+            "id": "f6",
+            "numero": "6",
+            "dataFattura": "2026-02-10",
+            "imponibile": 800000,
+            "trattamentoIva": "esente_art10",
+            "bolloAddebitato": true,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "incassata",
+            "dataIncasso": "2026-01-15",
+            "origine": "manuale"
+          }
+        ],
+        "anno": 2026
+      },
+      "atteso": 0
+    },
+    {
+      "id": "iva/pro-rata-3",
+      "origine": "riepilogo.test.ts › IVA ordinario › pro-rata arrotondato all'unità superiore",
+      "funzione": "proRata",
+      "input": {
+        "fatture": [
+          {
+            "id": "f7",
+            "numero": "7",
+            "dataFattura": "2026-03-10",
+            "imponibile": 200000,
+            "trattamentoIva": "imponibile_22",
+            "bolloAddebitato": false,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "incassata",
+            "dataIncasso": "2026-01-15",
+            "origine": "manuale"
+          }
+        ],
+        "anno": 2026
+      },
+      "atteso": 1
+    },
+    {
+      "id": "iva/liquidazione-t1",
+      "origine": "riepilogo.test.ts › IVA ordinario › liquidazione 1° trimestre con interessi 1%",
+      "funzione": "liquidazioniIva",
+      "input": {
+        "fatture": [
+          {
+            "id": "f6",
+            "numero": "6",
+            "dataFattura": "2026-02-10",
+            "imponibile": 800000,
+            "trattamentoIva": "esente_art10",
+            "bolloAddebitato": true,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "incassata",
+            "dataIncasso": "2026-01-15",
+            "origine": "manuale"
+          },
+          {
+            "id": "f7",
+            "numero": "7",
+            "dataFattura": "2026-03-10",
+            "imponibile": 200000,
+            "trattamentoIva": "imponibile_22",
+            "bolloAddebitato": false,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "incassata",
+            "dataIncasso": "2026-01-15",
+            "origine": "manuale"
+          }
+        ],
+        "spese": [
+          {
+            "id": "s1",
+            "data": "2026-03-01",
+            "importo": 61000,
+            "iva": 11000,
+            "categoria": "software"
+          }
+        ],
+        "anno": 2026,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "trimestri[0].ivaDebito"
+          },
+          "op": "uguale",
+          "atteso": 44000
+        },
+        {
+          "valore": {
+            "$": "trimestri[0].ivaCredito"
+          },
+          "op": "uguale",
+          "atteso": 2200
+        },
+        {
+          "valore": {
+            "$": "trimestri[0].interessi"
+          },
+          "op": "uguale",
+          "atteso": 418
+        },
+        {
+          "valore": {
+            "$": "trimestri[0].daVersare"
+          },
+          "op": "uguale",
+          "atteso": 42218
+        }
+      ]
+    },
+    {
+      "id": "riepilogo/ricavi",
+      "origine": "riepilogo.test.ts › Riepilogo (dashboard) › ricavi solo incassati fino a oggi",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-30",
+          "profilo": {
+            "regime": "forfettario",
+            "dataNascita": "1991-05-10",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 100000,
+              "accontiVersati": 80000,
+              "redditoProfessionale": 2000000
+            }
+          },
+          "fatture": [
+            {
+              "id": "f8",
+              "numero": "8",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f9",
+              "numero": "9",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f10",
+              "numero": "10",
+              "dataFattura": "2026-01-15",
+              "imponibile": 50000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-08-01",
+              "origine": "manuale"
+            },
+            {
+              "id": "f11",
+              "numero": "11",
+              "dataFattura": "2026-03-01",
+              "imponibile": 30000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "da_incassare",
+              "origine": "manuale"
+            },
+            {
+              "id": "f12",
+              "numero": "12",
+              "dataFattura": "2025-11-10",
+              "imponibile": 15000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2025-11-10",
+              "origine": "manuale",
+              "inviataSTS": false
+            }
+          ],
+          "spese": [
+            {
+              "id": "e1",
+              "data": "2026-04-30",
+              "importo": 59294,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "e2",
+              "data": "2026-03-01",
+              "importo": 120000,
+              "categoria": "affitto_studio"
+            }
+          ]
+        }
+      },
+      "atteso": {
+        "ricavi": 2000000,
+        "speseProfessionali": 120000,
+        "contributiVersati": 59294
+      }
+    },
+    {
+      "id": "riepilogo/imposta-forfettaria",
+      "origine": "riepilogo.test.ts › Riepilogo (dashboard) › imposta forfettaria da inizio anno",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-30",
+          "profilo": {
+            "regime": "forfettario",
+            "dataNascita": "1991-05-10",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 100000,
+              "accontiVersati": 80000,
+              "redditoProfessionale": 2000000
+            }
+          },
+          "fatture": [
+            {
+              "id": "f8",
+              "numero": "8",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f9",
+              "numero": "9",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f10",
+              "numero": "10",
+              "dataFattura": "2026-01-15",
+              "imponibile": 50000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-08-01",
+              "origine": "manuale"
+            },
+            {
+              "id": "f11",
+              "numero": "11",
+              "dataFattura": "2026-03-01",
+              "imponibile": 30000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "da_incassare",
+              "origine": "manuale"
+            },
+            {
+              "id": "f12",
+              "numero": "12",
+              "dataFattura": "2025-11-10",
+              "imponibile": 15000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2025-11-10",
+              "origine": "manuale",
+              "inviataSTS": false
+            }
+          ],
+          "spese": [
+            {
+              "id": "e1",
+              "data": "2026-04-30",
+              "importo": 59294,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "e2",
+              "data": "2026-03-01",
+              "importo": 120000,
+              "categoria": "affitto_studio"
+            }
+          ]
+        }
+      },
+      "atteso": {
+        "daInizioAnno": {
+          "imposte": 75035
+        }
+      }
+    },
+    {
+      "id": "riepilogo/quota-b-maturata",
+      "origine": "riepilogo.test.ts › Riepilogo (dashboard) › Quota B maturata: soglia in proporzione ai giorni trascorsi",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-30",
+          "profilo": {
+            "regime": "forfettario",
+            "dataNascita": "1991-05-10",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 100000,
+              "accontiVersati": 80000,
+              "redditoProfessionale": 2000000
+            }
+          },
+          "fatture": [
+            {
+              "id": "f8",
+              "numero": "8",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f9",
+              "numero": "9",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f10",
+              "numero": "10",
+              "dataFattura": "2026-01-15",
+              "imponibile": 50000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-08-01",
+              "origine": "manuale"
+            },
+            {
+              "id": "f11",
+              "numero": "11",
+              "dataFattura": "2026-03-01",
+              "imponibile": 30000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "da_incassare",
+              "origine": "manuale"
+            },
+            {
+              "id": "f12",
+              "numero": "12",
+              "dataFattura": "2025-11-10",
+              "imponibile": 15000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2025-11-10",
+              "origine": "manuale",
+              "inviataSTS": false
+            }
+          ],
+          "spese": [
+            {
+              "id": "e1",
+              "data": "2026-04-30",
+              "importo": 59294,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "e2",
+              "data": "2026-03-01",
+              "importo": 120000,
+              "categoria": "affitto_studio"
+            }
+          ]
+        }
+      },
+      "atteso": {
+        "quotaBMaturata": {
+          "soglia": 270100,
+          "totale": 251531
+        }
+      }
+    },
+    {
+      "id": "riepilogo/da-accantonare",
+      "origine": "riepilogo.test.ts › Riepilogo (dashboard) › da accantonare = imposte nette + Quota A residua + Quota B maturata + IVA",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-30",
+          "profilo": {
+            "regime": "forfettario",
+            "dataNascita": "1991-05-10",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 100000,
+              "accontiVersati": 80000,
+              "redditoProfessionale": 2000000
+            }
+          },
+          "fatture": [
+            {
+              "id": "f8",
+              "numero": "8",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f9",
+              "numero": "9",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f10",
+              "numero": "10",
+              "dataFattura": "2026-01-15",
+              "imponibile": 50000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-08-01",
+              "origine": "manuale"
+            },
+            {
+              "id": "f11",
+              "numero": "11",
+              "dataFattura": "2026-03-01",
+              "imponibile": 30000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "da_incassare",
+              "origine": "manuale"
+            },
+            {
+              "id": "f12",
+              "numero": "12",
+              "dataFattura": "2025-11-10",
+              "imponibile": 15000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2025-11-10",
+              "origine": "manuale",
+              "inviataSTS": false
+            }
+          ],
+          "spese": [
+            {
+              "id": "e1",
+              "data": "2026-04-30",
+              "importo": 59294,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "e2",
+              "data": "2026-03-01",
+              "importo": 120000,
+              "categoria": "affitto_studio"
+            }
+          ]
+        }
+      },
+      "atteso": {
+        "quotaA": {
+          "totale": 95094
+        },
+        "accantonamento": {
+          "quotaAResidua": 35800,
+          "metodo": "proiezione"
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "accantonamento.imposte"
+          },
+          "op": "uguale",
+          "atteso": {
+            "$diff": [
+              {
+                "$diff": [
+                  {
+                    "$": "accantonamento.imposteMaturate"
+                  },
+                  {
+                    "$": "accantonamento.ritenute"
+                  }
+                ]
+              },
+              {
+                "$": "accantonamento.accontiVersati"
+              }
+            ]
+          }
+        },
+        {
+          "valore": {
+            "$": "daAccantonare"
+          },
+          "op": "uguale",
+          "atteso": {
+            "$somma": [
+              {
+                "$": "accantonamento.imposte"
+              },
+              {
+                "$": "accantonamento.quotaAResidua"
+              },
+              {
+                "$": "accantonamento.quotaBMaturata"
+              },
+              {
+                "$": "accantonamento.iva"
+              }
+            ]
+          }
+        },
+        {
+          "valore": {
+            "$": "avvisi[*].codice"
+          },
+          "op": "contiene",
+          "atteso": "VERSAMENTI_DEDOTTI"
+        }
+      ]
+    },
+    {
+      "id": "riepilogo/impegni-anno-precedente",
+      "origine": "riepilogo.test.ts › Riepilogo (dashboard) › impegni dell'anno scorso: saldo 200 + Quota B 2025 su 20.000 € (2.837,88)",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-30",
+          "profilo": {
+            "regime": "forfettario",
+            "dataNascita": "1991-05-10",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 100000,
+              "accontiVersati": 80000,
+              "redditoProfessionale": 2000000
+            }
+          },
+          "fatture": [
+            {
+              "id": "f8",
+              "numero": "8",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f9",
+              "numero": "9",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f10",
+              "numero": "10",
+              "dataFattura": "2026-01-15",
+              "imponibile": 50000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-08-01",
+              "origine": "manuale"
+            },
+            {
+              "id": "f11",
+              "numero": "11",
+              "dataFattura": "2026-03-01",
+              "imponibile": 30000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "da_incassare",
+              "origine": "manuale"
+            },
+            {
+              "id": "f12",
+              "numero": "12",
+              "dataFattura": "2025-11-10",
+              "imponibile": 15000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2025-11-10",
+              "origine": "manuale",
+              "inviataSTS": false
+            }
+          ],
+          "spese": [
+            {
+              "id": "e1",
+              "data": "2026-04-30",
+              "importo": 59294,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "e2",
+              "data": "2026-03-01",
+              "importo": 120000,
+              "categoria": "affitto_studio"
+            }
+          ]
+        }
+      },
+      "atteso": {
+        "impegniAnnoPrecedente": {
+          "anno": 2025,
+          "saldoImposte": 20000,
+          "saldoAddizionali": 0,
+          "quotaB": 283788,
+          "totale": 303788
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "liquiditaImpegnata"
+          },
+          "op": "uguale",
+          "atteso": {
+            "$somma": [
+              {
+                "$": "daAccantonare"
+              },
+              303788
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "riepilogo/percentuale-limite",
+      "origine": "riepilogo.test.ts › Riepilogo (dashboard) › percentuale verso il limite forfettario",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-30",
+          "profilo": {
+            "regime": "forfettario",
+            "dataNascita": "1991-05-10",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 100000,
+              "accontiVersati": 80000,
+              "redditoProfessionale": 2000000
+            }
+          },
+          "fatture": [
+            {
+              "id": "f8",
+              "numero": "8",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f9",
+              "numero": "9",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f10",
+              "numero": "10",
+              "dataFattura": "2026-01-15",
+              "imponibile": 50000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-08-01",
+              "origine": "manuale"
+            },
+            {
+              "id": "f11",
+              "numero": "11",
+              "dataFattura": "2026-03-01",
+              "imponibile": 30000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "da_incassare",
+              "origine": "manuale"
+            },
+            {
+              "id": "f12",
+              "numero": "12",
+              "dataFattura": "2025-11-10",
+              "imponibile": 15000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2025-11-10",
+              "origine": "manuale",
+              "inviataSTS": false
+            }
+          ],
+          "spese": [
+            {
+              "id": "e1",
+              "data": "2026-04-30",
+              "importo": 59294,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "e2",
+              "data": "2026-03-01",
+              "importo": 120000,
+              "categoria": "affitto_studio"
+            }
+          ]
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "percentualeLimiteForfettario"
+          },
+          "op": "vicino",
+          "atteso": {
+            "$quoziente": [
+              20000,
+              85000
+            ]
+          },
+          "cifre": 6
+        }
+      ]
+    },
+    {
+      "id": "riepilogo/scadenze-importi",
+      "origine": "riepilogo.test.ts › Riepilogo (dashboard) › scadenze con importi stimati e saldo",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-30",
+          "profilo": {
+            "regime": "forfettario",
+            "dataNascita": "1991-05-10",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 100000,
+              "accontiVersati": 80000,
+              "redditoProfessionale": 2000000
+            }
+          },
+          "fatture": [
+            {
+              "id": "f8",
+              "numero": "8",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f9",
+              "numero": "9",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f10",
+              "numero": "10",
+              "dataFattura": "2026-01-15",
+              "imponibile": 50000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-08-01",
+              "origine": "manuale"
+            },
+            {
+              "id": "f11",
+              "numero": "11",
+              "dataFattura": "2026-03-01",
+              "imponibile": 30000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "da_incassare",
+              "origine": "manuale"
+            },
+            {
+              "id": "f12",
+              "numero": "12",
+              "dataFattura": "2025-11-10",
+              "imponibile": 15000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2025-11-10",
+              "origine": "manuale",
+              "inviataSTS": false
+            }
+          ],
+          "spese": [
+            {
+              "id": "e1",
+              "data": "2026-04-30",
+              "importo": 59294,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "e2",
+              "data": "2026-03-01",
+              "importo": 120000,
+              "categoria": "affitto_studio"
+            }
+          ]
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "scadenze[id=saldo-primo-acconto].importoStimato"
+          },
+          "op": "uguale",
+          "atteso": 70000
+        },
+        {
+          "valore": {
+            "$": "scadenze[id=secondo-acconto].importoStimato"
+          },
+          "op": "uguale",
+          "atteso": 50000
+        }
+      ]
+    },
+    {
+      "id": "riepilogo/avvisi-sts",
+      "origine": "riepilogo.test.ts › Riepilogo (dashboard) › avvisi: fatture 2025 non inviate al Sistema TS",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-30",
+          "profilo": {
+            "regime": "forfettario",
+            "dataNascita": "1991-05-10",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 100000,
+              "accontiVersati": 80000,
+              "redditoProfessionale": 2000000
+            }
+          },
+          "fatture": [
+            {
+              "id": "f8",
+              "numero": "8",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f9",
+              "numero": "9",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f10",
+              "numero": "10",
+              "dataFattura": "2026-01-15",
+              "imponibile": 50000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-08-01",
+              "origine": "manuale"
+            },
+            {
+              "id": "f11",
+              "numero": "11",
+              "dataFattura": "2026-03-01",
+              "imponibile": 30000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "da_incassare",
+              "origine": "manuale"
+            },
+            {
+              "id": "f12",
+              "numero": "12",
+              "dataFattura": "2025-11-10",
+              "imponibile": 15000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2025-11-10",
+              "origine": "manuale",
+              "inviataSTS": false
+            }
+          ],
+          "spese": [
+            {
+              "id": "e1",
+              "data": "2026-04-30",
+              "importo": 59294,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "e2",
+              "data": "2026-03-01",
+              "importo": 120000,
+              "categoria": "affitto_studio"
+            }
+          ]
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "avvisi[*].codice"
+          },
+          "op": "contiene",
+          "atteso": "STS_DA_INVIARE"
+        },
+        {
+          "valore": {
+            "$lunghezza": {
+              "$": "crediti"
+            }
+          },
+          "op": "uguale",
+          "atteso": 1
+        },
+        {
+          "valore": {
+            "$lunghezza": {
+              "$": "parametriDaVerificare"
+            }
+          },
+          "op": "maggioreDi",
+          "atteso": 0
+        }
+      ]
+    },
+    {
+      "id": "riepilogo/ordinario-iva-addizionali",
+      "origine": "riepilogo.test.ts › Riepilogo (dashboard) › ordinario: calcola anche IVA e addizionali",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-30",
+          "profilo": {
+            "regime": "ordinario",
+            "dataNascita": "1991-05-10",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "regione": "SAR"
+          },
+          "fatture": [
+            {
+              "id": "f13",
+              "numero": "13",
+              "dataFattura": "2026-01-15",
+              "imponibile": 3000000,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-03-01",
+              "origine": "manuale"
+            }
+          ],
+          "spese": [
+            {
+              "id": "e1",
+              "data": "2026-04-30",
+              "importo": 59294,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "e2",
+              "data": "2026-03-01",
+              "importo": 120000,
+              "categoria": "affitto_studio"
+            }
+          ]
+        }
+      },
+      "atteso": {
+        "daInizioAnno": {
+          "regime": "ordinario"
+        },
+        "iva": {
+          "soloEsenti": true
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "scadenze[*].categoria"
+          },
+          "op": "nonContiene",
+          "atteso": "iva"
+        }
+      ]
+    },
+    {
+      "id": "piani/limite-1",
+      "origine": "riepilogo.test.ts › Piani › limiti e funzioni",
+      "funzione": "puoAggiungere",
+      "input": {
+        "piano": "free",
+        "tipo": "fattura",
+        "usatiNelMese": 29
+      },
+      "atteso": {
+        "consentito": true
+      }
+    },
+    {
+      "id": "piani/limite-2",
+      "origine": "riepilogo.test.ts › Piani › limiti e funzioni",
+      "funzione": "puoAggiungere",
+      "input": {
+        "piano": "free",
+        "tipo": "fattura",
+        "usatiNelMese": 30
+      },
+      "atteso": {
+        "consentito": false
+      }
+    },
+    {
+      "id": "piani/limite-3",
+      "origine": "riepilogo.test.ts › Piani › limiti e funzioni",
+      "funzione": "puoAggiungere",
+      "input": {
+        "piano": "pro",
+        "tipo": "fattura",
+        "usatiNelMese": 10000
+      },
+      "atteso": {
+        "consentito": true
+      }
+    },
+    {
+      "id": "piani/funzione-1",
+      "origine": "riepilogo.test.ts › Piani › limiti e funzioni",
+      "funzione": "puoUsare",
+      "input": {
+        "piano": "free",
+        "funzione": "report_pdf"
+      },
+      "atteso": false
+    },
+    {
+      "id": "piani/funzione-2",
+      "origine": "riepilogo.test.ts › Piani › limiti e funzioni",
+      "funzione": "puoUsare",
+      "input": {
+        "piano": "pro",
+        "funzione": "lettura_foto"
+      },
+      "atteso": true
+    },
+    {
+      "id": "report/csv-fatture",
+      "origine": "riepilogo.test.ts › Report CSV › formato italiano, nome paziente escluso di default",
+      "funzione": "csvFatture",
+      "input": {
+        "fatture": [
+          {
+            "id": "f14",
+            "numero": "1",
+            "dataFattura": "2026-01-15",
+            "imponibile": 15000,
+            "trattamentoIva": "forfettario_no_iva",
+            "bolloAddebitato": true,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "incassata",
+            "dataIncasso": "2026-01-15",
+            "origine": "manuale",
+            "nomePaziente": "Mario Rossi",
+            "tipoPrestazione": "Visita; controllo"
+          }
+        ],
+        "anno": 2026,
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": ""
+          },
+          "op": "corrisponde",
+          "atteso": "^[^\\n]*Numero;Data fattura"
+        },
+        {
+          "valore": {
+            "$": ""
+          },
+          "op": "contiene",
+          "atteso": "150,00"
+        },
+        {
+          "valore": {
+            "$": ""
+          },
+          "op": "contiene",
+          "atteso": "\"Visita; controllo\""
+        },
+        {
+          "valore": {
+            "$": ""
+          },
+          "op": "nonContiene",
+          "atteso": "Mario Rossi"
+        }
+      ]
+    },
+    {
+      "id": "report/csv-fatture-con-paziente",
+      "origine": "riepilogo.test.ts › Report CSV › formato italiano, nome paziente escluso di default",
+      "funzione": "csvFatture",
+      "input": {
+        "fatture": [
+          {
+            "id": "f14",
+            "numero": "1",
+            "dataFattura": "2026-01-15",
+            "imponibile": 15000,
+            "trattamentoIva": "forfettario_no_iva",
+            "bolloAddebitato": true,
+            "destinatario": "paziente",
+            "elettronica": false,
+            "stato": "incassata",
+            "dataIncasso": "2026-01-15",
+            "origine": "manuale",
+            "nomePaziente": "Mario Rossi",
+            "tipoPrestazione": "Visita; controllo"
+          }
+        ],
+        "anno": 2026,
+        "p": {
+          "$parametri": 2026
+        },
+        "opt": {
+          "includiNomePaziente": true
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": ""
+          },
+          "op": "contiene",
+          "atteso": "Mario Rossi"
+        }
+      ]
+    },
+    {
+      "id": "report/csv-spese",
+      "origine": "riepilogo.test.ts › Report CSV › spese",
+      "funzione": "csvSpese",
+      "input": {
+        "spese": [
+          {
+            "id": "1",
+            "data": "2026-01-02",
+            "importo": 1000,
+            "categoria": "altro"
+          }
+        ],
+        "anno": 2026
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$righe": {
+              "$": ""
+            }
+          },
+          "op": "uguale",
+          "atteso": 2
+        }
+      ]
+    },
+    {
+      "id": "dashboard/D1",
+      "origine": "riepilogo.test.ts › Dashboard — scenari per il commercialista › D1: Forfettario 15%, over 40, al 30 giugno: Quota A pagata, saldo 2025 e Quota B 2025 ancora da pagare",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-30",
+          "profilo": {
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "regime": "forfettario",
+            "dataNascita": "1975-03-01",
+            "annoInizioAttivita": 2018,
+            "requisitiStartup5": false,
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 900000,
+              "accontiVersati": 700000,
+              "ricavi": 8000000,
+              "redditoProfessionale": 6240000
+            }
+          },
+          "fatture": [
+            {
+              "id": "f15",
+              "numero": "D1-1",
+              "dataFattura": "2026-01-15",
+              "imponibile": 750000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-01-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f16",
+              "numero": "D1-2",
+              "dataFattura": "2026-02-15",
+              "imponibile": 750000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f17",
+              "numero": "D1-3",
+              "dataFattura": "2026-03-15",
+              "imponibile": 750000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-03-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f18",
+              "numero": "D1-4",
+              "dataFattura": "2026-04-15",
+              "imponibile": 750000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-04-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f19",
+              "numero": "D1-5",
+              "dataFattura": "2026-05-15",
+              "imponibile": 750000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f20",
+              "numero": "D1-6",
+              "dataFattura": "2026-06-15",
+              "imponibile": 750000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-06-15",
+              "origine": "manuale"
+            }
+          ],
+          "spese": [
+            {
+              "id": "qa",
+              "data": "2026-04-30",
+              "importo": 205710,
+              "categoria": "contributi_enpam",
+              "riferimento": {
+                "tributo": "enpam_quota_a",
+                "anno": 2026
+              }
+            }
+          ]
+        }
+      },
+      "atteso": {
+        "accantonamento": {
+          "metodo": "proiezione",
+          "imposteMaturate": 435279,
+          "imposte": 435279,
+          "quotaAResidua": 0,
+          "quotaBMaturata": 587178,
+          "iva": 0
+        },
+        "daAccantonare": 1022457,
+        "impegniAnnoPrecedente": {
+          "totale": 1220644
+        },
+        "guadagnoNetto": 3375533
+      }
+    },
+    {
+      "id": "dashboard/D2",
+      "origine": "riepilogo.test.ts › Dashboard — scenari per il commercialista › D2: Ordinario, over 40, al 30 settembre: compensi da strutture con ritenuta del 20%",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-09-30",
+          "profilo": {
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "regime": "ordinario",
+            "dataNascita": "1975-03-01",
+            "annoInizioAttivita": 2015,
+            "requisitiStartup5": false,
+            "regione": "SAR"
+          },
+          "fatture": [
+            {
+              "id": "f21",
+              "numero": "D2-1",
+              "dataFattura": "2026-01-10",
+              "imponibile": 600000,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "struttura",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-01-10",
+              "origine": "manuale",
+              "ritenutaAcconto": 120000
+            },
+            {
+              "id": "f22",
+              "numero": "D2-2",
+              "dataFattura": "2026-02-10",
+              "imponibile": 600000,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "struttura",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-10",
+              "origine": "manuale",
+              "ritenutaAcconto": 120000
+            },
+            {
+              "id": "f23",
+              "numero": "D2-3",
+              "dataFattura": "2026-03-10",
+              "imponibile": 600000,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "struttura",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-03-10",
+              "origine": "manuale",
+              "ritenutaAcconto": 120000
+            },
+            {
+              "id": "f24",
+              "numero": "D2-4",
+              "dataFattura": "2026-04-10",
+              "imponibile": 600000,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "struttura",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-04-10",
+              "origine": "manuale",
+              "ritenutaAcconto": 120000
+            },
+            {
+              "id": "f25",
+              "numero": "D2-5",
+              "dataFattura": "2026-05-10",
+              "imponibile": 600000,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "struttura",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-10",
+              "origine": "manuale",
+              "ritenutaAcconto": 120000
+            },
+            {
+              "id": "f26",
+              "numero": "D2-6",
+              "dataFattura": "2026-06-10",
+              "imponibile": 600000,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "struttura",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-06-10",
+              "origine": "manuale",
+              "ritenutaAcconto": 120000
+            },
+            {
+              "id": "f27",
+              "numero": "D2-7",
+              "dataFattura": "2026-07-10",
+              "imponibile": 600000,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "struttura",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-07-10",
+              "origine": "manuale",
+              "ritenutaAcconto": 120000
+            },
+            {
+              "id": "f28",
+              "numero": "D2-8",
+              "dataFattura": "2026-08-10",
+              "imponibile": 600000,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "struttura",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-08-10",
+              "origine": "manuale",
+              "ritenutaAcconto": 120000
+            },
+            {
+              "id": "f29",
+              "numero": "D2-9",
+              "dataFattura": "2026-09-10",
+              "imponibile": 600000,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "struttura",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-09-10",
+              "origine": "manuale",
+              "ritenutaAcconto": 120000
+            }
+          ],
+          "spese": [
+            {
+              "id": "aff0",
+              "data": "2026-01-01",
+              "importo": 80000,
+              "categoria": "affitto_studio"
+            },
+            {
+              "id": "aff1",
+              "data": "2026-02-01",
+              "importo": 80000,
+              "categoria": "affitto_studio"
+            },
+            {
+              "id": "aff2",
+              "data": "2026-03-01",
+              "importo": 80000,
+              "categoria": "affitto_studio"
+            },
+            {
+              "id": "aff3",
+              "data": "2026-04-01",
+              "importo": 80000,
+              "categoria": "affitto_studio"
+            },
+            {
+              "id": "aff4",
+              "data": "2026-05-01",
+              "importo": 80000,
+              "categoria": "affitto_studio"
+            },
+            {
+              "id": "aff5",
+              "data": "2026-06-01",
+              "importo": 80000,
+              "categoria": "affitto_studio"
+            },
+            {
+              "id": "aff6",
+              "data": "2026-07-01",
+              "importo": 80000,
+              "categoria": "affitto_studio"
+            },
+            {
+              "id": "aff7",
+              "data": "2026-08-01",
+              "importo": 80000,
+              "categoria": "affitto_studio"
+            },
+            {
+              "id": "aff8",
+              "data": "2026-09-01",
+              "importo": 80000,
+              "categoria": "affitto_studio"
+            },
+            {
+              "id": "qa",
+              "data": "2026-04-30",
+              "importo": 205710,
+              "categoria": "contributi_enpam",
+              "riferimento": {
+                "tributo": "enpam_quota_a",
+                "anno": 2026
+              }
+            }
+          ]
+        }
+      },
+      "atteso": {
+        "accantonamento": {
+          "metodo": "proiezione",
+          "imposteMaturate": 1418514,
+          "imposte": 338514,
+          "quotaAResidua": 0,
+          "quotaBMaturata": 765886,
+          "iva": 0
+        },
+        "daAccantonare": 1104400,
+        "impegniAnnoPrecedente": null,
+        "guadagnoNetto": 2341740
+      }
+    },
+    {
+      "id": "dashboard/D3",
+      "origine": "riepilogo.test.ts › Dashboard — scenari per il commercialista › D3: Forfettario 5%, under 40, al 15 dicembre: saldo, acconti e Quota B già pagati (versamenti senza riferimento, attribuiti dalla data)",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-12-15",
+          "profilo": {
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "regime": "forfettario",
+            "dataNascita": "1990-01-20",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 200000,
+              "accontiVersati": 0,
+              "ricavi": 5000000,
+              "redditoProfessionale": 3900000
+            }
+          },
+          "fatture": [
+            {
+              "id": "f30",
+              "numero": "D3-1",
+              "dataFattura": "2026-01-05",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-01-05",
+              "origine": "manuale"
+            },
+            {
+              "id": "f31",
+              "numero": "D3-2",
+              "dataFattura": "2026-02-05",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-05",
+              "origine": "manuale"
+            },
+            {
+              "id": "f32",
+              "numero": "D3-3",
+              "dataFattura": "2026-03-05",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-03-05",
+              "origine": "manuale"
+            },
+            {
+              "id": "f33",
+              "numero": "D3-4",
+              "dataFattura": "2026-04-05",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-04-05",
+              "origine": "manuale"
+            },
+            {
+              "id": "f34",
+              "numero": "D3-5",
+              "dataFattura": "2026-05-05",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-05",
+              "origine": "manuale"
+            },
+            {
+              "id": "f35",
+              "numero": "D3-6",
+              "dataFattura": "2026-06-05",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-06-05",
+              "origine": "manuale"
+            },
+            {
+              "id": "f36",
+              "numero": "D3-7",
+              "dataFattura": "2026-07-05",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-07-05",
+              "origine": "manuale"
+            },
+            {
+              "id": "f37",
+              "numero": "D3-8",
+              "dataFattura": "2026-08-05",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-08-05",
+              "origine": "manuale"
+            },
+            {
+              "id": "f38",
+              "numero": "D3-9",
+              "dataFattura": "2026-09-05",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-09-05",
+              "origine": "manuale"
+            },
+            {
+              "id": "f39",
+              "numero": "D3-10",
+              "dataFattura": "2026-10-05",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-10-05",
+              "origine": "manuale"
+            },
+            {
+              "id": "f40",
+              "numero": "D3-11",
+              "dataFattura": "2026-11-05",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-11-05",
+              "origine": "manuale"
+            },
+            {
+              "id": "f41",
+              "numero": "D3-12",
+              "dataFattura": "2026-12-05",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-12-05",
+              "origine": "manuale"
+            }
+          ],
+          "spese": [
+            {
+              "id": "v1",
+              "data": "2026-04-30",
+              "importo": 115766,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "v2",
+              "data": "2026-07-20",
+              "importo": 300000,
+              "categoria": "imposte_f24"
+            },
+            {
+              "id": "v3",
+              "data": "2026-11-02",
+              "importo": 654288,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "v4",
+              "data": "2026-11-30",
+              "importo": 100000,
+              "categoria": "imposte_f24"
+            }
+          ]
+        }
+      },
+      "atteso": {
+        "accantonamento": {
+          "metodo": "proiezione",
+          "imposteMaturate": 197185,
+          "imposte": 0,
+          "quotaAResidua": 0,
+          "quotaBMaturata": 811044,
+          "iva": 0
+        },
+        "daAccantonare": 811044,
+        "impegniAnnoPrecedente": {
+          "totale": 0
+        },
+        "guadagnoNetto": 4881080
+      }
+    },
+    {
+      "id": "dashboard/D4",
+      "origine": "riepilogo.test.ts › Dashboard — scenari per il commercialista › D4: Ordinario, over 40, al 30 giugno: 18.000 € esenti e una perizia da 12.000 € con IVA 22% non ancora versata",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-30",
+          "profilo": {
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "regime": "ordinario",
+            "dataNascita": "1975-03-01",
+            "annoInizioAttivita": 2015,
+            "requisitiStartup5": false,
+            "regione": "SAR"
+          },
+          "fatture": [
+            {
+              "id": "f42",
+              "numero": "D4-1",
+              "dataFattura": "2026-03-10",
+              "imponibile": 1800000,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-03-10",
+              "origine": "manuale"
+            },
+            {
+              "id": "f43",
+              "numero": "D4-2",
+              "dataFattura": "2026-05-12",
+              "imponibile": 1200000,
+              "trattamentoIva": "imponibile_22",
+              "bolloAddebitato": false,
+              "destinatario": "struttura",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-12",
+              "origine": "manuale"
+            }
+          ],
+          "spese": []
+        }
+      },
+      "atteso": {
+        "accantonamento": {
+          "metodo": "proiezione",
+          "imposteMaturate": 894986,
+          "imposte": 894986,
+          "quotaAResidua": 205710,
+          "quotaBMaturata": 487728,
+          "iva": 266640
+        },
+        "daAccantonare": 1855064,
+        "impegniAnnoPrecedente": null,
+        "guadagnoNetto": 1515276
+      }
+    },
+    {
+      "id": "dashboard/D5",
+      "origine": "riepilogo.test.ts › Dashboard — scenari per il commercialista › D5: Forfettario 15%, over 40, al 20 febbraio: pochi dati, imposte stimate con l'aliquota effettiva del 2025 (9.000 / 80.000 = 11,25%)",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-02-20",
+          "profilo": {
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "regime": "forfettario",
+            "dataNascita": "1975-03-01",
+            "annoInizioAttivita": 2018,
+            "requisitiStartup5": false,
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 900000,
+              "accontiVersati": 700000,
+              "ricavi": 8000000,
+              "redditoProfessionale": 6240000
+            }
+          },
+          "fatture": [
+            {
+              "id": "f44",
+              "numero": "D5-1",
+              "dataFattura": "2026-01-15",
+              "imponibile": 700000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-01-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f45",
+              "numero": "D5-2",
+              "dataFattura": "2026-02-10",
+              "imponibile": 600000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-10",
+              "origine": "manuale"
+            }
+          ],
+          "spese": []
+        }
+      },
+      "atteso": {
+        "accantonamento": {
+          "metodo": "anno_precedente",
+          "imposteMaturate": 146250,
+          "imposte": 146250,
+          "quotaAResidua": 205710,
+          "quotaBMaturata": 170322,
+          "iva": 0
+        },
+        "daAccantonare": 522282,
+        "impegniAnnoPrecedente": {
+          "totale": 1220644
+        },
+        "guadagnoNetto": 954685
+      }
+    },
+    {
+      "id": "correzioni/imposte-maturate-ordinario",
+      "origine": "riepilogo.test.ts › Correzioni del 13/10 sui numeri della dashboard › ordinario: le imposte maturate seguono l'imposta annua, non gli scaglioni sul reddito parziale",
+      "chiamate": {
+        "fine": {
+          "funzione": "calcolaRiepilogo",
+          "input": {
+            "input": {
+              "oggi": "2026-12-31",
+              "profilo": {
+                "regime": "ordinario",
+                "dataNascita": "1980-01-01",
+                "annoInizioAttivita": 2023,
+                "requisitiStartup5": true,
+                "rateQuotaA": 1,
+                "rateQuotaB": 1,
+                "emetteFattureElettroniche": false,
+                "regione": "SAR"
+              },
+              "fatture": [
+                {
+                  "id": "f46",
+                  "numero": "46",
+                  "dataFattura": "2026-01-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-01-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f47",
+                  "numero": "47",
+                  "dataFattura": "2026-02-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-02-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f48",
+                  "numero": "48",
+                  "dataFattura": "2026-03-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-03-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f49",
+                  "numero": "49",
+                  "dataFattura": "2026-04-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-04-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f50",
+                  "numero": "50",
+                  "dataFattura": "2026-05-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-05-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f51",
+                  "numero": "51",
+                  "dataFattura": "2026-06-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-06-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f52",
+                  "numero": "52",
+                  "dataFattura": "2026-07-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-07-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f53",
+                  "numero": "53",
+                  "dataFattura": "2026-08-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-08-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f54",
+                  "numero": "54",
+                  "dataFattura": "2026-09-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-09-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f55",
+                  "numero": "55",
+                  "dataFattura": "2026-10-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-10-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f56",
+                  "numero": "56",
+                  "dataFattura": "2026-11-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-11-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f57",
+                  "numero": "57",
+                  "dataFattura": "2026-12-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-12-15",
+                  "origine": "manuale"
+                }
+              ],
+              "spese": []
+            }
+          }
+        },
+        "marzo": {
+          "funzione": "calcolaRiepilogo",
+          "input": {
+            "input": {
+              "oggi": "2026-03-31",
+              "profilo": {
+                "regime": "ordinario",
+                "dataNascita": "1980-01-01",
+                "annoInizioAttivita": 2023,
+                "requisitiStartup5": true,
+                "rateQuotaA": 1,
+                "rateQuotaB": 1,
+                "emetteFattureElettroniche": false,
+                "regione": "SAR"
+              },
+              "fatture": [
+                {
+                  "id": "f46",
+                  "numero": "46",
+                  "dataFattura": "2026-01-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-01-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f47",
+                  "numero": "47",
+                  "dataFattura": "2026-02-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-02-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f48",
+                  "numero": "48",
+                  "dataFattura": "2026-03-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-03-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f49",
+                  "numero": "49",
+                  "dataFattura": "2026-04-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-04-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f50",
+                  "numero": "50",
+                  "dataFattura": "2026-05-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-05-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f51",
+                  "numero": "51",
+                  "dataFattura": "2026-06-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-06-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f52",
+                  "numero": "52",
+                  "dataFattura": "2026-07-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-07-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f53",
+                  "numero": "53",
+                  "dataFattura": "2026-08-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-08-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f54",
+                  "numero": "54",
+                  "dataFattura": "2026-09-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-09-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f55",
+                  "numero": "55",
+                  "dataFattura": "2026-10-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-10-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f56",
+                  "numero": "56",
+                  "dataFattura": "2026-11-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-11-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f57",
+                  "numero": "57",
+                  "dataFattura": "2026-12-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-12-15",
+                  "origine": "manuale"
+                }
+              ],
+              "spese": []
+            }
+          }
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$abs": {
+              "$diff": [
+                {
+                  "$quoziente": [
+                    {
+                      "$": "marzo.accantonamento.imposteMaturate"
+                    },
+                    {
+                      "$prodotto": [
+                        {
+                          "$": "fine.accantonamento.imposteMaturate"
+                        },
+                        {
+                          "$quoziente": [
+                            {
+                              "$": "marzo.ricavi"
+                            },
+                            {
+                              "$": "fine.ricavi"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                1
+              ]
+            }
+          },
+          "op": "minoreDi",
+          "atteso": 0.02
+        }
+      ]
+    },
+    {
+      "id": "correzioni/ritenute",
+      "origine": "riepilogo.test.ts › Correzioni del 13/10 sui numeri della dashboard › ritenute subite tolte dal da accantonare",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-30",
+          "profilo": {
+            "regime": "ordinario",
+            "dataNascita": "1980-01-01",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "regione": "SAR"
+          },
+          "spese": [],
+          "fatture": [
+            {
+              "id": "f58",
+              "numero": "58",
+              "dataFattura": "2026-06-01",
+              "imponibile": 3000000,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "struttura",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-06-01",
+              "origine": "manuale",
+              "ritenutaAcconto": 600000
+            }
+          ]
+        }
+      },
+      "atteso": {
+        "accantonamento": {
+          "ritenute": 600000
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "accantonamento.imposte"
+          },
+          "op": "uguale",
+          "atteso": {
+            "$max": [
+              0,
+              {
+                "$diff": [
+                  {
+                    "$": "accantonamento.imposteMaturate"
+                  },
+                  600000
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "correzioni/acconti-versati",
+      "origine": "riepilogo.test.ts › Correzioni del 13/10 sui numeri della dashboard › acconti F24 già versati tolti dal da accantonare",
+      "chiamate": {
+        "senza": {
+          "funzione": "calcolaRiepilogo",
+          "input": {
+            "input": {
+              "oggi": "2026-12-01",
+              "profilo": {
+                "regime": "forfettario",
+                "dataNascita": "1991-05-10",
+                "annoInizioAttivita": 2023,
+                "requisitiStartup5": false,
+                "rateQuotaA": 1,
+                "rateQuotaB": 1,
+                "emetteFattureElettroniche": false
+              },
+              "fatture": [
+                {
+                  "id": "f59",
+                  "numero": "59",
+                  "dataFattura": "2026-01-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-01-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f60",
+                  "numero": "60",
+                  "dataFattura": "2026-02-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-02-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f61",
+                  "numero": "61",
+                  "dataFattura": "2026-03-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-03-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f62",
+                  "numero": "62",
+                  "dataFattura": "2026-04-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-04-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f63",
+                  "numero": "63",
+                  "dataFattura": "2026-05-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-05-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f64",
+                  "numero": "64",
+                  "dataFattura": "2026-06-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-06-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f65",
+                  "numero": "65",
+                  "dataFattura": "2026-07-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-07-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f66",
+                  "numero": "66",
+                  "dataFattura": "2026-08-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-08-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f67",
+                  "numero": "67",
+                  "dataFattura": "2026-09-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-09-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f68",
+                  "numero": "68",
+                  "dataFattura": "2026-10-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-10-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f69",
+                  "numero": "69",
+                  "dataFattura": "2026-11-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-11-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f70",
+                  "numero": "70",
+                  "dataFattura": "2026-12-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-12-15",
+                  "origine": "manuale"
+                }
+              ],
+              "spese": []
+            }
+          }
+        },
+        "con": {
+          "funzione": "calcolaRiepilogo",
+          "input": {
+            "input": {
+              "oggi": "2026-12-01",
+              "profilo": {
+                "regime": "forfettario",
+                "dataNascita": "1991-05-10",
+                "annoInizioAttivita": 2023,
+                "requisitiStartup5": false,
+                "rateQuotaA": 1,
+                "rateQuotaB": 1,
+                "emetteFattureElettroniche": false
+              },
+              "fatture": [
+                {
+                  "id": "f59",
+                  "numero": "59",
+                  "dataFattura": "2026-01-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-01-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f60",
+                  "numero": "60",
+                  "dataFattura": "2026-02-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-02-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f61",
+                  "numero": "61",
+                  "dataFattura": "2026-03-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-03-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f62",
+                  "numero": "62",
+                  "dataFattura": "2026-04-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-04-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f63",
+                  "numero": "63",
+                  "dataFattura": "2026-05-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-05-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f64",
+                  "numero": "64",
+                  "dataFattura": "2026-06-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-06-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f65",
+                  "numero": "65",
+                  "dataFattura": "2026-07-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-07-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f66",
+                  "numero": "66",
+                  "dataFattura": "2026-08-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-08-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f67",
+                  "numero": "67",
+                  "dataFattura": "2026-09-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-09-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f68",
+                  "numero": "68",
+                  "dataFattura": "2026-10-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-10-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f69",
+                  "numero": "69",
+                  "dataFattura": "2026-11-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-11-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f70",
+                  "numero": "70",
+                  "dataFattura": "2026-12-15",
+                  "imponibile": 500000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-12-15",
+                  "origine": "manuale"
+                }
+              ],
+              "spese": [
+                {
+                  "id": "f24",
+                  "data": "2026-11-30",
+                  "importo": 300000,
+                  "categoria": "imposte_f24",
+                  "riferimento": {
+                    "tributo": "imposta",
+                    "anno": 2026,
+                    "tipo": "acconto"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$diff": [
+              {
+                "$": "senza.daAccantonare"
+              },
+              {
+                "$": "con.daAccantonare"
+              }
+            ]
+          },
+          "op": "uguale",
+          "atteso": 300000
+        }
+      ]
+    },
+    {
+      "id": "correzioni/iva-22",
+      "origine": "riepilogo.test.ts › Correzioni del 13/10 sui numeri della dashboard › IVA 22%: il netto non sottrae l'IVA, il da accantonare la include",
+      "chiamate": {
+        "esente": {
+          "funzione": "calcolaRiepilogo",
+          "input": {
+            "input": {
+              "oggi": "2026-06-30",
+              "profilo": {
+                "regime": "ordinario",
+                "dataNascita": "1980-01-01",
+                "annoInizioAttivita": 2023,
+                "requisitiStartup5": true,
+                "rateQuotaA": 1,
+                "rateQuotaB": 1,
+                "emetteFattureElettroniche": false,
+                "regione": "SAR"
+              },
+              "spese": [],
+              "fatture": [
+                {
+                  "id": "f71",
+                  "numero": "71",
+                  "dataFattura": "2026-05-01",
+                  "imponibile": 1200000,
+                  "trattamentoIva": "esente_art10",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-05-01",
+                  "origine": "manuale"
+                }
+              ]
+            }
+          }
+        },
+        "conIva": {
+          "funzione": "calcolaRiepilogo",
+          "input": {
+            "input": {
+              "oggi": "2026-06-30",
+              "profilo": {
+                "regime": "ordinario",
+                "dataNascita": "1980-01-01",
+                "annoInizioAttivita": 2023,
+                "requisitiStartup5": true,
+                "rateQuotaA": 1,
+                "rateQuotaB": 1,
+                "emetteFattureElettroniche": false,
+                "regione": "SAR"
+              },
+              "spese": [],
+              "fatture": [
+                {
+                  "id": "f72",
+                  "numero": "72",
+                  "dataFattura": "2026-05-01",
+                  "imponibile": 1200000,
+                  "trattamentoIva": "imponibile_22",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-05-01",
+                  "origine": "manuale"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "conIva.guadagnoNetto"
+          },
+          "op": "uguale",
+          "atteso": {
+            "$": "esente.guadagnoNetto"
+          }
+        },
+        {
+          "valore": {
+            "$": "conIva.accantonamento.iva"
+          },
+          "op": "uguale",
+          "atteso": 266640
+        },
+        {
+          "valore": {
+            "$diff": [
+              {
+                "$": "conIva.daAccantonare"
+              },
+              {
+                "$": "esente.daAccantonare"
+              }
+            ]
+          },
+          "op": "uguale",
+          "atteso": 266640
+        }
+      ]
+    },
+    {
+      "id": "correzioni/quota-b-deducibile",
+      "origine": "riepilogo.test.ts › Correzioni del 13/10 sui numeri della dashboard › proiezione: la Quota B dell'anno scorso che scade entro dicembre è deducibile",
+      "nota": "Il test attende una differenza di 1.168.844 × 2/3 × 15% centesimi, con tolleranza di 1 centesimo.",
+      "chiamate": {
+        "unica": {
+          "funzione": "calcolaRiepilogo",
+          "input": {
+            "input": {
+              "oggi": "2026-06-30",
+              "profilo": {
+                "regime": "forfettario",
+                "dataNascita": "1980-01-01",
+                "annoInizioAttivita": 2023,
+                "requisitiStartup5": false,
+                "rateQuotaA": 1,
+                "rateQuotaB": 1,
+                "emetteFattureElettroniche": false,
+                "annoPrecedente": {
+                  "anno": 2025,
+                  "impostaDifferenza": 800000,
+                  "redditoProfessionale": 7000000
+                }
+              },
+              "fatture": [
+                {
+                  "id": "f73",
+                  "numero": "73",
+                  "dataFattura": "2026-01-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-01-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f74",
+                  "numero": "74",
+                  "dataFattura": "2026-02-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-02-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f75",
+                  "numero": "75",
+                  "dataFattura": "2026-03-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-03-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f76",
+                  "numero": "76",
+                  "dataFattura": "2026-04-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-04-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f77",
+                  "numero": "77",
+                  "dataFattura": "2026-05-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-05-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f78",
+                  "numero": "78",
+                  "dataFattura": "2026-06-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-06-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f79",
+                  "numero": "79",
+                  "dataFattura": "2026-07-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-07-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f80",
+                  "numero": "80",
+                  "dataFattura": "2026-08-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-08-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f81",
+                  "numero": "81",
+                  "dataFattura": "2026-09-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-09-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f82",
+                  "numero": "82",
+                  "dataFattura": "2026-10-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-10-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f83",
+                  "numero": "83",
+                  "dataFattura": "2026-11-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-11-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f84",
+                  "numero": "84",
+                  "dataFattura": "2026-12-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-12-15",
+                  "origine": "manuale"
+                }
+              ],
+              "spese": []
+            }
+          }
+        },
+        "noveRate": {
+          "funzione": "calcolaRiepilogo",
+          "input": {
+            "input": {
+              "oggi": "2026-06-30",
+              "profilo": {
+                "regime": "forfettario",
+                "dataNascita": "1980-01-01",
+                "annoInizioAttivita": 2023,
+                "requisitiStartup5": false,
+                "rateQuotaA": 1,
+                "rateQuotaB": 9,
+                "emetteFattureElettroniche": false,
+                "annoPrecedente": {
+                  "anno": 2025,
+                  "impostaDifferenza": 800000,
+                  "redditoProfessionale": 7000000
+                }
+              },
+              "fatture": [
+                {
+                  "id": "f73",
+                  "numero": "73",
+                  "dataFattura": "2026-01-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-01-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f74",
+                  "numero": "74",
+                  "dataFattura": "2026-02-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-02-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f75",
+                  "numero": "75",
+                  "dataFattura": "2026-03-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-03-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f76",
+                  "numero": "76",
+                  "dataFattura": "2026-04-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-04-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f77",
+                  "numero": "77",
+                  "dataFattura": "2026-05-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-05-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f78",
+                  "numero": "78",
+                  "dataFattura": "2026-06-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-06-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f79",
+                  "numero": "79",
+                  "dataFattura": "2026-07-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-07-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f80",
+                  "numero": "80",
+                  "dataFattura": "2026-08-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-08-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f81",
+                  "numero": "81",
+                  "dataFattura": "2026-09-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-09-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f82",
+                  "numero": "82",
+                  "dataFattura": "2026-10-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-10-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f83",
+                  "numero": "83",
+                  "dataFattura": "2026-11-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-11-15",
+                  "origine": "manuale"
+                },
+                {
+                  "id": "f84",
+                  "numero": "84",
+                  "dataFattura": "2026-12-15",
+                  "imponibile": 750000,
+                  "trattamentoIva": "forfettario_no_iva",
+                  "bolloAddebitato": false,
+                  "destinatario": "paziente",
+                  "elettronica": false,
+                  "stato": "incassata",
+                  "dataIncasso": "2026-12-15",
+                  "origine": "manuale"
+                }
+              ],
+              "spese": []
+            }
+          }
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$abs": {
+              "$diff": [
+                {
+                  "$diff": [
+                    {
+                      "$": "noveRate.proiezione.imposte"
+                    },
+                    {
+                      "$": "unica.proiezione.imposte"
+                    }
+                  ]
+                },
+                {
+                  "$prodotto": [
+                    1168844,
+                    {
+                      "$quoziente": [
+                        2,
+                        3
+                      ]
+                    },
+                    0.15
+                  ]
+                }
+              ]
+            }
+          },
+          "op": "minoreOUguale",
+          "atteso": 1
+        }
+      ]
+    },
+    {
+      "id": "correzioni/quota-a-con-rate-quota-b",
+      "origine": "riepilogo.test.ts › Correzioni del 13/10 sui numeri della dashboard › Quota A non sparisce quando a gennaio-marzo si pagano rate di Quota B",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-04-15",
+          "profilo": {
+            "regime": "forfettario",
+            "dataNascita": "1991-05-10",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 9,
+            "emetteFattureElettroniche": false
+          },
+          "fatture": [
+            {
+              "id": "f59",
+              "numero": "59",
+              "dataFattura": "2026-01-15",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-01-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f60",
+              "numero": "60",
+              "dataFattura": "2026-02-15",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f61",
+              "numero": "61",
+              "dataFattura": "2026-03-15",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-03-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f62",
+              "numero": "62",
+              "dataFattura": "2026-04-15",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-04-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f63",
+              "numero": "63",
+              "dataFattura": "2026-05-15",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f64",
+              "numero": "64",
+              "dataFattura": "2026-06-15",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-06-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f65",
+              "numero": "65",
+              "dataFattura": "2026-07-15",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-07-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f66",
+              "numero": "66",
+              "dataFattura": "2026-08-15",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-08-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f67",
+              "numero": "67",
+              "dataFattura": "2026-09-15",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-09-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f68",
+              "numero": "68",
+              "dataFattura": "2026-10-15",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-10-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f69",
+              "numero": "69",
+              "dataFattura": "2026-11-15",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-11-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f70",
+              "numero": "70",
+              "dataFattura": "2026-12-15",
+              "imponibile": 500000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-12-15",
+              "origine": "manuale"
+            }
+          ],
+          "spese": [
+            {
+              "id": "01",
+              "data": "2026-01-28",
+              "importo": 100000,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "02",
+              "data": "2026-02-28",
+              "importo": 100000,
+              "categoria": "contributi_enpam"
+            },
+            {
+              "id": "03",
+              "data": "2026-03-28",
+              "importo": 100000,
+              "categoria": "contributi_enpam"
+            }
+          ]
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "accantonamento.quotaAResidua"
+          },
+          "op": "uguale",
+          "atteso": {
+            "$": "quotaA.totale"
+          }
+        }
+      ]
+    },
+    {
+      "id": "correzioni/saldo-addizionali",
+      "origine": "riepilogo.test.ts › Correzioni del 13/10 sui numeri della dashboard › ordinario: la scadenza di luglio include il saldo delle addizionali",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-06-01",
+          "spese": [],
+          "fatture": [
+            {
+              "id": "f85",
+              "numero": "85",
+              "dataFattura": "2026-01-15",
+              "imponibile": 583333,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-01-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f86",
+              "numero": "86",
+              "dataFattura": "2026-02-15",
+              "imponibile": 583333,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-02-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f87",
+              "numero": "87",
+              "dataFattura": "2026-03-15",
+              "imponibile": 583333,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-03-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f88",
+              "numero": "88",
+              "dataFattura": "2026-04-15",
+              "imponibile": 583333,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-04-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f89",
+              "numero": "89",
+              "dataFattura": "2026-05-15",
+              "imponibile": 583333,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-05-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f90",
+              "numero": "90",
+              "dataFattura": "2026-06-15",
+              "imponibile": 583333,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-06-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f91",
+              "numero": "91",
+              "dataFattura": "2026-07-15",
+              "imponibile": 583333,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-07-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f92",
+              "numero": "92",
+              "dataFattura": "2026-08-15",
+              "imponibile": 583333,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-08-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f93",
+              "numero": "93",
+              "dataFattura": "2026-09-15",
+              "imponibile": 583333,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-09-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f94",
+              "numero": "94",
+              "dataFattura": "2026-10-15",
+              "imponibile": 583333,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-10-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f95",
+              "numero": "95",
+              "dataFattura": "2026-11-15",
+              "imponibile": 583333,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-11-15",
+              "origine": "manuale"
+            },
+            {
+              "id": "f96",
+              "numero": "96",
+              "dataFattura": "2026-12-15",
+              "imponibile": 583333,
+              "trattamentoIva": "esente_art10",
+              "bolloAddebitato": false,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-12-15",
+              "origine": "manuale"
+            }
+          ],
+          "profilo": {
+            "regime": "ordinario",
+            "dataNascita": "1980-01-01",
+            "annoInizioAttivita": 2023,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "regione": "SAR",
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 1500000,
+              "accontiVersati": 1200000,
+              "addizionaleRegionale": 76000,
+              "addizionaleComunale": 50000,
+              "redditoProfessionale": 7000000
+            }
+          }
+        }
+      },
+      "atteso": {
+        "impegniAnnoPrecedente": {
+          "saldoAddizionali": 111000
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "scadenze[id=saldo-primo-acconto].importoStimato"
+          },
+          "op": "uguale",
+          "atteso": 1176000
+        }
+      ]
+    },
+    {
+      "id": "correzioni/forfettario-5-15",
+      "origine": "riepilogo.test.ts › Correzioni del 13/10 sui numeri della dashboard › forfettario: passaggio dal 5% al 15% riproporziona l'aliquota dell'anno scorso",
+      "funzione": "calcolaRiepilogo",
+      "input": {
+        "input": {
+          "oggi": "2026-02-10",
+          "spese": [],
+          "profilo": {
+            "regime": "forfettario",
+            "dataNascita": "1991-05-10",
+            "annoInizioAttivita": 2021,
+            "requisitiStartup5": true,
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false,
+            "annoPrecedente": {
+              "anno": 2025,
+              "impostaDifferenza": 200000,
+              "ricavi": 5000000
+            }
+          },
+          "fatture": [
+            {
+              "id": "f97",
+              "numero": "97",
+              "dataFattura": "2026-01-15",
+              "imponibile": 1000000,
+              "trattamentoIva": "forfettario_no_iva",
+              "bolloAddebitato": true,
+              "destinatario": "paziente",
+              "elettronica": false,
+              "stato": "incassata",
+              "dataIncasso": "2026-01-20",
+              "origine": "manuale"
+            }
+          ]
+        }
+      },
+      "atteso": {
+        "accantonamento": {
+          "metodo": "anno_precedente",
+          "imposteMaturate": 120000
+        }
+      }
+    },
+    {
+      "id": "versamenti/f24-luglio",
+      "origine": "riepilogo.test.ts › Attribuzione dei versamenti senza riferimento › F24 di luglio: prima il saldo dell'anno scorso, poi il primo acconto",
+      "funzione": "attribuisciVersamenti",
+      "input": {
+        "spese": [
+          {
+            "id": "a",
+            "data": "2026-07-20",
+            "importo": 300000,
+            "categoria": "imposte_f24"
+          }
+        ],
+        "opt": {
+          "anno": 2026,
+          "oggi": "2026-12-31",
+          "quotaAAnnua": 0,
+          "saldoImposteAnnoPrecedente": 200000
+        }
+      },
+      "atteso": {
+        "versamenti": [
+          {
+            "riferimento": {
+              "anno": 2025,
+              "tipo": "saldo"
+            },
+            "importo": 200000
+          },
+          {
+            "riferimento": {
+              "anno": 2026,
+              "tipo": "acconto"
+            },
+            "importo": 100000
+          }
+        ]
+      }
+    },
+    {
+      "id": "versamenti/enpam-da-aprile",
+      "origine": "riepilogo.test.ts › Attribuzione dei versamenti senza riferimento › ENPAM da aprile: prima la Quota A fino al suo importo, il resto è Quota B",
+      "funzione": "attribuisciVersamenti",
+      "input": {
+        "spese": [
+          {
+            "id": "a",
+            "data": "2026-10-31",
+            "importo": 500000,
+            "categoria": "contributi_enpam"
+          }
+        ],
+        "opt": {
+          "anno": 2026,
+          "oggi": "2026-12-31",
+          "quotaAAnnua": 200000
+        }
+      },
+      "atteso": {
+        "versamenti": [
+          {
+            "riferimento": {
+              "tributo": "enpam_quota_a",
+              "anno": 2026
+            },
+            "importo": 200000
+          },
+          {
+            "riferimento": {
+              "tributo": "enpam_quota_b",
+              "anno": 2025
+            },
+            "importo": 300000
+          }
+        ]
+      }
+    },
+    {
+      "id": "versamenti/f24-marzo",
+      "origine": "riepilogo.test.ts › Attribuzione dei versamenti senza riferimento › F24 di marzo senza riferimento: non attribuito, con avviso",
+      "funzione": "attribuisciVersamenti",
+      "input": {
+        "spese": [
+          {
+            "id": "a",
+            "data": "2026-03-16",
+            "importo": 50000,
+            "categoria": "imposte_f24"
+          }
+        ],
+        "opt": {
+          "anno": 2026,
+          "oggi": "2026-12-31",
+          "quotaAAnnua": 0
+        }
+      },
+      "atteso": {
+        "versamenti": []
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "avvisi[*].codice"
+          },
+          "op": "contiene",
+          "atteso": "VERSAMENTI_NON_ATTRIBUITI"
+        }
+      ]
+    },
+    {
+      "id": "versamenti/riferimento-utente",
+      "origine": "riepilogo.test.ts › Attribuzione dei versamenti senza riferimento › il riferimento indicato dall'utente vince sulla data",
+      "funzione": "attribuisciVersamenti",
+      "input": {
+        "spese": [
+          {
+            "id": "a",
+            "data": "2026-07-20",
+            "importo": 80000,
+            "categoria": "imposte_f24",
+            "riferimento": {
+              "tributo": "iva",
+              "anno": 2026
+            }
+          }
+        ],
+        "opt": {
+          "anno": 2026,
+          "oggi": "2026-12-31",
+          "quotaAAnnua": 0,
+          "saldoImposteAnnoPrecedente": 200000
+        }
+      },
+      "atteso": {
+        "avvisi": []
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "versamenti[0].importo"
+          },
+          "op": "uguale",
+          "atteso": 80000
+        },
+        {
+          "valore": {
+            "$": "versamenti[0].dedotto"
+          },
+          "op": "uguale",
+          "atteso": false
+        },
+        {
+          "valore": {
+            "$": "versamenti[0].riferimento.tributo"
+          },
+          "op": "uguale",
+          "atteso": "iva"
+        }
+      ]
+    },
+    {
+      "id": "versamenti/quota-a-4-rate",
+      "origine": "riepilogo.test.ts › Attribuzione dei versamenti senza riferimento › Quota A in 4 rate: la rata di Quota B di ottobre non copre l'ultima rata di Quota A",
+      "funzione": "attribuisciVersamenti",
+      "input": {
+        "spese": [
+          {
+            "id": "a1",
+            "data": "2026-04-30",
+            "importo": 51427,
+            "categoria": "contributi_enpam"
+          },
+          {
+            "id": "a2",
+            "data": "2026-06-30",
+            "importo": 51427,
+            "categoria": "contributi_enpam"
+          },
+          {
+            "id": "a3",
+            "data": "2026-09-30",
+            "importo": 51427,
+            "categoria": "contributi_enpam"
+          },
+          {
+            "id": "b1",
+            "data": "2026-10-31",
+            "importo": 510322,
+            "categoria": "contributi_enpam"
+          }
+        ],
+        "opt": {
+          "anno": 2026,
+          "oggi": "2026-10-31",
+          "quotaAAnnua": 205710,
+          "rateQuotaA": 4,
+          "rateQuotaB": 2
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "versamenti[spesaId~=^b1$]"
+          },
+          "op": "uguale",
+          "atteso": [
+            {
+              "riferimento": {
+                "tributo": "enpam_quota_b"
+              },
+              "importo": 510322
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "versamenti/enpam-eccedente",
+      "origine": "riepilogo.test.ts › Attribuzione dei versamenti senza riferimento › ENPAM a luglio oltre la Quota A (pagata due volte): eccedenza non attribuita, con avviso",
+      "funzione": "attribuisciVersamenti",
+      "input": {
+        "spese": [
+          {
+            "id": "a",
+            "data": "2026-04-30",
+            "importo": 205710,
+            "categoria": "contributi_enpam"
+          },
+          {
+            "id": "b",
+            "data": "2026-07-15",
+            "importo": 205710,
+            "categoria": "contributi_enpam"
+          }
+        ],
+        "opt": {
+          "anno": 2026,
+          "oggi": "2026-07-31",
+          "quotaAAnnua": 205710
+        }
+      },
+      "atteso": {
+        "versamenti": [
+          {
+            "spesaId": "a",
+            "riferimento": {
+              "tributo": "enpam_quota_a"
+            },
+            "importo": 205710
+          }
+        ]
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "avvisi[*].codice"
+          },
+          "op": "contiene",
+          "atteso": "VERSAMENTI_ENPAM_ECCEDENTI"
+        }
+      ]
+    },
+    {
+      "id": "versamenti/f24-agosto-iva",
+      "origine": "riepilogo.test.ts › Attribuzione dei versamenti senza riferimento › F24 di agosto nell'ordinario con IVA: prima l'IVA del 2° trimestre, poi le imposte",
+      "funzione": "attribuisciVersamenti",
+      "input": {
+        "spese": [
+          {
+            "id": "a",
+            "data": "2026-08-20",
+            "importo": 300000,
+            "categoria": "imposte_f24"
+          }
+        ],
+        "opt": {
+          "anno": 2026,
+          "oggi": "2026-08-31",
+          "quotaAAnnua": 0,
+          "ivaTrimestri": {
+            "2": 266640
+          }
+        }
+      },
+      "atteso": {
+        "versamenti": [
+          {
+            "riferimento": {
+              "tributo": "iva",
+              "tipo": null
+            },
+            "importo": 266640
+          },
+          {
+            "riferimento": {
+              "tributo": "imposta",
+              "tipo": "acconto"
+            },
+            "importo": 33360
+          }
+        ]
+      }
+    },
+    {
+      "id": "calendario/pasqua-2025",
+      "origine": "scadenziario.test.ts › Calendario › Pasqua",
+      "funzione": "easterSunday",
+      "input": {
+        "year": 2025
+      },
+      "atteso": "2025-04-20"
+    },
+    {
+      "id": "calendario/pasqua-2026",
+      "origine": "scadenziario.test.ts › Calendario › Pasqua",
+      "funzione": "easterSunday",
+      "input": {
+        "year": 2026
+      },
+      "atteso": "2026-04-05"
+    },
+    {
+      "id": "calendario/pasqua-2027",
+      "origine": "scadenziario.test.ts › Calendario › Pasqua",
+      "funzione": "easterSunday",
+      "input": {
+        "year": 2027
+      },
+      "atteso": "2027-03-28"
+    },
+    {
+      "id": "calendario/lavorativo-2026-01-31",
+      "origine": "scadenziario.test.ts › Calendario › slittamento al primo giorno lavorativo",
+      "funzione": "primoGiornoLavorativo",
+      "input": {
+        "iso": "2026-01-31"
+      },
+      "atteso": "2026-02-02"
+    },
+    {
+      "id": "calendario/lavorativo-2026-10-31",
+      "origine": "scadenziario.test.ts › Calendario › slittamento al primo giorno lavorativo",
+      "funzione": "primoGiornoLavorativo",
+      "input": {
+        "iso": "2026-10-31"
+      },
+      "atteso": "2026-11-02"
+    },
+    {
+      "id": "calendario/lavorativo-2026-04-06",
+      "origine": "scadenziario.test.ts › Calendario › slittamento al primo giorno lavorativo",
+      "funzione": "primoGiornoLavorativo",
+      "input": {
+        "iso": "2026-04-06"
+      },
+      "atteso": "2026-04-07"
+    },
+    {
+      "id": "calendario/lavorativo-2026-07-20",
+      "origine": "scadenziario.test.ts › Calendario › slittamento al primo giorno lavorativo",
+      "funzione": "primoGiornoLavorativo",
+      "input": {
+        "iso": "2026-07-20"
+      },
+      "atteso": "2026-07-20"
+    },
+    {
+      "id": "calendario/eta-2026-03-14",
+      "origine": "scadenziario.test.ts › Calendario › età compiuta",
+      "funzione": "etaAl",
+      "input": {
+        "dataNascita": "1996-03-15",
+        "al": "2026-03-14"
+      },
+      "atteso": 29
+    },
+    {
+      "id": "calendario/eta-2026-03-15",
+      "origine": "scadenziario.test.ts › Calendario › età compiuta",
+      "funzione": "etaAl",
+      "input": {
+        "dataNascita": "1996-03-15",
+        "al": "2026-03-15"
+      },
+      "atteso": 30
+    },
+    {
+      "id": "scadenziario/forfettario-unica-soluzione",
+      "origine": "scadenziario.test.ts › Scadenziario 2026 › forfettario con Quota A e B in unica soluzione",
+      "funzione": "generaScadenziario",
+      "input": {
+        "opt": {
+          "anno": 2026,
+          "profilo": {
+            "regime": "forfettario",
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false
+          },
+          "haOperazioniIva": false
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "[id=sts].data"
+          },
+          "op": "uguale",
+          "atteso": "2026-02-02"
+        },
+        {
+          "valore": {
+            "$": "[id=quotaA-1].data"
+          },
+          "op": "uguale",
+          "atteso": "2026-04-30"
+        },
+        {
+          "valore": {
+            "$": "[id=modelloD].data"
+          },
+          "op": "uguale",
+          "atteso": "2026-07-31"
+        },
+        {
+          "valore": {
+            "$": "[id=saldo-primo-acconto].data"
+          },
+          "op": "uguale",
+          "atteso": "2026-07-20"
+        },
+        {
+          "valore": {
+            "$": "[id=quotaB-1].data"
+          },
+          "op": "uguale",
+          "atteso": "2026-11-02"
+        },
+        {
+          "valore": {
+            "$": "[id=secondo-acconto].data"
+          },
+          "op": "uguale",
+          "atteso": "2026-11-30"
+        },
+        {
+          "valore": {
+            "$": "[*].categoria"
+          },
+          "op": "nonContiene",
+          "atteso": "iva"
+        },
+        {
+          "valore": {
+            "$": "[*].data"
+          },
+          "op": "ordinato"
+        }
+      ]
+    },
+    {
+      "id": "scadenziario/rate-senza-perdere-centesimi",
+      "origine": "scadenziario.test.ts › Scadenziario 2026 › rate Quota A e B con importi divisi senza perdere centesimi",
+      "funzione": "generaScadenziario",
+      "input": {
+        "opt": {
+          "anno": 2026,
+          "profilo": {
+            "regime": "forfettario",
+            "rateQuotaA": 8,
+            "rateQuotaB": 9,
+            "emetteFattureElettroniche": false
+          },
+          "haOperazioniIva": false,
+          "importi": {
+            "quotaA": 59294,
+            "quotaB": 502188,
+            "quotaBCicloPrecedente": 450000
+          }
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$lunghezza": {
+              "$": "[id~=^quotaA-]"
+            }
+          },
+          "op": "uguale",
+          "atteso": 8
+        },
+        {
+          "valore": {
+            "$somma": [
+              {
+                "$": "[id~=^quotaA-].importoStimato"
+              }
+            ]
+          },
+          "op": "uguale",
+          "atteso": 59294
+        },
+        {
+          "valore": {
+            "$lunghezza": {
+              "$": "[id~=^quotaB-(?!prec)]"
+            }
+          },
+          "op": "uguale",
+          "atteso": 3
+        },
+        {
+          "valore": {
+            "$lunghezza": {
+              "$": "[id~=^quotaB-prec]"
+            }
+          },
+          "op": "uguale",
+          "atteso": 6
+        }
+      ]
+    },
+    {
+      "id": "scadenziario/ordinario-iva-fatture-elettroniche",
+      "origine": "scadenziario.test.ts › Scadenziario 2026 › ordinario con IVA e fatture elettroniche",
+      "funzione": "generaScadenziario",
+      "input": {
+        "opt": {
+          "anno": 2026,
+          "profilo": {
+            "regime": "ordinario",
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": true
+          },
+          "haOperazioniIva": true
+        },
+        "p": {
+          "$parametri": 2026
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "[id=iva-t1].data"
+          },
+          "op": "uguale",
+          "atteso": "2026-05-18"
+        },
+        {
+          "valore": {
+            "$": "[id=iva-t2].data"
+          },
+          "op": "uguale",
+          "atteso": "2026-08-20"
+        },
+        {
+          "valore": {
+            "$": "[id=iva-acconto].data"
+          },
+          "op": "uguale",
+          "atteso": "2026-12-28"
+        },
+        {
+          "valore": {
+            "$": "[id=bollo-t1].data"
+          },
+          "op": "uguale",
+          "atteso": "2026-06-01"
+        }
+      ]
+    },
+    {
+      "id": "scadenziario/anno-senza-parametri",
+      "origine": "scadenziario.test.ts › Scadenziario 2026 › anno senza parametri: date standard",
+      "funzione": "generaScadenziario",
+      "input": {
+        "opt": {
+          "anno": 2027,
+          "profilo": {
+            "regime": "forfettario",
+            "rateQuotaA": 1,
+            "rateQuotaB": 1,
+            "emetteFattureElettroniche": false
+          },
+          "haOperazioniIva": false
+        },
+        "p": {
+          "$parametri": 2027
+        }
+      },
+      "verifiche": [
+        {
+          "valore": {
+            "$": "[id=saldo-primo-acconto].dataNominale"
+          },
+          "op": "uguale",
+          "atteso": "2027-06-30"
+        }
+      ]
+    }
+  ]
+}

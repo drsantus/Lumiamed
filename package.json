@@ -47,7 +47,8 @@
     "typecheck:core": "tsc --noEmit -p tsconfig.core.json",
     "check": "npm run typecheck:core && npm run test",
     "casi-test": "tsx scripts/esporta-casi-test.ts",
-    "import-addizionali": "tsx scripts/import-addizionali.ts"
+    "import-addizionali": "tsx scripts/import-addizionali.ts",
+    "vettori": "tsx scripts/esporta-vettori.ts"
   },
   "private": true
 }

@@ -15,6 +15,8 @@ App Expo per la gestione finanziaria dei medici liberi professionisti italiani. 
 - Principio di cassa: ricavi per data di incasso, spese per data di pagamento.
 - Prima di dichiarare finito: `npm run check` (typecheck del motore + test).
 - Se cambia una regola fiscale: aggiorna `params/`, poi `scenari.ts`, poi rigenera l'Excel (`npm run casi-test` + `python scripts/genera_excel_commercialista.py`).
+- Vettori golden per il porting in Swift (`golden/vettori.json`, vedi `docs/PORTING.md`): dopo ogni modifica a `scenari.ts`
+  o ai casi di test rigenerali con `npm run vettori` (altrimenti `vettori.test.ts` fallisce).
 
 ---
 
